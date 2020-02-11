@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from yaml2sbml import parse_yaml
+from yaml2sbml.yaml2sbml import parse_yaml
 
 
 class TestYamlImport(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestYamlImport(unittest.TestCase):
 
     def test_yaml_import(self):
         ode_file = os.path.join('test_yaml2sbml', 'ode_input1.yaml')
-        expected_result_file = os.path.join('test_yaml_import', 'true_sbml_output1.xml')
+        expected_result_file = os.path.join('test_yaml2sbml', 'true_sbml_output1.xml')
 
         sbml_contents = parse_yaml(ode_file)
 
