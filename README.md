@@ -1,8 +1,8 @@
 # yaml2sbml
 
 
-[![Build Status](https://travis-ci.com/martamatos/yaml2sbml.svg?branch=master)](https://travis-ci.com/martamatos/yaml2sbml)
-[![Coverage Status](https://coveralls.io/repos/github/martamatos/yaml2sbml/badge.svg?branch=master)](https://coveralls.io/github/martamatos/yaml2sbml?branch=master)
+[![Build Status](https://travis-ci.org/martamatos/yaml2sbml.svg?branch=master)](https://travis-ci.org/martamatos/yaml2sbml)
+[![Coverage Status](https://coveralls.io/repos/github/martamatos/yaml2sbml/badge.svg)](https://coveralls.io/github/martamatos/yaml2sbml)
 
 
 Table of contents
