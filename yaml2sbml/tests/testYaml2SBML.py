@@ -6,7 +6,7 @@ from yaml2sbml.yaml2sbml import parse_yaml
 
 class TestYamlImport(unittest.TestCase):
     """
-    TestCase class for testing ODE import from a generic yaml file and convertion to SBML.
+    TestCase class for testing ODE import from a generic yaml file and conversion to SBML.
     """
 
     def setUp(self):

@@ -79,7 +79,7 @@
       </functionDefinition>
     </listOfFunctionDefinitions>
     <listOfCompartments>
-      <compartment id="Compartment" constant="true"/>
+      <compartment id="Compartment" size="1" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
       <species id="S1" compartment="Compartment" initialAmount="0.1" substanceUnits="dimensionless" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
