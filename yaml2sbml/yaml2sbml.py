@@ -71,6 +71,7 @@ def _create_compartment(model):
     c = model.createCompartment()
     c.setId('Compartment')
     c.setConstant(True)
+    c.setSize(1)
 
     return model
 
@@ -110,7 +111,6 @@ def _convert_yaml_blocks_to_sbml(model, yaml_dic: dict):
 
     """
     function_dict = {'time': read_time_block,
-                     'constants': read_constants_block,
                      'parameters': read_parameters_block,
                      'states': read_states_block,
                      'assignments': read_assignments_block,
@@ -166,26 +166,6 @@ def create_time(model, time_var: str):
     time_assignment.setMath(sbml.parseL3Formula('time'))
 
 
-def read_constants_block(model, constant_list: list):
-    """
-    Reads and processes the constants block in the ODE yaml file.
-    In particular, it reads the constants and adds them to the given SBML model.
-    The expected format for constant_dic definition is
-    {'id': <constant_id>, 'value': <value>}
-
-    Arguments:
-        model: the SBML model
-        constant_list: block containing the constant definitions
-
-    Returns:
-
-    Raises:
-
-    """
-    for constant_def in constant_list:
-        create_parameter(model, constant_def['id'], True, constant_def['value'])
-
-
 def read_parameters_block(model, parameter_list: list):
     """
     Reads and processes the parameters block in the ODE yaml file.
@@ -203,21 +183,18 @@ def read_parameters_block(model, parameter_list: list):
 
     """
     for parameter_def in parameter_list:
-        create_parameter(model, parameter_def['id'], True, parameter_def['value'])
+        create_parameter(model, parameter_def['id'], parameter_def['value'])
 
 
-def create_parameter(model, id: str, constant: bool, value: str):
+def create_parameter(model, parameter_id: str, value: str):
     """
-    Creates a parameter or constant and adds it to the given SBML model.
-    The difference between parameter and constant is only whether the parameter is set as constant or not. If it is
-    set as constant then it is a constant, otherwise it is a parameter that can be optimized.
+    Creates a parameter and adds it to the given SBML model.
     Units are set as dimensionless by default.
 
     Arguments:
-        model: the SBML model to which the parameter/constant will be added.
-        id: the parameter/constant ID
-        constant: whether the parameter is actually a constant or not.
-        value: the parameter or constant value
+        model: the SBML model to which the parameter will be added.
+        parameter_id: the parameter ID
+        value: the parameter value
 
     Returns:
 
@@ -225,9 +202,9 @@ def create_parameter(model, id: str, constant: bool, value: str):
 
     """
     k = model.createParameter()
-    k.setId(id)
-    k.setName(id)
-    k.setConstant(constant)
+    k.setId(parameter_id)
+    k.setName(parameter_id)
+    k.setConstant(True)
     k.setValue(float(value))
 
     k.setUnits('dimensionless')
