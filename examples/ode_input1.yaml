@@ -1,14 +1,13 @@
 time:
     variable: t
 
-constants:
+parameters:
     - id: c1 
       value: 1
     
     - id: Shalve 
       value: 0.1
-
-parameters:
+      
     - id: Vh
       value: 0.1
 
