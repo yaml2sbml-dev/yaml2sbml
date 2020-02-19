@@ -69,9 +69,6 @@ observables:
     - observableId: Obs_2
       observableFormula: s * S3
 
-noise:
-
-
 events:
 
 
