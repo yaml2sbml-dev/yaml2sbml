@@ -1,36 +1,52 @@
 import argparse
 import warnings
+import os
 
 import libsbml as sbml
 import yaml
 
+from . import yaml2PEtab
 
-def yaml2sbml(yaml_file: str, sbml_file: str):
+
+def yaml2sbml(yaml_file: str,
+              output_dir: str,
+              model_name: str,
+              petab: bool = True):
     """
     Takes in a yaml file with the ODE specification, parses it, converts it into SBML format, and writes the SBML file.
 
     Arguments:
         yaml_file : path to the yaml file with the ODEs specification
-        sbml_file: path to the SBML file to be written out
+        output_dir: path the output file(s) are be written out
+        model_name: name of SBML model (e.g. lokta_volterra leads to a model named lokta_volterra.xml)
+        petab: flag, if the PEtab observable/parameter tables should be generated as well
 
     Returns:
 
     Raises:
 
     """
-    sbml_as_string = parse_yaml(yaml_file)
+
+    if model_name.endswith('.xml'):
+        sbml_file = os.path.join(output_dir, model_name)
+    else:
+        sbml_file = os.path.join(output_dir, model_name + '.xml')
+
+    sbml_as_string = parse_yaml(yaml_file, output_dir, petab)
 
     # write sbml file
     with open(sbml_file, 'w') as f_out:
         f_out.write(sbml_as_string)
 
 
-def parse_yaml(yaml_file: str) -> str:
+def parse_yaml(yaml_file: str, output_dir: str, petab: bool) -> str:
     """
     Takes in a yaml file with the specification of ODEs, parses it, and returns the corresponding SBML string.
 
     Arguments:
         yaml_file: path to the yaml file with the ODEs specification
+        output_dir: path to the directory, where the output is written
+        petab: flag, that indicates weather petab files should be written
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format
@@ -47,14 +63,17 @@ def parse_yaml(yaml_file: str) -> str:
     model = _create_compartment(model)
 
     yaml_dic = _load_yaml_file(yaml_file)
-    model = _convert_yaml_blocks_to_sbml(model, yaml_dic)
+    _convert_yaml_blocks_to_sbml(model, yaml_dic)
+
+    if petab:
+        yaml2PEtab.create_petab_from_yaml(yaml_dic, output_dir)
 
     sbml_string = sbml.writeSBMLToString(document)
 
     return sbml_string
 
 
-def _create_compartment(model):
+def _create_compartment(model: sbml.Model):
     """
     Creates a default compartment for the model.
     We don't support multiple compartments at the moment.
@@ -96,7 +115,7 @@ def _load_yaml_file(yaml_file: str) -> dict:
     return yaml_dic
 
 
-def _convert_yaml_blocks_to_sbml(model, yaml_dic: dict):
+def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
     """
     Converts each block in the yaml dictionary to SBML.
 
@@ -115,9 +134,8 @@ def _convert_yaml_blocks_to_sbml(model, yaml_dic: dict):
                      'states': read_states_block,
                      'assignments': read_assignments_block,
                      'functions': read_functions_block,
-                     'odes': read_odes_block,
                      'observables': read_observables_block,
-                     'noise': read_noise_block,
+                     'odes': read_odes_block,
                      'events': read_events_block}
 
     for block in yaml_dic:
@@ -126,7 +144,7 @@ def _convert_yaml_blocks_to_sbml(model, yaml_dic: dict):
     return model
 
 
-def read_time_block(model, time_dic: dict):
+def read_time_block(model: sbml.Model, time_dic: dict):
     """
     Reads and processes the time block.
     If time units are not given they're set to seconds.
@@ -143,7 +161,7 @@ def read_time_block(model, time_dic: dict):
     create_time(model, time_dic['variable'])
 
 
-def create_time(model, time_var: str):
+def create_time(model: sbml.Model, time_var: str):
     """
     Creates the time variable, add assignment to 'time'
 
@@ -166,12 +184,12 @@ def create_time(model, time_var: str):
     time_assignment.setMath(sbml.parseL3Formula('time'))
 
 
-def read_parameters_block(model, parameter_list: list):
+def read_parameters_block(model: sbml.Model, parameter_list: list):
     """
     Reads and processes the parameters block in the ODE yaml file.
     In particular, it reads the parameters and adds them to the given SBML model.
     The expected format for parameter definition is
-    {'id': <parameter_id>, 'value': <value>}
+    {'parameterId': <parameterId>, 'nominalValue': <nominalValue>}
 
     Arguments:
         model: the SBML model
@@ -183,10 +201,10 @@ def read_parameters_block(model, parameter_list: list):
 
     """
     for parameter_def in parameter_list:
-        create_parameter(model, parameter_def['id'], parameter_def['value'])
+        create_parameter(model, parameter_def['parameterId'], parameter_def['nominalValue'])
 
 
-def create_parameter(model, parameter_id: str, value: str):
+def create_parameter(model: sbml.Model, parameter_id: str, value: str):
     """
     Creates a parameter and adds it to the given SBML model.
     Units are set as dimensionless by default.
@@ -210,12 +228,12 @@ def create_parameter(model, parameter_id: str, value: str):
     k.setUnits('dimensionless')
 
 
-def read_states_block(model, state_list: list):
+def read_states_block(model: sbml.Model, state_list: list):
     """
     Reads and processes the states block in the ODE yaml file.
     In particular, it reads the states and adds them to the given SBML file as species.
     The expected format of a state definition is:
-    {'id': <state_id>, 'value': <value>}
+    {'stateId': <stateId>, 'initialValue': <initialValue>}
 
     Arguments:
         model: the SBML model
@@ -227,10 +245,10 @@ def read_states_block(model, state_list: list):
 
     """
     for state_def in state_list:
-        create_species(model, state_def['id'], state_def['initial_value'])
+        create_species(model, state_def['stateId'], state_def['initialValue'])
 
 
-def create_species(model, species_id: str, initial_amount: str):
+def create_species(model: sbml.Model, species_id: str, initial_amount: str):
     """
     Creates a species and adds it to the given SBML model.
     Units are set as dimensionless by default.
@@ -259,12 +277,13 @@ def create_species(model, species_id: str, initial_amount: str):
     return s
 
 
-def read_assignments_block(model, assignment_list: list):
+def read_assignments_block(model: sbml.Model, assignment_list: list):
     """
     Reads and processes the assignments block in the ODE yaml file.
     In particular, it reads the assignments and adds them to the given SBML file.
     The expected format of a state definition is:
-    {'id': <state_id>, 'formula': <formula>}
+    {'assignmentId': <assignmentId>, 'formula': <formula>}
+
     This is used to assign a formula (probably time-dependent) to a variable.
 
     Arguments:
@@ -276,12 +295,11 @@ def read_assignments_block(model, assignment_list: list):
     Raises:
 
     """
-
     for assignment_def in assignment_list:
-        create_assignment(model, assignment_def['id'], assignment_def['formula'])
+        create_assignment(model, assignment_def['assignmentId'], assignment_def['formula'])
 
 
-def create_assignment(model, assignment_id: str, formula: str):
+def create_assignment(model: sbml.Model, assignment_id: str, formula: str):
     """
     Creates an  assignment rule, that assigns id to formula.
 
@@ -305,12 +323,12 @@ def create_assignment(model, assignment_id: str, formula: str):
     assignment_rule.setMath(sbml.parseL3Formula(formula))
 
 
-def read_functions_block(model, functions_list: list):
+def read_functions_block(model: sbml.Model, functions_list: list):
     """
     Reads and processes the functions block in the ODE yaml file.
     In particular, it reads the functions and adds them to the given SBML file as functionDefinitions.
     The expected format of a function definition is:
-    {'id': <state_id>, 'arguments': <arguments>,  'formula' : <formula>}
+    {'functionId': <functionId>, 'arguments': <arguments>,  'formula' : <formula>}
 
     Arguments:
         model: a SBML model
@@ -322,10 +340,10 @@ def read_functions_block(model, functions_list: list):
 
     """
     for function_def in functions_list:
-        create_function(model, function_def['id'], function_def['arguments'], function_def['formula'])
+        create_function(model, function_def['functionId'], function_def['arguments'], function_def['formula'])
 
 
-def create_function(model, function_id: str, arguments: str, formula: str):
+def create_function(model: sbml.Model, function_id: str, arguments: str, formula: str):
     """
     Creates a functionDefinition and adds it to the given SBML model.
 
@@ -346,11 +364,12 @@ def create_function(model, function_id: str, arguments: str, formula: str):
     f.setMath(math)
 
 
-def read_odes_block(model, odes_list: list):
+def read_odes_block(model: sbml.Model, odes_list: list):
     """
     Reads and processes lines in the odes block in the ODE yaml file.
     In particular, it reads the odes and adds them to the given SBML file as rateRules.
-    The expected format of an ode definition is: {'id': <state_variable>, 'right_hand_side' : <right_hand_side>}
+    The expected format of an ode definition is:
+    {'state': <state_variable>, 'rightHandSide' : <right_hand_side>}
 
     Arguments:
         model: a SBML model
@@ -362,10 +381,10 @@ def read_odes_block(model, odes_list: list):
 
     """
     for ode_def in odes_list:
-        create_rate_rule(model, ode_def['state'], ode_def['right_hand_side'])
+        create_rate_rule(model, ode_def['state'], ode_def['rightHandSide'])
 
 
-def create_rate_rule(model, species: str, formula: str):
+def create_rate_rule(model: sbml.Model, species: str, formula: str):
     """
     Creates a SBML rateRule for a species and adds it to the given model.
     This is where the ODEs from the text file are encoded.
@@ -404,7 +423,7 @@ def read_observables_block(model, observable_list: list):
     """
     try:
         for observable_def in observable_list:
-            create_observable(model, observable_def['id'], observable_def['formula'])
+            create_observable(model, observable_def['observableId'], observable_def['observableFormula'])
     except TypeError:
         pass
 
@@ -441,18 +460,27 @@ def read_noise_block(model, line):
 
 
 # TODO read_events_block
-def read_events_block(model, line):
+def read_events_block(model: sbml.Model, events_list: list):
     warnings.warn('Events not supported yet')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to SBML.')
     parser.add_argument('yaml_file', type=str)
-    parser.add_argument('sbml_file', type=str)
+    parser.add_argument('output_dir', type=str)
+    parser.add_argument('model_name', type=str)
+    parser.add_argument('petab_output', type=str)
 
     args = parser.parse_args()
+
     print(f'Path to yaml file: {args.yaml_file}')
-    print(f'Path to sbml file: {args.sbml_file}')
+    print(f'Output directory: {args.model_name}')
+    print(f'Path to sbml file: {args.model_name}')
+    if 'y' in args.petab_output:
+        print('PEtab observable/parameter tables are created.')
     print('Converting...')
 
-    yaml2sbml(args.yaml_file, args.sbml_file)
+    yaml2sbml(args.yaml_file,
+              args.output_dir,
+              args.model_name,
+              'y' in args.petab_output)
