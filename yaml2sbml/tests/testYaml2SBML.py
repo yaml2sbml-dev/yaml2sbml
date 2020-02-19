@@ -17,7 +17,7 @@ class TestYamlImport(unittest.TestCase):
         ode_file = os.path.join(self.test_folder, 'ode_input1.yaml')
         expected_result_file = os.path.join(self.test_folder, 'true_sbml_output1.xml')
 
-        sbml_contents = parse_yaml(ode_file)
+        sbml_contents = parse_yaml(ode_file, None, False)
 
         with open(expected_result_file, 'r') as f_in:
             expected_sbml_contents = f_in.read()
@@ -33,7 +33,7 @@ class TestYamlImport(unittest.TestCase):
         ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
         expected_result_file = os.path.join(self.test_folder, 'true_sbml_output2.xml')
 
-        sbml_contents = parse_yaml(ode_file)
+        sbml_contents = parse_yaml(ode_file, None, False)
 
         with open(expected_result_file, 'r') as f_in:
             expected_sbml_contents = f_in.read()
