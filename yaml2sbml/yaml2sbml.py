@@ -5,21 +5,14 @@ import os
 import libsbml as sbml
 import yaml
 
-from . import yaml2PEtab
 
-
-def yaml2sbml(yaml_file: str,
-              output_dir: str,
-              model_name: str,
-              petab: bool = True):
+def yaml2sbml(yaml_file: str, sbml_file: str):
     """
     Takes in a yaml file with the ODE specification, parses it, converts it into SBML format, and writes the SBML file.
 
     Arguments:
         yaml_file : path to the yaml file with the ODEs specification
-        output_dir: path the output file(s) are be written out
-        model_name: name of SBML model (e.g. lokta_volterra leads to a model named lokta_volterra.xml)
-        petab: flag, if the PEtab observable/parameter tables should be generated as well
+        sbml_file: path to the SBML file to be written out
 
     Returns:
 
@@ -27,26 +20,19 @@ def yaml2sbml(yaml_file: str,
 
     """
 
-    if model_name.endswith('.xml'):
-        sbml_file = os.path.join(output_dir, model_name)
-    else:
-        sbml_file = os.path.join(output_dir, model_name + '.xml')
-
-    sbml_as_string = parse_yaml(yaml_file, output_dir, petab)
+    sbml_as_string = parse_yaml(yaml_file)
 
     # write sbml file
     with open(sbml_file, 'w') as f_out:
         f_out.write(sbml_as_string)
 
 
-def parse_yaml(yaml_file: str, output_dir: str, petab: bool) -> str:
+def parse_yaml(yaml_file: str) -> str:
     """
     Takes in a yaml file with the specification of ODEs, parses it, and returns the corresponding SBML string.
 
     Arguments:
         yaml_file: path to the yaml file with the ODEs specification
-        output_dir: path to the directory, where the output is written
-        petab: flag, that indicates weather petab files should be written
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format
@@ -64,9 +50,6 @@ def parse_yaml(yaml_file: str, output_dir: str, petab: bool) -> str:
 
     yaml_dic = _load_yaml_file(yaml_file)
     _convert_yaml_blocks_to_sbml(model, yaml_dic)
-
-    if petab:
-        yaml2PEtab.create_petab_from_yaml(yaml_dic, output_dir)
 
     sbml_string = sbml.writeSBMLToString(document)
 
@@ -406,7 +389,7 @@ def create_rate_rule(model: sbml.Model, species: str, formula: str):
     r.setMath(math_ast)
 
 
-def read_observables_block(model, observable_list: list):
+def read_observables_block(model: sbml.Model, observable_list: list):
     """
     Reads an processes the observables block in the ODE yaml file.
     In particular it generates the Observables in the SBML file.
@@ -428,7 +411,7 @@ def read_observables_block(model, observable_list: list):
         pass
 
 
-def create_observable(model, observable_id: str, formula: str):
+def create_observable(model: sbml.Model, observable_id: str, formula: str):
     """
     Creates a parameter with the name observable_id and an assignment rule, that assigns the parameter to
     the equation given in formula.
@@ -455,10 +438,6 @@ def create_observable(model, observable_id: str, formula: str):
     obs_assignment_rule.setMath(sbml.parseL3Formula(formula))
 
 
-def read_noise_block(model, line):
-    warnings.warn('Noise not supported yet')
-
-
 # TODO read_events_block
 def read_events_block(model: sbml.Model, events_list: list):
     warnings.warn('Events not supported yet')
@@ -467,20 +446,13 @@ def read_events_block(model: sbml.Model, events_list: list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to SBML.')
     parser.add_argument('yaml_file', type=str)
-    parser.add_argument('output_dir', type=str)
-    parser.add_argument('model_name', type=str)
-    parser.add_argument('petab_output', type=str)
+    parser.add_argument('sbml_file', type=str)
 
     args = parser.parse_args()
 
     print(f'Path to yaml file: {args.yaml_file}')
-    print(f'Output directory: {args.model_name}')
-    print(f'Path to sbml file: {args.model_name}')
-    if 'y' in args.petab_output:
-        print('PEtab observable/parameter tables are created.')
+    print(f'Path to sbml file: {args.sbml_file}')
+
     print('Converting...')
 
-    yaml2sbml(args.yaml_file,
-              args.output_dir,
-              args.model_name,
-              'y' in args.petab_output)
+    yaml2sbml(args.yaml_file, args.sbml_file)
