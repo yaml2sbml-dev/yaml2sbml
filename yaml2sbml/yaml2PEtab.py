@@ -2,6 +2,10 @@ import argparse
 import os
 import pandas as pd
 
+import libsbml as sbml
+import petab
+
+
 from . import yaml2sbml
 
 
@@ -23,23 +27,23 @@ def yaml2petab(yaml_file: str,
 
     """
     if model_name.endswith('.xml') or model_name.endswith('.sbml'):
-        sbml_file = os.path.join(output_dir, model_name)
+        sbml_dir = os.path.join(output_dir, model_name)
     else:
-        sbml_file = os.path.join(output_dir, model_name + '.xml')
+        sbml_dir = os.path.join(output_dir, model_name + '.xml')
 
     # create SBML
     sbml_as_string = yaml2sbml.parse_yaml(yaml_file)
 
-    with open(sbml_file, 'w') as f_out:
+    with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
     # create petab tsv files:
     yaml_dict = yaml2sbml.load_yaml_file(yaml_file)
-    create_petab_from_yaml(yaml_dict, output_dir)
+    create_petab_tables_from_yaml(yaml_dict, output_dir)
 
 
-def create_petab_from_yaml(yaml_dict: dict,
-                           output_dir: str):
+def create_petab_tables_from_yaml(yaml_dict: dict,
+                                  output_dir: str):
     """
     Parses the yaml dict to a PEtab observable/parameter table.
 
@@ -58,10 +62,10 @@ def create_petab_from_yaml(yaml_dict: dict,
     observable_table = _create_observable_table(yaml_dict['observables'])
 
     if observable_table is not None:
-        observable_table.to_csv(os.path.join(output_dir, 'observable_table.tsv'), sep='\t')
+        observable_table.to_csv(os.path.join(output_dir, 'observable_table.tsv'), sep='\t', index=False)
 
     parameter_table = _create_parameter_table(yaml_dict['parameters'])
-    parameter_table.to_csv(os.path.join(output_dir, 'parameter_table.tsv'), sep='\t')
+    parameter_table.to_csv(os.path.join(output_dir, 'parameter_table.tsv'), sep='\t', index=False)
 
 
 def _create_observable_table(observable_block_dict: dict):
@@ -95,6 +99,39 @@ def _create_observable_table(observable_block_dict: dict):
 
     else:
         return None
+
+
+def validate_petab_tables(sbml_dir: str, output_dir: str):
+    """
+    Validates the petab tables via petab.lint. Throws an error,
+    if the petab tables do not follow petab format standard.
+
+    Arguments:
+        sbml_dir: directory of the sbml
+        output_dir: output directory for petab files
+
+    Returns:
+
+    Raises:
+        Errors are raised by lint, if PEtab files are invalid...
+
+    """
+    model = sbml.readSBML(sbml_dir)
+
+    parameter_file_dir = os.path.join(output_dir, 'parameter_table.tsv')
+    observable_file_dir = os.path.join(output_dir, 'observable_table.tsv')
+
+    if os.path.exists(observable_file_dir):
+        observable_df = pd.read_csv(observable_file_dir, sep='\t', index_col='observableId')
+        petab.lint.check_observable_df(observable_df)
+
+    else:
+        observable_df = None
+
+    parameter_df = pd.read_csv(parameter_file_dir, sep='\t', index_col='parameterId')
+    petab.lint.check_parameter_df(parameter_df,
+                                  sbml_model=model,
+                                  observable_df=observable_df)
 
 
 def _create_parameter_table(parameter_block_dict: dict):

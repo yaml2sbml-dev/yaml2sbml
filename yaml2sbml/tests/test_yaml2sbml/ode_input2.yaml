@@ -7,29 +7,74 @@ parameters:
     - parameterId: c1
       nominalValue: 1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: Shalve
       nominalValue: 0.1
+
+      parameterScale: log10
+      lowerBound: 0.1
+      upperBound: 10
+      estimate: 1
 
     - parameterId: Vh
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 50
+      estimate: 0
+
     - parameterId: h
       nominalValue: 0.1
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
 
     - parameterId: Vmm
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: Km
       nominalValue: 0.1
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
 
     - parameterId: v1
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: k4
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: s
       nominalValue: 3
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
 
 
 functions:
@@ -59,8 +104,14 @@ observables:
     - observableId: Obs_1
       observableFormula: S1 + S2
 
+      noiseFormula: noiseParameter1
+      noiseDistribution: normal
+
     - observableId: Obs_2
       observableFormula: s * S3
+
+      noiseFormula: noiseParameter1
+      noiseDistribution: normal
 
 events:
 
