@@ -9,12 +9,13 @@ def yaml2petab(yaml_file: str,
                output_dir: str,
                model_name: str):
     """
-    Takes in a yaml file with the ODE specification, parses it, converts it into SBML format, and writes the SBML file.
+    Takes in a yaml file with the ODE specification, parses it, converts
+    it into SBML format, and writes the SBML file.
 
     Arguments:
         yaml_file : path to the yaml file with the ODEs specification
         output_dir: path the output file(s) are be written out
-        model_name: name of SBML model (e.g. lokta_volterra leads to a model named lokta_volterra.xml)
+        model_name: name of SBML model
 
     Returns:
 
@@ -33,7 +34,7 @@ def yaml2petab(yaml_file: str,
         f_out.write(sbml_as_string)
 
     # create petab tsv files:
-    yaml_dict = yaml2sbml.parse_yaml(yaml_file)
+    yaml_dict = yaml2sbml.load_yaml_file(yaml_file)
     create_petab_from_yaml(yaml_dict, output_dir)
 
 
@@ -166,9 +167,6 @@ if __name__ == '__main__':
 
     print('Converting...')
 
-    # TODO
-    yaml2sbml.yaml2sbml(args.yaml_file,
-                        args.output_dir,
-                        args.model_name,
-                        'y' in args.petab_output)
-
+    yaml2petab(args.yaml_file,
+               args.output_dir,
+               args.model_name)

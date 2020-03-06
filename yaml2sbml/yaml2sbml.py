@@ -1,6 +1,5 @@
 import argparse
 import warnings
-import os
 
 import libsbml as sbml
 import yaml
@@ -48,7 +47,7 @@ def parse_yaml(yaml_file: str) -> str:
     model = document.createModel()
     model = _create_compartment(model)
 
-    yaml_dic = _load_yaml_file(yaml_file)
+    yaml_dic = load_yaml_file(yaml_file)
     _convert_yaml_blocks_to_sbml(model, yaml_dic)
 
     sbml_string = sbml.writeSBMLToString(document)
@@ -78,7 +77,7 @@ def _create_compartment(model: sbml.Model):
     return model
 
 
-def _load_yaml_file(yaml_file: str) -> dict:
+def load_yaml_file(yaml_file: str) -> dict:
     """
     Loads yaml file and returns the resulting dictionary.
 
@@ -114,7 +113,6 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
     """
     function_dict = {'time': read_time_block,
                      'parameters': read_parameters_block,
-                     'states': read_states_block,
                      'assignments': read_assignments_block,
                      'functions': read_functions_block,
                      'observables': read_observables_block,
@@ -214,55 +212,6 @@ def create_parameter(model: sbml.Model, parameter_id: str, value: str):
     k.setUnits('dimensionless')
 
 
-def read_states_block(model: sbml.Model, state_list: list):
-    """
-    Reads and processes the states block in the ODE yaml file.
-    In particular, it reads the states and adds them to the given SBML file as species.
-    The expected format of a state definition is:
-    {'stateId': <stateId>, 'initialValue': <initialValue>}
-
-    Arguments:
-        model: the SBML model
-        state_list: a list of dictionaries where each entry is a state definition
-
-    Returns:
-
-    Raises:
-
-    """
-    for state_def in state_list:
-        create_species(model, state_def['stateId'], state_def['initialValue'])
-
-
-def create_species(model: sbml.Model, species_id: str, initial_amount: str):
-    """
-    Creates a species and adds it to the given SBML model.
-    Units are set as dimensionless by default.
-
-    Arguments:
-        model: the SBML model to which the species will be added.
-        species_id: the species ID
-        initial_amount: the species initial amount
-
-    Returns:
-        s: the SBML species
-
-    Raises:
-
-    """
-    s = model.createSpecies()
-    s.setId(species_id)
-    s.setInitialAmount(float(initial_amount))
-    s.setConstant(False)
-    s.setBoundaryCondition(False)
-    s.setHasOnlySubstanceUnits(False)
-    s.setCompartment('Compartment')
-
-    s.setSubstanceUnits('dimensionless')
-
-    return s
-
-
 def read_assignments_block(model: sbml.Model, assignment_list: list):
     """
     Reads and processes the assignments block in the ODE yaml file.
@@ -352,10 +301,13 @@ def create_function(model: sbml.Model, function_id: str, arguments: str, formula
 
 def read_odes_block(model: sbml.Model, odes_list: list):
     """
-    Reads and processes lines in the odes block in the ODE yaml file.
-    In particular, it reads the odes and adds them to the given SBML file as rateRules.
+    Reads and processes the odes block in the ODE yaml file. In particular,
+    it reads the odes and adds a species for the corresponding state and the
+    right hand side as rateRules to the given SBML file.
+
     The expected format of an ode definition is:
-    {'state': <state_variable>, 'rightHandSide' : <right_hand_side>}
+    {'stateId': <state_variable>, 'rightHandSide' : <right_hand_side>,
+    'initialValue' = <initial_value>}
 
     Arguments:
         model: a SBML model
@@ -367,7 +319,37 @@ def read_odes_block(model: sbml.Model, odes_list: list):
 
     """
     for ode_def in odes_list:
-        create_rate_rule(model, ode_def['state'], ode_def['rightHandSide'])
+        create_species(model, ode_def['stateId'], ode_def['initialValue'])
+        create_rate_rule(model, ode_def['stateId'], ode_def['rightHandSide'])
+
+
+def create_species(model: sbml.Model, species_id: str, initial_amount: str):
+    """
+    Creates a species and adds it to the given SBML model.
+    Units are set as dimensionless by default.
+
+    Arguments:
+        model: the SBML model to which the species will be added.
+        species_id: the species ID
+        initial_amount: the species initial amount
+
+    Returns:
+        s: the SBML species
+
+    Raises:
+
+    """
+    s = model.createSpecies()
+    s.setId(species_id)
+    s.setInitialAmount(float(initial_amount))
+    s.setConstant(False)
+    s.setBoundaryCondition(False)
+    s.setHasOnlySubstanceUnits(False)
+    s.setCompartment('Compartment')
+
+    s.setSubstanceUnits('dimensionless')
+
+    return s
 
 
 def create_rate_rule(model: sbml.Model, species: str, formula: str):
@@ -447,6 +429,7 @@ def read_events_block(model: sbml.Model, events_list: list):
 
 
 if __name__ == '__main__':
+
     parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to SBML.')
     parser.add_argument('yaml_file', type=str)
     parser.add_argument('sbml_file', type=str)

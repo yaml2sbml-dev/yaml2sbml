@@ -58,16 +58,6 @@ parameters:
       nominalValue: 1
       estimate : 0
 
-states:
-    - stateId: S1
-      initialValue: 0.1
-
-    - stateId: S2
-      initialValue: 1
-
-    - stateId: S3
-      initialValue: 1
-
 assignments:
     - assignmentId: log_10_c1
       formula: log10(c1)
@@ -82,14 +72,17 @@ functions:
       formula: V*s / (Km + s)
 
 odes:
-    - state: S1
+    - stateId: S1
       rightHandSide: v1 - MM(S1, Vmm, Km)*c1^2
+      initialValue: 0.1
 
-    - state: S2
+    - stateId: S2
       rightHandSide: MM(S1, Vmm, Km) - hill(S2, Shalve, Vh, h)
+      initialValue: 1
 
-    - state: S3
+    - stateId: S3
       rightHandSide: hill(S2, Shalve, Vh, h) - k4*S3 + log10(c1)
+      initialValue: 1
 
 
 observables:
