@@ -130,7 +130,6 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
 def read_time_block(model: sbml.Model, time_dic: dict):
     """
     Reads and processes the time block.
-    If time units are not given they're set to seconds.
 
     Arguments:
         model: SBML model to which the rate rule will be added.
@@ -141,7 +140,11 @@ def read_time_block(model: sbml.Model, time_dic: dict):
     Raises:
 
     """
-    create_time(model, time_dic['variable'])
+
+    if time_dic['variable'] == 'time':
+        return
+    else:
+        create_time(model, time_dic['variable'])
 
 
 def create_time(model: sbml.Model, time_var: str):
