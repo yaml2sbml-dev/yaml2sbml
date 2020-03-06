@@ -50,6 +50,13 @@ def parse_yaml(yaml_file: str) -> str:
     yaml_dic = load_yaml_file(yaml_file)
     _convert_yaml_blocks_to_sbml(model, yaml_dic)
 
+    # check consistency and give warnings for errors in SBML:
+    if document.checkConsistency():
+
+        for error_num in range(document.getErrorLog().getNumErrors()):
+            if not document.getErrorLog().getError(error_num).isWarning():
+                warnings.warn(document.getErrorLog().getError(error_num).getMessage(), RuntimeWarning)
+
     sbml_string = sbml.writeSBMLToString(document)
 
     return sbml_string
