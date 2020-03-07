@@ -1,6 +1,7 @@
 import argparse
 import os
 import pandas as pd
+import warnings
 
 import libsbml as sbml
 import petab
@@ -31,7 +32,6 @@ def yaml2petab(yaml_file: str,
     else:
         sbml_dir = os.path.join(output_dir, model_name + '.xml')
 
-    # create SBML
     sbml_as_string = yaml2sbml.parse_yaml(yaml_file)
 
     with open(sbml_dir, 'w') as f_out:

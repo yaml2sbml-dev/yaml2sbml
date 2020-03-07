@@ -396,38 +396,8 @@ def read_observables_block(model: sbml.Model, observable_list: list):
     Raises:
 
     """
-    try:
-        for observable_def in observable_list:
-            create_observable(model, observable_def['observableId'], observable_def['observableFormula'])
-    except TypeError:
-        pass
-
-
-def create_observable(model: sbml.Model, observable_id: str, formula: str):
-    """
-    Creates a parameter with the name observable_id and an assignment rule, that assigns the parameter to
-    the equation given in formula.
-    Units are set as dimensionless by default.
-
-    Arguments:
-        model: SBML model to which the rate rule will be added.
-        observable_id: str, the id of the observable
-        formula: str: contains the equation for the observable
-
-    Returns:
-
-    Raises:
-
-    """
-    obs_param = model.createParameter()
-    obs_param.setId('observable_' + observable_id)
-    obs_param.setName(observable_id)
-    obs_param.setConstant(False)
-    obs_param.setUnits('dimensionless')
-
-    obs_assignment_rule = model.createAssignmentRule()
-    obs_assignment_rule.setVariable('observable_' + observable_id)
-    obs_assignment_rule.setMath(sbml.parseL3Formula(formula))
+    warnings.warn('Observables do not appear in the SBML and therefore '
+                  'only have an effect, when called via yaml2PEtab')
 
 
 # TODO read_events_block

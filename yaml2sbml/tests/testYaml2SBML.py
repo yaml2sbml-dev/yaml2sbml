@@ -18,8 +18,8 @@ class TestYamlImport(unittest.TestCase):
         """
         Test yaml import/SBML generation...
         """
-        ode_file = os.path.join(self.test_folder, 'ode_input1.yaml')
-        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output1.xml')
+        ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
+        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output.xml')
 
         sbml_contents = parse_yaml(ode_file)
 
@@ -35,7 +35,7 @@ class TestYamlImport(unittest.TestCase):
 
     def test_yaml_import_observables(self):
         ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
-        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output2.xml')
+        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output.xml')
 
         sbml_contents = parse_yaml(ode_file)
 

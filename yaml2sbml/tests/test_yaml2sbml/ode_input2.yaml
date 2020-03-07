@@ -68,13 +68,6 @@ parameters:
       upperBound: 10
       estimate: 0
 
-    - parameterId: s
-      nominalValue: 3
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
 
 
 functions:
