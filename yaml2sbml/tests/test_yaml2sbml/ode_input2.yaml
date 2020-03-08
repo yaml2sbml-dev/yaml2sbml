@@ -105,6 +105,13 @@ observables:
       noiseFormula: noiseParameter1
       noiseDistribution: normal
 
+conditions:
+
+    - conditionId: condition1
+      conditionName: condition1
+      S1: 42
+      Km: 3.14
+
 events:
 
 

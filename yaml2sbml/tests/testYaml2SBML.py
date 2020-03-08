@@ -62,7 +62,7 @@ class TestYamlImport(unittest.TestCase):
         yaml2PEtab.validate_petab_tables(os.path.join(self.test_folder, 'sbml_test.xml'),
                                          self.test_folder)
 
-        for file in ['observable_table.tsv', 'parameter_table.tsv', 'sbml_test.xml']:
+        for file in ['observable_table.tsv', 'parameter_table.tsv', 'condition_table.tsv', 'sbml_test.xml']:
             os.remove(os.path.join(self.test_folder, file))
 
 

@@ -124,7 +124,8 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
                      'functions': read_functions_block,
                      'observables': read_observables_block,
                      'odes': read_odes_block,
-                     'events': read_events_block}
+                     'events': read_events_block,
+                     'conditions': read_conditions_block}
 
     for block in yaml_dic:
         function_dict[block](model, yaml_dic[block])
@@ -389,8 +390,8 @@ def create_rate_rule(model: sbml.Model, species: str, formula: str):
 def read_observables_block(model: sbml.Model, observable_list: list):
     """
     Reads an processes the observables block in the ODE yaml file.
-    In particular it generates the Observables in the SBML file.
-    The expected format is: {'id': <observable_id>, 'formula': <observable_formula>}
+    Since the observables are not represented in the SBML, it only gives
+    a warning to inform the user.
 
     Arguments:
         model: SBML model (libsbml)
@@ -401,8 +402,27 @@ def read_observables_block(model: sbml.Model, observable_list: list):
     Raises:
 
     """
-    warnings.warn('Observables do not appear in the SBML and therefore '
-                  'only have an effect, when called via yaml2PEtab')
+    warnings.warn('Observables are not represented in the SBML and therefore '
+                  'only have an effect the output, when called via yaml2PEtab')
+
+
+def read_conditions_block(model: sbml.Model, observable_list: list):
+    """
+    Reads an processes the conditions block in the ODE yaml file.
+    Since the conditions are not represented in the SBML, it only gives
+    a warning to inform the user.
+
+    Arguments:
+        model: SBML model (libsbml)
+        observable_list: observables block containing all observable definitions.
+
+    Returns:
+
+    Raises:
+
+    """
+    warnings.warn('Conditions are not represented in the SBML and therefore '
+                  'only have an effect the output, when called via yaml2PEtab')
 
 
 # TODO read_events_block

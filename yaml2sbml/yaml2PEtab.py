@@ -57,24 +57,48 @@ def create_petab_tables_from_yaml(yaml_dict: dict,
     Raises:
 
     """
-
-    # create PEtab observable file, if observables are present in the yaml file.
-    observable_table = _create_observable_table(yaml_dict['observables'])
-
-    if observable_table is not None:
-        observable_table.to_csv(os.path.join(output_dir, 'observable_table.tsv'), sep='\t', index=False)
-
-    parameter_table = _create_parameter_table(yaml_dict['parameters'])
+    parameter_table = _create_parameter_table(yaml_dict)
     parameter_table.to_csv(os.path.join(output_dir, 'parameter_table.tsv'), sep='\t', index=False)
 
+    # create PEtab observable table, if observables are present in the yaml file.
+    if 'observables' in yaml_dict.keys():
+        observable_table = _create_observable_table(yaml_dict)
+        observable_table.to_csv(os.path.join(output_dir, 'observable_table.tsv'), sep='\t', index=False)
 
-def _create_observable_table(observable_block_dict: dict):
+    # create PEtab condition table, if conditions are present in the yaml file.
+    if 'conditions' in yaml_dict.keys():
+        condition_table = _create_condition_table(yaml_dict)
+        condition_table.to_csv(os.path.join(output_dir, 'condition_table.tsv'), sep='\t', index=False)
+
+
+def _create_parameter_table(yaml_dict: dict):
     """
-    Creates an observable table from the observable block given by
-    yaml_dict['observable'].
+    Creates a parameter table from the parameter block in the given yaml_dict.
 
     Arguments:
-        observable_block_dict: yaml_dict['parameters'].
+        yaml_dict
+
+    Returns:
+        parameter_table: pandas data frame containing the parameter table.
+
+    Raises:
+
+    """
+    mandatory_id_list = ['parameterId', 'parameterName', 'parameterScale',
+                         'lowerBound', 'upperBound', 'nominalValue', 'estimate']
+
+    optional_id_list = ['initializationPriorType', 'initializationPriorParameters',
+                        'objectivePriorType', 'objectivePriorParameters']
+
+    return _create_petab_table(yaml_dict['parameters'], mandatory_id_list, optional_id_list)
+
+
+def _create_observable_table(yaml_dict: dict):
+    """
+    Creates an observable table from the observable block  in the given yaml_dict.
+
+    Arguments:
+        yaml_dict
 
     Returns:
         observable_table: pandas data frame containing the observable table.
@@ -83,22 +107,34 @@ def _create_observable_table(observable_block_dict: dict):
     Raises:
 
     """
+    mandatory_id_list = ['observableId', 'observableFormula', 'noiseFormula']
 
-    if observable_block_dict:
+    optional_id_list = ['observableName', 'observableTransformation', 'noiseDistribution']
 
-        observable_table = pd.DataFrame({'observableId': [],
-                                         'observableName': [],
-                                         'observableFormula': [],
-                                         'observableTransformation': [],
-                                         'noiseFormula': [],
-                                         'noiseDistribution': []})
-        for observable in observable_block_dict:
-            _petab_table_add_row(observable_table, observable)
+    return _create_petab_table(yaml_dict['observables'], mandatory_id_list, optional_id_list)
 
-        return observable_table
 
-    else:
-        return None
+def _create_condition_table(yaml_dict: dict):
+    """
+    Creates a condition table from the observable block  in the given yaml_dict.
+
+    Arguments:
+        yaml_dict
+
+    Returns:
+        condition_table: pandas data frame containing the condition table.
+            (if condition block is not empty, else None)
+
+    Raises:
+
+    """
+    mandatory_id_list = ['conditionId']
+
+    optional_id_list = ['conditionName'] + \
+                       [param['parameterId'] for param in yaml_dict['parameters']] + \
+                       [ode['stateId'] for ode in yaml_dict['odes']]
+
+    return _create_petab_table(yaml_dict['conditions'], mandatory_id_list, optional_id_list)
 
 
 def validate_petab_tables(sbml_dir: str, output_dir: str):
@@ -134,34 +170,34 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
                                   observable_df=observable_df)
 
 
-def _create_parameter_table(parameter_block_dict: dict):
+def _create_petab_table(block_list: list,
+                        mandatory_id_list: list,
+                        optional_id_list: id):
     """
-    Creates a parameter table from the parameter block given by
-    yaml_dict['parameters'].
+    Creates a PEtab table from the block_list in the yaml_dict.
 
     Arguments:
-        parameter_block_dict: yaml_dict['parameters'].
+        block_list: entry from yaml_dict.
+        mandatory_id_list: list of mandatory ids in the PEtab table
+        optional_id_list: list of optional ids in the PEtab table
 
     Returns:
-        parameter_table: pandas data frame containing the parameter table.
+        petab_table: pandas data frame containing the petab table.
 
     Raises:
 
     """
-    parameter_table = pd.DataFrame({'parameterId': [],
-                                    'parameterName': [],
-                                    'parameterScale': [],
-                                    'lowerBound': [],
-                                    'upperBound': [],
-                                    'nominalValue': [],
-                                    'estimate': []})
 
-    for parameter in parameter_block_dict:
-        _petab_table_add_row(parameter_table, parameter)
+    petab_table = pd.DataFrame({col_id: [] for col_id in mandatory_id_list})
 
-    parameter_table.loc[:, 'estimate'] = pd.to_numeric(parameter_table.loc[:, 'estimate'], downcast='integer')
+    for row in block_list:
+        _petab_table_add_row(petab_table, row)
 
-    return parameter_table
+    # check if every column is part of PEtab standard.
+    for col_name in petab_table.head():
+        if not (col_name in mandatory_id_list or col_name in optional_id_list):
+            warnings.warn(f'PEtab warning: {col_name} is not part of the PEtab standard.')
+    return petab_table
 
 
 def _petab_table_add_row(petab_table: pd.DataFrame, row_dict: dict):
