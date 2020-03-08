@@ -192,10 +192,13 @@ def read_parameters_block(model: sbml.Model, parameter_list: list):
 
     """
     for parameter_def in parameter_list:
-        create_parameter(model, parameter_def['parameterId'], parameter_def['nominalValue'])
+        if 'nominalValue' in parameter_def.keys():
+            create_parameter(model, parameter_def['parameterId'], parameter_def['nominalValue'])
+        else:
+            create_parameter(model, parameter_def['parameterId'])
 
 
-def create_parameter(model: sbml.Model, parameter_id: str, value: str):
+def create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
     """
     Creates a parameter and adds it to the given SBML model.
     Units are set as dimensionless by default.
@@ -203,7 +206,7 @@ def create_parameter(model: sbml.Model, parameter_id: str, value: str):
     Arguments:
         model: the SBML model to which the parameter will be added.
         parameter_id: the parameter ID
-        value: the parameter value
+        value: the parameter value, if value is None, no parameter is set.
 
     Returns:
 
@@ -214,7 +217,9 @@ def create_parameter(model: sbml.Model, parameter_id: str, value: str):
     k.setId(parameter_id)
     k.setName(parameter_id)
     k.setConstant(True)
-    k.setValue(float(value))
+
+    if value is not None:
+        k.setValue(float(value))
 
     k.setUnits('dimensionless')
 

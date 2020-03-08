@@ -1,6 +1,5 @@
 time:
-    variable: t 
-    units: seconds
+    variable: t
 
 parameters:
 
