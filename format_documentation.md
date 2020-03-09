@@ -122,7 +122,7 @@
       - conditionId: condition1
         p_1: 1
         x_1: 2
-  		...
+        ...
   ```
 
   Conditions allow set parameters or initial conditions of states to a numeric value/unknown parameter. This allows to specify different experimental setups in the data generation (e.g. different initial conditions for different runs of an experiment). 
