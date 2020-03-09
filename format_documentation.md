@@ -68,11 +68,11 @@ For a more detailed description of the parsing of mathematical expressions (e.g.
 
 ``` yaml
 functions:
-    - id: g_1
+    - functionId: g_1
       arguments: x_1, s
       formula: s * x_1 + 1
 
-    - id: g_2
+    - functionId: g_2
       ...
 ```
 
