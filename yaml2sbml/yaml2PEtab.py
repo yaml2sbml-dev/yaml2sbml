@@ -230,12 +230,11 @@ if __name__ == '__main__':
     parser.add_argument('yaml_file', type=str)
     parser.add_argument('output_dir', type=str)
     parser.add_argument('model_name', type=str)
-    parser.add_argument('petab_output', type=str)
 
     args = parser.parse_args()
 
     print(f'Path to yaml file: {args.yaml_file}')
-    print(f'Output directory: {args.model_name}')
+    print(f'Output directory: {args.output_dir}')
     print(f'Path to sbml/petab files: {args.model_name}')
 
     print('Converting...')
