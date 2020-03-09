@@ -17,7 +17,7 @@ Table of contents
 Introduction
 ------------
 
-yaml2sbml is a small package to convert an ODE model specified in a yaml file into an [**SBML**](www.sbml.org) for ODE simulation and into [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. These file formats can be used with other packages.
+yaml2sbml is a small package to convert an ODE model specified in a yaml file into an [**SBML**](http://www.sbml.org/) for ODE simulation and into [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. These file formats can be used with other packages.
 
 * [format_documentation.md](format_documentation.md) provides a documentation of the format of the input yaml. 
 
