@@ -1,13 +1,13 @@
 # Input Format for yaml2sbml
 
-### General scope
+## General scope
 
 *  `yaml2sbml`: Translates ODEs (Initial value problems) of the form `x' = f(t, x, p)` with time t, states x  and (potentially) unknown parameters p into a SBML file for simulation purose.
 
 *  `yaml2PEtab`: Defines a fitting problem of the form `y(t_i) = h(x(t_i), p) + eps_i` with independent Normal or Laplace distributed error terms eps. h denotes the mapping from system states to observables. PEtab allows to formulate MLE and MAP based fitting problems.
 
 
-### time \[optional\]
+## time \[optional\]
 
 ```yaml
 time:
@@ -16,7 +16,7 @@ time:
 
 Defines a **time variable**, in case the right hand side of the ODE is time-dependent.
   
-### parameters \[optional\]
+## parameters \[optional\]
 
 ```yaml
 parameters: 
@@ -33,7 +33,7 @@ For a detailed description see the documentation of the [PEtab parameter table](
 
 Further entries are possible and will be written to the _parameter table_ as well but are currently not part of the PEtab standard. 
 
-### odes
+## odes
 
 ```yaml
 odes:
@@ -49,7 +49,7 @@ Defines the **ODE**. An ODE consists of a `stateId` (string), a `rightHandSide` 
 
 For a more detailed description of the parsing of mathematical expressions ( for  `rightHandSide`) we refer to the [corresponding section](#parsing-of-mathematical-equations) of this documentation.
 
-### assignments \[optional\]
+## assignments \[optional\]
 
 ```yaml
 assignments:
@@ -64,7 +64,7 @@ assignments:
 
 For a more detailed description of the parsing of mathematical expressions (e.g. for  `formula`) we refer to the [corresponding section](#parsing-of-mathematical-equations) of this documentation.
 
-### functions \[optional\]
+## functions \[optional\]
 
 ``` yaml
 functions:
@@ -82,7 +82,7 @@ Defines a **function**, that can be called in other parts of the ODE definitions
 
 For a more detailed description of the parsing of mathematical expressions (e.g. for  `formula`) we refer to the [corresponding section](#parsing-of-mathematical-equations) of this documentation.
 
-### observables \[optional\]
+## observables \[optional\]
 
 ``` yaml
 observables:
@@ -101,7 +101,7 @@ Defines the **observables**. Observables are not part of the SBML standard and h
 
 For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.md#observables-table).
 
-### conditons \[optional\]:
+## conditons \[optional\]:
 
 ```yaml
 conditions:
@@ -123,7 +123,7 @@ conditions:
 
 For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.md#condition-table).
 
-### Parsing of Mathematical Equations
+## Parsing of Mathematical Equations
 
  Throughout `yaml2sbml` formulas are parsed by `libsbml's` `parseL3Formula` function. Further information on the syntay are given by
 
