@@ -101,7 +101,7 @@ Defines the **observables**. Observables are not part of the SBML standard and h
 
 For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.md#observables-table).
 
-## conditons \[optional\]:
+## conditons \[optional\]
 
 ```yaml
 conditions:
