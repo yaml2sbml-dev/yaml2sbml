@@ -1,4 +1,4 @@
-* # Input Format for yaml2sbml
+# Input Format for yaml2sbml
 
 ### General scope
 
