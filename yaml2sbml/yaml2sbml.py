@@ -124,7 +124,6 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
                      'functions': read_functions_block,
                      'observables': read_observables_block,
                      'odes': read_odes_block,
-                     'events': read_events_block,
                      'conditions': read_conditions_block}
 
     for block in yaml_dic:
@@ -423,11 +422,6 @@ def read_conditions_block(model: sbml.Model, observable_list: list):
     """
     warnings.warn('Conditions are not represented in the SBML and therefore '
                   'only have an effect the output, when called via yaml2PEtab')
-
-
-# TODO read_events_block
-def read_events_block(model: sbml.Model, events_list: list):
-    warnings.warn('Events not supported yet')
 
 
 if __name__ == '__main__':
