@@ -361,7 +361,7 @@ def create_species(model: sbml.Model, species_id: str, initial_amount: str):
         init = model.createInitialAssignment()
         init.setId('init_' + species_id)
         init.setSymbol(species_id)
-        init.setMath(initial_amount)
+        init.setMath(sbml.parseL3Formula(initial_amount))
 
     s.setConstant(False)
     s.setBoundaryCondition(False)
