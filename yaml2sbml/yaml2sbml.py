@@ -353,7 +353,16 @@ def create_species(model: sbml.Model, species_id: str, initial_amount: str):
     """
     s = model.createSpecies()
     s.setId(species_id)
-    s.setInitialAmount(float(initial_amount))
+
+    try:
+        s.setInitialAmount(float(initial_amount))
+    except ValueError:
+        # TODO
+        init = model.createInitialAssignment()
+        init.setId('init_' + species_id)
+        init.setSymbol(species_id)
+        init.setMath(initial_amount)
+
     s.setConstant(False)
     s.setBoundaryCondition(False)
     s.setHasOnlySubstanceUnits(False)
