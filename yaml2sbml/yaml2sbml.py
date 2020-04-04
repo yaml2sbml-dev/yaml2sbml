@@ -7,7 +7,8 @@ import yaml
 
 def yaml2sbml(yaml_file: str, sbml_file: str):
     """
-    Takes in a yaml file with the ODE specification, parses it, converts it into SBML format, and writes the SBML file.
+    Takes in a yaml file with the ODE specification, parses it, converts it
+    into SBML format, and writes the SBML file.
 
     Arguments:
         yaml_file : path to the yaml file with the ODEs specification
@@ -27,7 +28,8 @@ def yaml2sbml(yaml_file: str, sbml_file: str):
 
 def parse_yaml(yaml_file: str) -> str:
     """
-    Takes in a yaml file with the specification of ODEs, parses it, and returns the corresponding SBML string.
+    Takes in a yaml file with the specification of ODEs, parses it, and
+    returns the corresponding SBML string.
 
     Arguments:
         yaml_file: path to the yaml file with the ODEs specification
@@ -308,7 +310,8 @@ def create_assignment(model, assignment_id: str, formula: str):
 def read_functions_block(model, functions_list: list):
     """
     Reads and processes the functions block in the ODE yaml file.
-    In particular, it reads the functions and adds them to the given SBML file as functionDefinitions.
+    In particular, it reads the functions and adds them to the given SBML file
+    as functionDefinitions.
     The expected format of a function definition is:
     {'id': <state_id>, 'arguments': <arguments>,  'formula' : <formula>}
 
@@ -322,7 +325,8 @@ def read_functions_block(model, functions_list: list):
 
     """
     for function_def in functions_list:
-        create_function(model, function_def['id'], function_def['arguments'], function_def['formula'])
+        create_function(model, function_def['id'], function_def['arguments'],
+                        function_def['formula'])
 
 
 def create_function(model, function_id: str, arguments: str, formula: str):
@@ -350,7 +354,8 @@ def read_odes_block(model, odes_list: list):
     """
     Reads and processes lines in the odes block in the ODE yaml file.
     In particular, it reads the odes and adds them to the given SBML file as rateRules.
-    The expected format of an ode definition is: {'id': <state_variable>, 'right_hand_side' : <right_hand_side>}
+    The expected format of an ode definition is:
+    {'id': <state_variable>, 'right_hand_side' : <right_hand_side>}
 
     Arguments:
         model: a SBML model
@@ -411,8 +416,8 @@ def read_observables_block(model, observable_list: list):
 
 def create_observable(model, observable_id: str, formula: str):
     """
-    Creates a parameter with the name observable_id and an assignment rule, that assigns the parameter to
-    the equation given in formula.
+    Creates a parameter with the name observable_id and an assignment rule,
+    that assigns the parameter to the equation given in formula.
     Units are set as dimensionless by default.
 
     Arguments:
@@ -445,8 +450,9 @@ def read_events_block(model, line):
     warnings.warn('Events not supported yet')
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to SBML.')
+def main():
+    parser = argparse.ArgumentParser(
+        description='Takes in an ODE model in .yaml and converts it to SBML.')
     parser.add_argument('yaml_file', type=str)
     parser.add_argument('sbml_file', type=str)
 
@@ -456,3 +462,7 @@ if __name__ == '__main__':
     print('Converting...')
 
     yaml2sbml(args.yaml_file, args.sbml_file)
+
+
+if __name__ == '__main__':
+    main()
