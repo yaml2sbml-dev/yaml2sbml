@@ -357,7 +357,6 @@ def create_species(model: sbml.Model, species_id: str, initial_amount: str):
     try:
         s.setInitialAmount(float(initial_amount))
     except ValueError:
-        # TODO
         init = model.createInitialAssignment()
         init.setId('init_' + species_id)
         init.setSymbol(species_id)
