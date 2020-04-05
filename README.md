@@ -53,7 +53,11 @@ To install packages use either pip or conda:
 
 ## Usage
 
-### yaml2sbml
+You can either call `yaml2sbml` via its command line interface or within your python code: 
+
+### Command line interface 
+
+#### yaml2sbml
 
 To convert an ODE model encoded in a yaml file to SBML using the terminal, go to the `yaml2sbml` folder and run:
 
@@ -67,16 +71,7 @@ For instance, using the yaml file in the examples folder:
  yaml2sbml ../examples/ode_input1.yaml ../examples/sbml_out.xml
 ```
 
-Alternatively you can use `yaml2sbml` within your python code via
-
-```python
-from yaml2sbml import yaml2sbml
-
-yaml2sbml.yaml2sbml(yaml_file, sbml_file)
-```
-Here `yaml_file` and `sbml_file` are strings.
-
-### yaml2PEtab
+#### yaml2PEtab
 
 If you want to generate PEtab parameter, observable and condition tables, additionally to the SBML file using the terminal, go to the `yaml2sbml` folderand run:
 
@@ -89,14 +84,26 @@ For instance, again using the yaml file in the examples folder:
  yaml2petab ../examples/ode_input1.yaml ../examples/ example_model.xml
 ```
 
-Alternatively you can use `yaml2petab` within your python code via
+### Python
+
+Alternatively you can call `yaml2sbml` within your python code via
+
+```python
+from yaml2sbml import yaml2sbml
+
+yaml2sbml.yaml2sbml(yaml_file, sbml_file)
+```
+
+Here all inputs ar given as strings.
+
+To generate PEtab files call `yaml2petab` via
 
 ```python
 from yaml2sbml import yaml2PEtab
 
-yaml2PEtab.yaml2petab(yaml_file: str,
-                      output_dir: str,
-                      model_name: str)
+yaml2PEtab.yaml2petab(yaml_file,
+                      output_dir,
+                      model_name)
 ```
 Here `yaml_file, output_dir` and `model_name` are strings.
 
