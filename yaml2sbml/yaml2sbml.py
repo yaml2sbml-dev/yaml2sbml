@@ -437,7 +437,6 @@ def read_conditions_block(model: sbml.Model, observable_list: list):
                   'only have an effect the output, when called via yaml2PEtab')
 
 
-
 def main():
     parser = argparse.ArgumentParser(
         description='Takes in an ODE model in .yaml and converts it to SBML.')
