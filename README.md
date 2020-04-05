@@ -54,7 +54,7 @@ To install packages use either pip or conda:
 
 ## Usage
 
-You can either call `yaml2sbml` via its command line interface or within your python code: 
+You can either call `yaml2sbml` via its [command line interface][#Command line interface] or within your [python code][#Python]: 
 
 ### Command line interface 
 
