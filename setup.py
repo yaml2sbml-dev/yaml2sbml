@@ -17,7 +17,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=["python-libsbml>=5.18.0",
                       "PyYAML>=5.1",
-                      "pandas>=1.0.1"],
+                      "pandas>=1.0.1",
+                      "petab>=0.1.4"],
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3.6+",
