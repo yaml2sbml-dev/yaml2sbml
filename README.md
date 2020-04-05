@@ -30,6 +30,7 @@ To install go to the main folder and do:
  * python-libsbml>=5.18.0
  * PyYAML>=5.3
  * pandas >= 1.0.1 
+ * PEtab >= 0.1.4
 
 #### Requirements files:
 
