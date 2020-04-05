@@ -2,6 +2,7 @@ import os
 import unittest
 
 from yaml2sbml.yaml2sbml import parse_yaml
+import yaml2sbml.yaml2PEtab as yaml2PEtab
 
 
 class TestYamlImport(unittest.TestCase):
@@ -14,8 +15,11 @@ class TestYamlImport(unittest.TestCase):
         self.test_folder = os.path.join(this_dir, 'test_yaml2sbml')
 
     def test_yaml_import(self):
-        ode_file = os.path.join(self.test_folder, 'ode_input1.yaml')
-        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output1.xml')
+        """
+        Test yaml import/SBML generation...
+        """
+        ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
+        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output.xml')
 
         sbml_contents = parse_yaml(ode_file)
 
@@ -31,7 +35,7 @@ class TestYamlImport(unittest.TestCase):
 
     def test_yaml_import_observables(self):
         ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
-        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output2.xml')
+        expected_result_file = os.path.join(self.test_folder, 'true_sbml_output.xml')
 
         sbml_contents = parse_yaml(ode_file)
 
@@ -44,6 +48,22 @@ class TestYamlImport(unittest.TestCase):
         self.assertEqual(expected_sbml_contents, sbml_contents)
 
         os.remove(os.path.join(self.test_folder, 'sbml_test.xml'))
+
+    def test_petab_export(self):
+        """
+        Test PEtab export
+        """
+        ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
+
+        yaml2PEtab.yaml2petab(ode_file,
+                              self.test_folder,
+                              'sbml_test.xml')
+
+        yaml2PEtab.validate_petab_tables(os.path.join(self.test_folder, 'sbml_test.xml'),
+                                         self.test_folder)
+
+        for file in ['observable_table.tsv', 'parameter_table.tsv', 'condition_table.tsv', 'sbml_test.xml']:
+            os.remove(os.path.join(self.test_folder, file))
 
 
 if __name__ == '__main__':

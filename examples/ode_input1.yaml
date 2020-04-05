@@ -2,64 +2,94 @@ time:
     variable: t
 
 parameters:
-    - id: c1 
-      value: 1
-    
-    - id: Shalve 
-      value: 0.1
-      
-    - id: Vh
-      value: 0.1
 
-    - id: h
-      value: 0.1
+    - parameterId: c1
+      nominalValue: 1
 
-    - id: Vmm
-      value: 0.1 
+      estimate: 0
 
-    - id: Km
-      value: 0.1
+    - parameterId: Shalve
+      nominalValue: 0.1
 
-    - id: v1
-      value: 0.1
+      estimate: 0
 
-    - id: k4
-      value: 0.1
+    - parameterId: Vh
+      nominalValue: 0.1
 
-states:
-    - id: S1 
-      initial_value: 0.1
+      lowerBound: 0
+      upperBound: 1000
+      estimate: 1
 
-    - id: S2
-      initial_value: 1
+    - parameterId: h
+      nominalValue: 0.1
 
-    - id: S3
-      initial_value: 1
+      lowerBound: 0
+      upperBound: 1000
+      estimate: 1
+
+    - parameterId: Vmm
+      nominalValue: 0.1
+
+      lowerBound: 0
+      upperBound: 1000
+      estimate: 1
+
+    - parameterId: Km
+      nominalValue: 0.1
+
+      lowerBound: 0
+      upperBound: 1000
+
+    - parameterId: v1
+      nominalValue: 0.1
+
+      lowerBound: 0
+      upperBound: 1000
+      estimate: 1
+
+    - parameterId: k4
+      nominalValue: 0.1
+
+      lowerBound: 0
+      upperBound: 1000
+      estimate: 1
+
+    - parameterId: sigma
+      nominalValue: 1
+      estimate : 0
+
+assignments:
+    - assignmentId: log_10_c1
+      formula: log10(c1)
 
 functions:
-    - id: hill
+    - functionId: hill
       arguments: V, s, Shalve, h
       formula: V * (s/Shalve)^h / (1 + (s/Shalve)^h )
 
-    - id: MM
+    - functionId: MM
       arguments: V, s, Km
       formula: V*s / (Km + s)
 
 odes:
-    - state: S1
-      right_hand_side: v1 - MM(S1, Vmm, Km)*c1^2
+    - stateId: S1
+      rightHandSide: v1 - MM(S1, Vmm, Km)*c1^2
+      initialValue: 0.1
 
-    - state: S2
-      right_hand_side: MM(S1, Vmm, Km) - hill(S2, Shalve, Vh, h)
+    - stateId: S2
+      rightHandSide: MM(S1, Vmm, Km) - hill(S2, Shalve, Vh, h)
+      initialValue: 1
 
-    - state: S3
-      right_hand_side: hill(S2, Shalve, Vh, h) - k4*S3 + log10(c1)
+    - stateId: S3
+      rightHandSide: hill(S2, Shalve, Vh, h) - k4*S3 + log10(c1)
+      initialValue: 1
 
 
 observables:
+    - observableId: total_S
+      observableFormula: S1 + S2 + S3
+      noiseFormula: sigma
 
-
-noise:
 
 
 events:
