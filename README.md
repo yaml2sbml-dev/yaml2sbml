@@ -8,7 +8,7 @@
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Command line interface](#Command line interface)
+  * [Command line interface](#Command_line_interface)
   * [Python](#Python)
 * [Known issues and limitations](#known-issues-and-limitations)
 
@@ -58,7 +58,7 @@ To install packages use either pip or conda:
 
 You can either call `yaml2sbml` via its [command line interface](#Command line interface) or within your [python code](#Python): 
 
-### Command line interface 
+### Command line interface
 
 #### yaml2sbml
 
