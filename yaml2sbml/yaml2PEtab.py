@@ -156,7 +156,9 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
 
     parameter_file_dir = os.path.join(output_dir, 'parameter_table.tsv')
     observable_file_dir = os.path.join(output_dir, 'observable_table.tsv')
+    condition_table_dir = os.path.join(output_dir, 'condition_table.tsv')
 
+    # check observable table, if the table exists
     if os.path.exists(observable_file_dir):
         observable_df = pd.read_csv(observable_file_dir, sep='\t', index_col='observableId')
         petab.lint.check_observable_df(observable_df)
@@ -164,6 +166,12 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
     else:
         observable_df = None
 
+    # check condition table, if the table exists
+    if os.path.exists(condition_table_dir):
+        condition_df = pd.read_csv(condition_table_dir, sep='\t', index_col='conditionId')
+        petab.lint.check_condition_df(condition_df, model)
+
+    # check parameter table
     parameter_df = pd.read_csv(parameter_file_dir, sep='\t', index_col='parameterId')
     petab.lint.check_parameter_df(parameter_df,
                                   sbml_model=model,
