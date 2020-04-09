@@ -148,7 +148,7 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
         Errors are raised by lint, if PEtab files are invalid...
 
     """
-    model = sbml.readSBML(sbml_dir)
+    model = sbml.readSBML(sbml_dir).getModel()
 
     parameter_file_dir = os.path.join(output_dir, 'parameter_table.tsv')
     observable_file_dir = os.path.join(output_dir, 'observable_table.tsv')
