@@ -31,5 +31,5 @@ class TestYaml2PEtab(unittest.TestCase):
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    suite.addTest(TestYaml2SBML())
+    suite.addTest(TestYaml2PEtab())
     unittest.main()

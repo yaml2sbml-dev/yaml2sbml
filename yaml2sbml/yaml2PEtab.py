@@ -84,13 +84,10 @@ def _create_parameter_table(yaml_dict: dict):
     Raises:
 
     """
-    mandatory_id_list = ['parameterId', 'parameterName', 'parameterScale',
-                         'lowerBound', 'upperBound', 'nominalValue', 'estimate']
 
-    optional_id_list = ['initializationPriorType', 'initializationPriorParameters',
-                        'objectivePriorType', 'objectivePriorParameters']
-
-    return _create_petab_table(yaml_dict['parameters'], mandatory_id_list, optional_id_list)
+    return _create_petab_table(yaml_dict['parameters'],
+                               petab.PARAMETER_DF_REQUIRED_COLS,
+                               petab.PARAMETER_DF_OPTIONAL_COLS)
 
 
 def _create_observable_table(yaml_dict: dict):
@@ -107,11 +104,10 @@ def _create_observable_table(yaml_dict: dict):
     Raises:
 
     """
-    mandatory_id_list = ['observableId', 'observableFormula', 'noiseFormula']
 
-    optional_id_list = ['observableName', 'observableTransformation', 'noiseDistribution']
-
-    return _create_petab_table(yaml_dict['observables'], mandatory_id_list, optional_id_list)
+    return _create_petab_table(yaml_dict['observables'],
+                               petab.OBSERVABLE_DF_REQUIRED_COLS,
+                               petab.OBSERVABLE_DF_OPTIONAL_COLS)
 
 
 def _create_condition_table(yaml_dict: dict):
@@ -128,9 +124,9 @@ def _create_condition_table(yaml_dict: dict):
     Raises:
 
     """
-    mandatory_id_list = ['conditionId']
+    mandatory_id_list = [petab.CONDITION_ID]
 
-    optional_id_list = ['conditionName'] + \
+    optional_id_list = [petab.CONDITION_NAME] + \
                        [param['parameterId'] for param in yaml_dict['parameters']] + \
                        [ode['stateId'] for ode in yaml_dict['odes']]
 
@@ -204,7 +200,8 @@ def _create_petab_table(block_list: list,
     # check if every column is part of PEtab standard.
     for col_name in petab_table.head():
         if not (col_name in mandatory_id_list or col_name in optional_id_list):
-            warnings.warn(f'PEtab warning: {col_name} is not part of the PEtab standard.')
+            warnings.warn(f'PEtab warning: {col_name} is not part of the PEtab '
+                          f'standard and hence might have noe effect.')
     return petab_table
 
 
