@@ -1,13 +1,16 @@
 # yaml2sbml
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd23dcce01f74ff3b9a3f5e90afd5731)](https://app.codacy.com/manual/martamatos/yaml2sbml?utm_source=github.com&utm_medium=referral&utm_content=martamatos/yaml2sbml&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/martamatos/yaml2sbml.svg?branch=master)](https://travis-ci.org/martamatos/yaml2sbml)
-[![Coverage Status](https://coveralls.io/repos/github/martamatos/yaml2sbml/badge.svg)](https://coveralls.io/github/martamatos/yaml2sbml)
+[![Coverage Status](https://coveralls.io/repos/github/martamatos/yaml2sbml/badge.svg?branch=master)](https://coveralls.io/github/martamatos/yaml2sbml?branch=master)
 
 ## Table of contents
 
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
+  * [Command line interface](#Command_line_interface)
+  * [Python](#Python)
 * [Known issues and limitations](#known-issues-and-limitations)
 
 ## Introduction
@@ -30,7 +33,7 @@ To install go to the main folder and do:
  * python-libsbml>=5.18.0
  * PyYAML>=5.3
  * pandas >= 1.0.1 
- * PEtab >= 0.1.2
+ * PEtab >= 0.1.4
 
 #### Requirements files:
 
@@ -54,29 +57,59 @@ To install packages use either pip or conda:
 
 ## Usage
 
-### yaml2sbml
+You can either call `yaml2sbml` via its [command line interface](#Command_line_interface) or within your [python code](#Python): 
+
+### Command line interface
+
+#### yaml2sbml
 
 To convert an ODE model encoded in a yaml file to SBML using the terminal, go to the `yaml2sbml` folder and run:
 
 ```shell
- python yaml2sbml.py <yaml_input_file> <sbml_output_file>
+ yaml2sbml <yaml_input_file> <sbml_output_file>
 ```
 
 For instance, using the yaml file in the examples folder:
 
 ```shell
- python yaml2sbml.py ../examples/ode_input1.yaml ../examples/sbml_out.xml
+ yaml2sbml ../examples/ode_input1.yaml ../examples/sbml_out.xml
 ```
 
-
-
-### yaml2PEtab
+#### yaml2PEtab
 
 If you want to generate PEtab parameter, observable and condition tables, additionally to the SBML file using the terminal, go to the `yaml2sbml` folderand run:
 
 ```shell
- python yaml2petab.py <yaml_input_file> <petab_output_directory> <model_name>
+ yaml2petab <yaml_input_file> <petab_output_directory> <model_name>
 ```
+
+For instance, again using the yaml file in the examples folder:
+```shell
+ yaml2petab ../examples/ode_input1.yaml ../examples/ example_model.xml
+```
+
+### Python
+
+Alternatively you can call `yaml2sbml` within your python code via
+
+```python
+from yaml2sbml import yaml2sbml
+
+yaml2sbml.yaml2sbml(yaml_file, sbml_file)
+```
+
+Here all inputs ar given as strings.
+
+To generate PEtab files call `yaml2petab` via
+
+```python
+from yaml2sbml import yaml2PEtab
+
+yaml2PEtab.yaml2petab(yaml_file,
+                      output_dir,
+                      model_name)
+```
+Here `yaml_file, output_dir` and `model_name` are strings.
 
 ## Known issues and limitations
 

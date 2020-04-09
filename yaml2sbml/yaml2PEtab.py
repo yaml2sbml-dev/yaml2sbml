@@ -229,7 +229,7 @@ def _petab_table_add_row(petab_table: pd.DataFrame, row_dict: dict):
         petab_table.loc[n_rows + 1, key] = row_dict[key]
 
 
-if __name__ == '__main__':
+def main():
 
     parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to a PEtab file.')
     parser.add_argument('yaml_file', type=str)
@@ -247,3 +247,7 @@ if __name__ == '__main__':
     yaml2petab(args.yaml_file,
                args.output_dir,
                args.model_name)
+
+
+if __name__ == '__main__':
+    main()
