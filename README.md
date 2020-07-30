@@ -7,10 +7,15 @@
 ## Table of contents
 
 * [Introduction](#introduction)
+
 * [Installation](#installation)
+
 * [Usage](#usage)
+
   * [Command line interface](#Command_line_interface)
+
   * [Python](#Python)
+
 * [Known issues and limitations](#known-issues-and-limitations)
 
 ## Introduction
@@ -35,7 +40,7 @@ To install go to the main folder and do:
  * pandas >= 1.0.1 
  * PEtab >= 0.1.4
 
-#### Requirements files:
+#### Requirements files
 
  * `requirements.txt` 
 
@@ -61,7 +66,7 @@ You can either call `yaml2sbml` via its [command line interface](#Command_line_i
 
 ### Command line interface
 
-#### yaml2sbml
+#### yaml2sbml command
 
 To convert an ODE model encoded in a yaml file to SBML using the terminal, go to the `yaml2sbml` folder and run:
 
@@ -75,7 +80,7 @@ For instance, using the yaml file in the examples folder:
  yaml2sbml ../examples/ode_input1.yaml ../examples/sbml_out.xml
 ```
 
-#### yaml2PEtab
+#### yaml2PEtab command
 
 If you want to generate PEtab parameter, observable and condition tables, additionally to the SBML file using the terminal, go to the `yaml2sbml` folderand run:
 
@@ -113,6 +118,6 @@ Here `yaml_file, output_dir` and `model_name` are strings.
 
 ## Known issues and limitations
 
- * **Compartments** are not supported.
- * **Units** are not supported, all quantities are dimensionless.
- * Specification of PEtab **data tables** are not in the scope of this tool. 
+* **Compartments** are not supported.
+* **Units** are not supported, all quantities are dimensionless.
+* Specification of PEtab **data tables** are not in the scope of this tool. 
