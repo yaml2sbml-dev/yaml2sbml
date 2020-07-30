@@ -10,7 +10,7 @@ class TestYaml2SBML(unittest.TestCase):
     """
 
     def setUp(self):
-        this_dir, this_filename = os.path.split(__file__)
+        this_dir, _ = os.path.split(__file__)
         self.test_folder = os.path.join(this_dir, 'test_yaml2sbml')
 
     def test_yaml_import(self):
