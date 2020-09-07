@@ -38,7 +38,7 @@ Further entries are possible and will be written to the _parameter table_ as wel
 ```yaml
 odes:
     - stateId: x_1
-      righHandSide: p_1 * x_1
+      rightHandSide: p_1 * x_1
       initialValue: 1
 
     - stateId: x_2
