@@ -5,41 +5,69 @@ import warnings
 
 import libsbml as sbml
 import petab
+import yaml
 
 
-from . import yaml2sbml
+from .yaml2sbml import parse_yaml, load_yaml_file
 
 
 def yaml2petab(yaml_file: str,
                output_dir: str,
-               model_name: str):
+               model_name: str,
+               petab_yaml_name: str = None,
+               measurement_table_name: str = None):
     """
     Takes in a yaml file with the ODE specification, parses it, converts
-    it into SBML format, and writes the SBML file.
+    it into SBML format, and writes the SBML file. Further it translates the
+    given information into PEtab tables.
+
+    If a petab_yaml_name is given, a .yaml file is created, that organizes
+    the petab problem. If additionally a measurement_table_file_name is
+    specified, this file name is written into the created .yaml file.
 
     Arguments:
         yaml_file : path to the yaml file with the ODEs specification
         output_dir: path the output file(s) are be written out
         model_name: name of SBML model
+        petab_yaml_name: name of yaml organizing the PEtab problem.
+        measurement_table_name: Name of measurement table
 
     Returns:
 
     Raises:
 
     """
+    # output make directory, if it doesn't exist yet.
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+
     if model_name.endswith('.xml') or model_name.endswith('.sbml'):
         sbml_dir = os.path.join(output_dir, model_name)
     else:
         sbml_dir = os.path.join(output_dir, model_name + '.xml')
 
-    sbml_as_string = yaml2sbml.parse_yaml(yaml_file)
+    sbml_as_string = parse_yaml(yaml_file)
 
     with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
     # create petab tsv files:
-    yaml_dict = yaml2sbml.load_yaml_file(yaml_file)
+    yaml_dict = load_yaml_file(yaml_file)
     create_petab_tables_from_yaml(yaml_dict, output_dir)
+
+    # create yaml file, that organizes the petab problem:
+    if (petab_yaml_name is None) and (measurement_table_name is not None):
+
+        warnings.warn(f'Since no petab_yaml_file_name is specified, the '
+                      f'specified measurement_table_name will have no effect',
+                      RuntimeWarning)
+
+    elif petab_yaml_name is not None:
+        _create_petab_problem_yaml(yaml_dict,
+                                   output_dir,
+                                   sbml_dir,
+                                   petab_yaml_name,
+                                   measurement_table_name)
 
 
 def create_petab_tables_from_yaml(yaml_dict: dict,
@@ -50,9 +78,6 @@ def create_petab_tables_from_yaml(yaml_dict: dict,
     Arguments:
         yaml_dict: dict, that contains the yaml file.
         output_dir: directory, where the PEtab tables should be written.
-
-    Returns:
-        parameter_table: pandas data frame containing the observable table.
 
     Raises:
 
@@ -69,6 +94,49 @@ def create_petab_tables_from_yaml(yaml_dict: dict,
     if 'conditions' in yaml_dict.keys():
         condition_table = _create_condition_table(yaml_dict)
         condition_table.to_csv(os.path.join(output_dir, 'condition_table.tsv'), sep='\t', index=False)
+
+
+def _create_petab_problem_yaml(yaml_dict: dict,
+                               output_dir: str,
+                               sbml_dir: str,
+                               petab_yaml_name: str,
+                               measurement_table_name: str = None):
+    """
+    Creates the yaml file, that can be used for structuring a PEtab problem in
+    the corresponding directory.
+
+    Arguments:
+        yaml_dict: dict, that contains the yaml file.
+        output_dir: directory, where the PEtab tables should be written.
+        sbml_dir: directory of the SBML model.
+        petab_yaml_name: name of file, where PEtab yaml is written.
+        measurement_table_name: directory of the  measurement table.
+
+    Raises:
+
+    """
+    petab_yaml_dict = {'format_version': 1,
+                       'parameter_file': 'parameter_table.tsv',
+                       'problems': [{'sbml_files': [os.path.basename(sbml_dir)]}]}
+
+    # fill the corresponding entries, if they are contained in the yaml/input.
+
+    if 'observables' in yaml_dict.keys():
+        petab_yaml_dict['problems'][0]['observable_files'] = \
+            ['observable_table.tsv']
+
+    if 'conditions' in yaml_dict.keys():
+        petab_yaml_dict['problems'][0]['condition_files'] = \
+            ['condition_table.tsv']
+
+    if measurement_table_name is not None:
+        petab_yaml_dict['problems'][0]['measurement_files'] = \
+            [measurement_table_name]
+
+    petab_yaml_dir = os.path.join(output_dir, petab_yaml_name)
+
+    with open(petab_yaml_dir, 'w') as file:
+        yaml.dump(petab_yaml_dict, file)
 
 
 def _create_parameter_table(yaml_dict: dict):

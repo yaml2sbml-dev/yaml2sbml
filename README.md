@@ -98,7 +98,7 @@ For instance, again using the yaml file in the examples folder:
 Alternatively you can call `yaml2sbml` within your python code via
 
 ```python
-from yaml2sbml import yaml2sbml
+import yaml2sbml
 
 yaml2sbml.yaml2sbml(yaml_file, sbml_file)
 ```
@@ -108,11 +108,11 @@ Here all inputs ar given as strings.
 To generate PEtab files call `yaml2petab` via
 
 ```python
-from yaml2sbml import yaml2PEtab
+import yaml2sbml
 
-yaml2PEtab.yaml2petab(yaml_file,
-                      output_dir,
-                      model_name)
+yaml2sbml.yaml2petab(yaml_file,
+                     output_dir,
+                     model_name)
 ```
 Here `yaml_file, output_dir` and `model_name` are strings.
 
