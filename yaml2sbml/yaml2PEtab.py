@@ -300,9 +300,14 @@ def _petab_table_add_row(petab_table: pd.DataFrame, row_dict: dict):
 def main():
 
     parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to a PEtab file.')
-    parser.add_argument('yaml_file', type=str)
-    parser.add_argument('output_dir', type=str)
-    parser.add_argument('model_name', type=str)
+    parser.add_argument('yaml_file', type=str, help='Input yaml directory')
+    parser.add_argument('output_dir', type=str, help='Output directory')
+    parser.add_argument('model_name', type=str,
+                        help='name of created SBML model.')
+    parser.add_argument('--petab_yaml', type=str,
+                        help='Optional argument, creates a petab .yml')
+    parser.add_argument('--measurement_table', type=str,
+                        help='Optional argument, path to measurement table')
 
     args = parser.parse_args()
 
@@ -314,7 +319,9 @@ def main():
 
     yaml2petab(args.yaml_file,
                args.output_dir,
-               args.model_name)
+               args.model_name,
+               args.petab_yaml,
+               args.measurement_table)
 
 
 if __name__ == '__main__':
