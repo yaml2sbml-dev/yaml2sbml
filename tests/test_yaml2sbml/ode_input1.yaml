@@ -49,8 +49,3 @@ odes:
       rightHandSide: hill(S2, Shalve, Vh, h) - k4*S3 + log10(c1)
       initialValue: 1
 
-
-observables:
-
-
-
