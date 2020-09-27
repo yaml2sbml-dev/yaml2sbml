@@ -29,7 +29,7 @@ parameters:
 
 Defines a **parameter**. `nominalValue` is optional for SBML/PEtab generation, but will be needed for model simulation. Further optional entries are `parameterName, parameterScale, lowerBound, upperBound, estimate` and entries regarding priors. These entries will be written the corresponding column of the _parameter table_ by `yaml2PEtab.`
 
-For a detailed description see the documentation of the [PEtab parameter table](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.md#parameter-table "PEtab paramter table documentation"). 
+For a detailed description see the documentation of the [PEtab parameter table](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.rst#parameter-table "PEtab parameter table documentation"). 
 
 Further entries are possible and will be written to the _parameter table_ as well but are currently not part of the PEtab standard. 
 
@@ -99,7 +99,7 @@ observables:
 
 Defines the **observables**. Observables are not part of the SBML standard and hence only influence the _observable table_ generated in `yaml2PEtab`. The entries are written to the corresponding columns of the PEtab observable table. According to the PEtab standard, an observable table can take the following entries:  `observableId, observableName, observableFormula, observableTransformation, noiseFormula, noiseDistribution`. 
 
-For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.md#observables-table).
+For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.rst#observables-table).
 
 ## conditons \[optional\]
 
@@ -121,7 +121,7 @@ conditions:
       - conditionId: condition1
 ```
 
-For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.md#condition-table).
+For a detailed discussion see the [corresponding part of the PEtab documentation](https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.rst#condition-table).
 
 ## Parsing of Mathematical Equations
 
