@@ -1,5 +1,6 @@
 # yaml2sbml
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd23dcce01f74ff3b9a3f5e90afd5731)](https://app.codacy.com/manual/martamatos/yaml2sbml?utm_source=github.com&utm_medium=referral&utm_content=yaml2sbml-dev/yaml2sbml&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd23dcce01f74ff3b9a3f5e90afd5731)](https://app.codacy.com/manual/martamatos/yaml2sbml?utm_source=github.com&utm_medium=referral&utm_content=martamatos/yaml2sbml&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/martamatos/yaml2sbml.svg?branch=master)](https://travis-ci.org/martamatos/yaml2sbml)
 [![Coverage Status](https://coveralls.io/repos/github/martamatos/yaml2sbml/badge.svg?branch=master)](https://coveralls.io/github/martamatos/yaml2sbml?branch=master)
