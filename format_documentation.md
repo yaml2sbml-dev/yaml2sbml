@@ -1,5 +1,18 @@
 # Input Format for yaml2sbml
 
+## Table of contents
+
+* [General scope](#general-scope)
+* [time](#time-\[optional\])
+* [parameters](#parameters-\[optional\])
+* [odes](#odes)
+* [assignments](#assignments-\[optional\])
+* [functions](#functions-\[optional\])
+* [observables](#observables-\[optional\])
+* [conditions](#conditons-\[optional\])
+* [Parsing of Mathematical Equations](#parsing-of-mathematical-equations)
+
+
 ## General scope
 
 *  `yaml2sbml`: Translates ODEs (Initial value problems) of the form `x' = f(t, x, p)` with time t, states x  and (potentially) unknown parameters p into a SBML file for simulation purose.
