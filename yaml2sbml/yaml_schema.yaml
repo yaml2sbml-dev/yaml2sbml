@@ -33,7 +33,7 @@ properties:
           description: the parameter name. This is optional.
         parameterScale:
           type: string
-          description: whether the parameter is in log (log10) or linear (lin) scale. This is optional.
+          description: whether the parameter is in `log`, `log10` or `lin` (i.e. linear)  scale. This is optional.
         lowerBound:
           type: number
           description: lower bound of the parameter. This is optional.
