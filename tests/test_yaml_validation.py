@@ -3,8 +3,8 @@ import unittest
 
 
 from yaml2sbml.yaml_validation import validate_yaml
-
 from jsonschema.exceptions import ValidationError
+
 
 class TestYamlValidation(unittest.TestCase):
 
@@ -24,7 +24,8 @@ class TestYamlValidation(unittest.TestCase):
     # Should throw an error because of typos
     def test_validate_yaml_typos(self):
         file_in = os.path.join(self.test_folder, 'ode_input_typos.yaml')
-        validate_yaml(file_in)
+        with self.assertRaises(ValidationError):
+            validate_yaml(file_in)
 
     def test_validate_yaml_typos_required(self):
         file_in = os.path.join(self.test_folder, 'ode_input_typos_required.yaml')

@@ -29,6 +29,7 @@ class TestYaml2PEtab(unittest.TestCase):
             for file in ['observable_table.tsv', 'parameter_table.tsv', 'condition_table.tsv', 'sbml_test.xml']:
                 os.remove(os.path.join(self.test_folder, file))
 
+
 if __name__ == '__main__':
     suite = unittest.TestSuite()
     suite.addTest(TestYaml2PEtab())

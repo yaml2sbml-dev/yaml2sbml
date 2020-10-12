@@ -183,6 +183,7 @@ properties:
         - conditionId
         - conditionName
 
+additionalProperties: false
 
 required:
   - odes
