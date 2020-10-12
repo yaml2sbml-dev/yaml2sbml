@@ -4,6 +4,8 @@ import warnings
 import libsbml as sbml
 import yaml
 
+from .yaml_validation import validate_yaml
+
 
 def yaml2sbml(yaml_file: str, sbml_file: str):
     """
@@ -19,6 +21,7 @@ def yaml2sbml(yaml_file: str, sbml_file: str):
     Raises:
 
     """
+    validate_yaml(yaml_file)
 
     sbml_as_string = parse_yaml(yaml_file)
 
