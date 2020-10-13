@@ -1,8 +1,6 @@
 import os
-
+import yaml
 import jsonschema
-
-from yaml2sbml.yaml2sbml import load_yaml_file
 
 SCHEMA = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                       "yaml_schema.yaml")
@@ -21,8 +19,14 @@ def validate_yaml(yaml_file: str):
     Raises:
 
     """
+    # read in SCHEMA
+    with open(SCHEMA, 'r') as f_in:
+        yaml_contents = f_in.read()
+        schema = yaml.full_load(yaml_contents)
 
-    schema = load_yaml_file(SCHEMA)
-    yaml_in = load_yaml_file(yaml_file)
+    # read in yaml_file
+    with open(yaml_file, 'r') as f_in:
+        yaml_contents = f_in.read()
+        yaml_in = yaml.full_load(yaml_contents)
 
     jsonschema.validate(instance=yaml_in, schema=schema)
