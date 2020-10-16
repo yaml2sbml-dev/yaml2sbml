@@ -1,8 +1,8 @@
 # yaml2sbml
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd23dcce01f74ff3b9a3f5e90afd5731)](https://app.codacy.com/manual/martamatos/yaml2sbml?utm_source=github.com&utm_medium=referral&utm_content=martamatos/yaml2sbml&utm_campaign=Badge_Grade_Dashboard)
-[![Build Status](https://travis-ci.org/martamatos/yaml2sbml.svg?branch=master)](https://travis-ci.org/martamatos/yaml2sbml)
-[![Coverage Status](https://coveralls.io/repos/github/martamatos/yaml2sbml/badge.svg?branch=master)](https://coveralls.io/github/martamatos/yaml2sbml?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dc25c9a84ba54710bbb23a6e08ab5d22)](https://www.codacy.com/manual/martamatos/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/yaml2sbml-dev/yaml2sbml.svg?branch=master)](https://travis-ci.com/yaml2sbml-dev/yaml2sbml)
+[![Coverage Status](https://coveralls.io/repos/github/yaml2sbml-dev/yaml2sbml/badge.svg?branch=yaml_validation)](https://coveralls.io/github/yaml2sbml-dev/yaml2sbml?branch=yaml_validation)
 
 ## Table of contents
 
