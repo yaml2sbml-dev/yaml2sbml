@@ -16,7 +16,6 @@ class TestYamlValidation(unittest.TestCase):
         file_in = os.path.join(self.test_folder, 'ode_input1.yaml')
         validate_yaml(file_in)
 
-    #Should throw an error because of extra fields in conditions
     def test_validate_yaml_valid_2(self):
         file_in = os.path.join(self.test_folder, 'ode_input2.yaml')
         validate_yaml(file_in)
