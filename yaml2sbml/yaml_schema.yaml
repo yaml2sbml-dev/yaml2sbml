@@ -88,7 +88,9 @@ properties:
             type: string
             description: any identifier which would be a valid identifier in SBML.
           rightHandSide:
-            type: string
+            oneOf:
+            - type: number
+            - type: string
             description: ODE right hand side mathematical expression as plain text.
           initialValue:
             oneOf:
