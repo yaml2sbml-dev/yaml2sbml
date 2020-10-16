@@ -9,6 +9,7 @@ import yaml
 
 
 from .yaml2sbml import parse_yaml, load_yaml_file
+from .yaml_validation import validate_yaml
 
 
 def yaml2petab(yaml_file: str,
@@ -37,6 +38,9 @@ def yaml2petab(yaml_file: str,
     Raises:
 
     """
+    # validate yaml
+    validate_yaml(yaml_file)
+
     # output make directory, if it doesn't exist yet.
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)

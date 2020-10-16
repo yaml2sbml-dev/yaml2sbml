@@ -2,29 +2,71 @@ time:
     variable: t
 
 parameters:
+
     - parameterId: c1
       nominalValue: 1
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
 
     - parameterId: Shalve
       nominalValue: 0.1
 
+      parameterScale: log10
+      lowerBound: 0.1
+      upperBound: 10
+      estimate: 1
+
     - parameterId: Vh
       nominalValue: 0.1
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 50
+      estimate: 0
 
     - parameterId: h
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: Vmm
       nominalValue: 0.1
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
 
     - parameterId: Km
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: v1
       nominalValue: 0.1
 
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
     - parameterId: k4
       nominalValue: 0.1
+
+      parameterScale: lin
+      lowerBound: 0
+      upperBound: 10
+      estimate: 0
+
 
 
 functions:
@@ -48,4 +90,17 @@ odes:
     - stateId: S3
       rightHandSide: hill(S2, Shalve, Vh, h) - k4*S3 + log10(c1)
       initialValue: 1
+
+
+observables:
+
+
+conditions:
+
+    - conditionId: condition1
+      conditionName: condition1
+      S1: 42
+      Km: 3.14
+
+
 

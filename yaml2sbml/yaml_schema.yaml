@@ -1,0 +1,191 @@
+# For syntax see: https://json-schema.org/understanding-json-schema/index.html
+#$schema: "https://json-schema.org/draft/2019-09/meta/core"
+$schema: "http://json-schema.org/draft-06/schema"
+description: yaml2sbml file format
+
+properties:
+
+  time:
+    items:
+      variable:
+        type: string
+        description: defines a time variable, in case the right hand side of the ODE is time-dependent.
+
+
+  parameters:
+    type: array
+    description: a list of the system parameters and respective definition.
+
+    items:
+      type: object
+      description: defines each system parameter.
+      properties:
+
+        parameterId:
+          type: string
+          description: any identifier which would be a valid identifier in SBML.
+        nominalValue:
+          type: number
+          description: the parameter's value. This is optional for SBML/PEtab generation, but will be needed
+            for model simulation.
+        parameterName:
+          type: string
+          description: the parameter name. This is optional.
+        parameterScale:
+          type: string
+          description: whether the parameter is in `log`, `log10` or `lin` (i.e. linear)  scale. This is optional.
+        lowerBound:
+          type: number
+          description: lower bound of the parameter. This is optional.
+        upperBound:
+          type: number
+          description: upper bound of the parameter. This is optional.
+        estimate:
+          type: number
+          description: estimated parameter value. This is optional.
+
+      required:
+        - parameterId
+
+
+  functions:
+    type: array
+    description: a list of function definitions.
+    items:
+
+      type: object
+      description: defines a function that can be called in other parts of the ODE definitions.
+      properties:
+
+        functionId:
+          type: string
+          description: any identifier which would be a valid identifier in SBML.
+        arguments:
+          type: string
+          description: list of function arguments in string format, separated by a comma. Note that all unknowns
+            appearing in the formula (e.g. also parameters or the time variable) also have to be arguments of the
+            function.
+        formula:
+          type: string
+          description: the function formula as plain text.
+
+      required:
+        - functionId
+        - arguments
+        - formula
+
+
+  odes:
+      type: array
+      description: a list of ODE definitions.
+      items:
+
+        type: object
+        description: defines an ODE.
+        properties:
+
+          stateId:
+            type: string
+            description: any identifier which would be a valid identifier in SBML.
+          rightHandSide:
+            oneOf:
+            - type: number
+            - type: string
+            description: ODE right hand side mathematical expression as plain text.
+          initialValue:
+            oneOf:
+            - type: number
+            - type: string
+            description: ODE value at t=0, can be either a number or a parameter ID.
+
+      required:
+        - stateId
+        - rightHandSide
+        - initialValue
+
+
+  observables:
+    type: array
+    description: a list of observables.
+    items:
+
+      type: object
+      description: observables are not part of the SBML standard and hence only influence the observable table generated
+        in yaml2PEtab. The entries are written to the corresponding columns of the PEtab observable table.
+      properties:
+
+        observableId:
+          type: string
+          description: an observable identifier.
+        observableFormula:
+          type: string
+          description: observation function as a plain text mathematical expression.
+        noiseFormula:
+          oneOf:
+          - type: string
+          - type: number
+          description: measurement noise can be specified as a numerical value which will default to a Gaussian noise
+            model if not specified differently in noiseDistribution with standard deviation as provided here.
+            In this case, the same standard deviation is assumed for all measurements for the given observable.
+            Alternatively, some formula expression can be provided to specify more complex noise models.
+        noiseDistribution:
+          type: string
+          description: assumed noise distribution for the given measurement. Only normally or Laplace distributed noise
+            is currently allowed. Defaults to normal. If normal, the specified noiseParameters will be interpreted
+            as standard deviation (not variance). If Laplace ist specified, the specified noiseParameter will be
+            interpreted as the scale, or diversity, parameter.
+
+      required:
+        - observableId
+        - observableFormula
+
+
+  assignments:
+    type: array
+    description: a list of assignments.
+    items:
+
+      type: object
+      description: assigns the term assignmentId to the value given in formula. The value is dynamically updated and
+        can depend on on parameters, states and time. In the SBML assignments are represented via parameter assignment
+        rules.
+      properties:
+
+        assignmentId:
+          type: string
+          description: an assignment identifier.
+        formula:
+          type: string
+          description: mathematical expression as plain text.
+
+      required:
+        - assignmentId
+        - formula
+
+
+  conditions:
+    type: array
+    description: list of different conditions.
+    items:
+
+      type: object
+      description: A condition, allows to specify different experimental setups in the data generation
+        (e.g. different initial conditions for different runs of an experiment).
+      properties:
+
+        conditionId:
+          type: string
+          description: unique identifier for the simulation/experimental condition.
+        conditionName:
+          type: string
+          description: condition names are arbitrary strings to describe the given condition. They may be used for
+            reporting or visualization.
+
+      required:
+        - conditionId
+        - conditionName
+
+additionalProperties: false
+
+required:
+  - odes
