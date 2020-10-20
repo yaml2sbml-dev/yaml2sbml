@@ -183,7 +183,6 @@ properties:
 
       required:
         - conditionId
-        - conditionName
 
 additionalProperties: false
 
