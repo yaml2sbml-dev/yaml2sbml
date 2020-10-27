@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from yaml2sbml.yaml2sbml import parse_yaml
+from yaml2sbml.yaml2sbml import _parse_yaml
 
 
 class TestYaml2SBML(unittest.TestCase):
@@ -20,7 +20,7 @@ class TestYaml2SBML(unittest.TestCase):
         ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
         expected_result_file = os.path.join(self.test_folder, 'true_sbml_output.xml')
 
-        sbml_contents = parse_yaml(ode_file)
+        sbml_contents = _parse_yaml(ode_file)
 
         with open(expected_result_file, 'r') as f_in:
             expected_sbml_contents = f_in.read()
@@ -36,7 +36,7 @@ class TestYaml2SBML(unittest.TestCase):
         ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
         expected_result_file = os.path.join(self.test_folder, 'true_sbml_output.xml')
 
-        sbml_contents = parse_yaml(ode_file)
+        sbml_contents = _parse_yaml(ode_file)
 
         with open(expected_result_file, 'r') as f_in:
             expected_sbml_contents = f_in.read()
