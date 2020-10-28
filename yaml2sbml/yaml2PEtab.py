@@ -8,7 +8,7 @@ import petab
 import yaml
 
 
-from .yaml2sbml import parse_yaml, load_yaml_file
+from .yaml2sbml import _parse_yaml, _load_yaml_file
 from .yaml_validation import validate_yaml
 
 
@@ -50,14 +50,14 @@ def yaml2petab(yaml_file: str,
     else:
         sbml_dir = os.path.join(output_dir, model_name + '.xml')
 
-    sbml_as_string = parse_yaml(yaml_file)
+    sbml_as_string = _parse_yaml(yaml_file)
 
     with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
     # create petab tsv files:
-    yaml_dict = load_yaml_file(yaml_file)
-    create_petab_tables_from_yaml(yaml_dict, output_dir)
+    yaml_dict = _load_yaml_file(yaml_file)
+    _create_petab_tables_from_yaml(yaml_dict, output_dir)
 
     # create yaml file, that organizes the petab problem:
     if (petab_yaml_name is None) and (measurement_table_name is not None):
@@ -72,10 +72,12 @@ def yaml2petab(yaml_file: str,
                                    sbml_dir,
                                    petab_yaml_name,
                                    measurement_table_name)
+    # validate PEtab tables:
+    validate_petab_tables(sbml_dir, output_dir)
 
 
-def create_petab_tables_from_yaml(yaml_dict: dict,
-                                  output_dir: str):
+def _create_petab_tables_from_yaml(yaml_dict: dict,
+                                   output_dir: str):
     """
     Parses the yaml dict to a PEtab observable/parameter table.
 

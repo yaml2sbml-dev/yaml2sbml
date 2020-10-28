@@ -23,14 +23,14 @@ def yaml2sbml(yaml_file: str, sbml_file: str):
     """
     validate_yaml(yaml_file)
 
-    sbml_as_string = parse_yaml(yaml_file)
+    sbml_as_string = _parse_yaml(yaml_file)
 
     # write sbml file
     with open(sbml_file, 'w') as f_out:
         f_out.write(sbml_as_string)
 
 
-def parse_yaml(yaml_file: str) -> str:
+def _parse_yaml(yaml_file: str) -> str:
     """
     Takes in a yaml file with the specification of ODEs, parses it, and
     returns the corresponding SBML string.
@@ -52,7 +52,7 @@ def parse_yaml(yaml_file: str) -> str:
     model = document.createModel()
     model = _create_compartment(model)
 
-    yaml_dic = load_yaml_file(yaml_file)
+    yaml_dic = _load_yaml_file(yaml_file)
     _convert_yaml_blocks_to_sbml(model, yaml_dic)
 
     # check consistency and give warnings for errors in SBML:
@@ -89,7 +89,7 @@ def _create_compartment(model: sbml.Model):
     return model
 
 
-def load_yaml_file(yaml_file: str) -> dict:
+def _load_yaml_file(yaml_file: str) -> dict:
     """
     Loads yaml file and returns the resulting dictionary.
 
@@ -123,13 +123,13 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
     Raises:
 
     """
-    function_dict = {'time': read_time_block,
-                     'parameters': read_parameters_block,
-                     'assignments': read_assignments_block,
-                     'functions': read_functions_block,
-                     'observables': read_observables_block,
-                     'odes': read_odes_block,
-                     'conditions': read_conditions_block}
+    function_dict = {'time': _read_time_block,
+                     'parameters': _read_parameters_block,
+                     'assignments': _read_assignments_block,
+                     'functions': _read_functions_block,
+                     'observables': _read_observables_block,
+                     'odes': _read_odes_block,
+                     'conditions': _read_conditions_block}
 
     for block in yaml_dic:
         function_dict[block](model, yaml_dic[block])
@@ -137,7 +137,7 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
     return model
 
 
-def read_time_block(model: sbml.Model, time_dic: dict):
+def _read_time_block(model: sbml.Model, time_dic: dict):
     """
     Reads and processes the time block.
 
@@ -154,10 +154,10 @@ def read_time_block(model: sbml.Model, time_dic: dict):
     if time_dic['variable'] == 'time':
         return
     else:
-        create_time(model, time_dic['variable'])
+        _create_time(model, time_dic['variable'])
 
 
-def create_time(model: sbml.Model, time_var: str):
+def _create_time(model: sbml.Model, time_var: str):
     """
     Creates the time variable, add assignment to 'time'
 
@@ -180,7 +180,7 @@ def create_time(model: sbml.Model, time_var: str):
     time_assignment.setMath(sbml.parseL3Formula('time'))
 
 
-def read_parameters_block(model: sbml.Model, parameter_list: list):
+def _read_parameters_block(model: sbml.Model, parameter_list: list):
     """
     Reads and processes the parameters block in the ODE yaml file.
     In particular, it reads the parameters and adds them to the given SBML model.
@@ -198,12 +198,12 @@ def read_parameters_block(model: sbml.Model, parameter_list: list):
     """
     for parameter_def in parameter_list:
         if 'nominalValue' in parameter_def.keys():
-            create_parameter(model, parameter_def['parameterId'], parameter_def['nominalValue'])
+            _create_parameter(model, parameter_def['parameterId'], parameter_def['nominalValue'])
         else:
-            create_parameter(model, parameter_def['parameterId'])
+            _create_parameter(model, parameter_def['parameterId'])
 
 
-def create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
+def _create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
     """
     Creates a parameter and adds it to the given SBML model.
     Units are set as dimensionless by default.
@@ -229,7 +229,7 @@ def create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
     k.setUnits('dimensionless')
 
 
-def read_assignments_block(model: sbml.Model, assignment_list: list):
+def _read_assignments_block(model: sbml.Model, assignment_list: list):
     """
     Reads and processes the assignments block in the ODE yaml file.
     In particular, it reads the assignments and adds them to the given SBML file.
@@ -248,10 +248,10 @@ def read_assignments_block(model: sbml.Model, assignment_list: list):
 
     """
     for assignment_def in assignment_list:
-        create_assignment(model, assignment_def['assignmentId'], assignment_def['formula'])
+        _create_assignment(model, assignment_def['assignmentId'], assignment_def['formula'])
 
 
-def create_assignment(model: sbml.Model, assignment_id: str, formula: str):
+def _create_assignment(model: sbml.Model, assignment_id: str, formula: str):
     """
     Creates an  assignment rule, that assigns id to formula.
 
@@ -275,7 +275,7 @@ def create_assignment(model: sbml.Model, assignment_id: str, formula: str):
     assignment_rule.setMath(sbml.parseL3Formula(formula))
 
 
-def read_functions_block(model: sbml.Model, functions_list: list):
+def _read_functions_block(model: sbml.Model, functions_list: list):
     """
     Reads and processes the functions block in the ODE yaml file.
     In particular, it reads the functions and adds them to the given SBML file
@@ -293,11 +293,11 @@ def read_functions_block(model: sbml.Model, functions_list: list):
 
     """
     for function_def in functions_list:
-        create_function(model, function_def['functionId'], function_def['arguments'],
-                        function_def['formula'])
+        _create_function(model, function_def['functionId'], function_def['arguments'],
+                         function_def['formula'])
 
 
-def create_function(model: sbml.Model, function_id: str, arguments: str, formula: str):
+def _create_function(model: sbml.Model, function_id: str, arguments: str, formula: str):
     """
     Creates a functionDefinition and adds it to the given SBML model.
 
@@ -318,7 +318,7 @@ def create_function(model: sbml.Model, function_id: str, arguments: str, formula
     f.setMath(math)
 
 
-def read_odes_block(model: sbml.Model, odes_list: list):
+def _read_odes_block(model: sbml.Model, odes_list: list):
     """
     Reads and processes the odes block in the ODE yaml file. 
     In particular, it reads the odes and adds a species for 
@@ -339,11 +339,11 @@ def read_odes_block(model: sbml.Model, odes_list: list):
 
     """
     for ode_def in odes_list:
-        create_species(model, ode_def['stateId'], ode_def['initialValue'])
-        create_rate_rule(model, ode_def['stateId'], ode_def['rightHandSide'])
+        _create_species(model, ode_def['stateId'], ode_def['initialValue'])
+        _create_rate_rule(model, ode_def['stateId'], ode_def['rightHandSide'])
 
 
-def create_species(model: sbml.Model, species_id: str, initial_amount: str):
+def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
     """
     Creates a species and adds it to the given SBML model.
     Units are set as dimensionless by default.
@@ -380,7 +380,7 @@ def create_species(model: sbml.Model, species_id: str, initial_amount: str):
     return s
 
 
-def create_rate_rule(model: sbml.Model, species: str, formula: str):
+def _create_rate_rule(model: sbml.Model, species: str, formula: str):
     """
     Creates a SBML rateRule for a species and adds it to the given model.
     This is where the ODEs from the text file are encoded.
@@ -402,7 +402,7 @@ def create_rate_rule(model: sbml.Model, species: str, formula: str):
     r.setMath(math_ast)
 
 
-def read_observables_block(model: sbml.Model, observable_list: list):
+def _read_observables_block(model: sbml.Model, observable_list: list):
     """
     Reads an processes the observables block in the ODE yaml file.
     Since the observables are not represented in the SBML, it only gives
@@ -421,7 +421,7 @@ def read_observables_block(model: sbml.Model, observable_list: list):
                   'only have an effect the output, when called via yaml2PEtab')
 
 
-def read_conditions_block(model: sbml.Model, observable_list: list):
+def _read_conditions_block(model: sbml.Model, observable_list: list):
     """
     Reads an processes the conditions block in the ODE yaml file.
     Since the conditions are not represented in the SBML, it only gives
