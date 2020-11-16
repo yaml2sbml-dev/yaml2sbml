@@ -117,9 +117,16 @@ properties:
         observableId:
           type: string
           description: an observable identifier.
+        observableName:
+          type: string
+          description: name of the observable. Only used for output, not for identification in PEtab.
         observableFormula:
           type: string
           description: observation function as a plain text mathematical expression.
+        observableTransformation:
+          type: string
+          description: Transformation of the observable and measurement for computing the objective function.
+            Must be one of lin, log or log10. Defaults to lin.
         noiseFormula:
           oneOf:
           - type: string
@@ -138,6 +145,7 @@ properties:
       required:
         - observableId
         - observableFormula
+        - noiseFormula
 
 
   assignments:
