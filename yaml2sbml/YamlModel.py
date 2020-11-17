@@ -36,7 +36,7 @@ class YamlModel:
         # read in yaml_file
         with open(yaml_file, 'r') as f_in:
             yaml_contents = f_in.read()
-            new_model._yaml_model  = yaml.full_load(yaml_contents)
+            new_model._yaml_model = yaml.full_load(yaml_contents)
 
         # check, if the model is valid
         new_model.validate_model()
