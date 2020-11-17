@@ -586,4 +586,4 @@ def _filter_none_values(d: dict):
     Returns:
         filtered dictionary.
     """
-    return {key: value for (key, value) in d.items() if value}
+    return {key: value for (key, value) in d.items() if value is not None}
