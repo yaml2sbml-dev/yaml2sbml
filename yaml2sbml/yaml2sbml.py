@@ -50,7 +50,7 @@ def _parse_yaml(yaml_file: str) -> str:
     return sbml_string
 
 
-def _parse_yaml_dict(yaml_dict):
+def _parse_yaml_dict(yaml_dict) -> str:
     """
     Generates a string, containing the SBML from a yaml_dict.
 

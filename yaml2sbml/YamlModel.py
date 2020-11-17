@@ -3,6 +3,7 @@ import os.path
 from typing import Union
 
 from .yaml2sbml import _parse_yaml_dict
+from .yaml2PEtab import _yaml2petab
 from .yaml_validation import _validate_yaml_from_dict
 
 
@@ -104,6 +105,31 @@ class YamlModel:
 
         with open(sbml_dir, 'w') as f_out:
             f_out.write(sbml_as_string)
+
+    def write_to_petab(self,
+                       output_dir: str,
+                       model_name: str,
+                       petab_yaml_name: str = None,
+                       measurement_table_name: str = None):
+        """
+        Writes the YamlModel as a petab problem. Equivalent to calling yaml2petab
+        on the file produced by the yaml output.
+
+        If a petab_yaml_name is given, a .yaml file is created, that organizes
+        the petab problem. If additionally a measurement_table_file_name is
+        specified, this file name is written into the created .yaml file.
+
+        Arguments:
+            output_dir: path the output file(s) are be written out
+            model_name: name of SBML model
+            petab_yaml_name: name of yaml organizing the PEtab problem.
+            measurement_table_name: Name of measurement table
+        """
+        _yaml2petab(self._yaml_model,
+                    output_dir,
+                    model_name,
+                    petab_yaml_name,
+                    measurement_table_name)
 
     def validate_model(self):
         """

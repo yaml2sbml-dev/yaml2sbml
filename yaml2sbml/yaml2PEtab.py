@@ -8,8 +8,8 @@ import petab
 import yaml
 
 
-from .yaml2sbml import _parse_yaml, _load_yaml_file
-from .yaml_validation import validate_yaml
+from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
+from .yaml_validation import _validate_yaml_from_dict
 
 
 def yaml2petab(yaml_file: str,
@@ -38,8 +38,45 @@ def yaml2petab(yaml_file: str,
     Raises:
 
     """
+    yaml_model_dict = _load_yaml_file(yaml_file)
+    _yaml2petab(yaml_model_dict,
+                output_dir,
+                model_name,
+                petab_yaml_name,
+                measurement_table_name)
+
+
+def _yaml2petab(yaml_model_dict: dict,
+                output_dir: str,
+                model_name: str,
+                petab_yaml_name: str = None,
+                measurement_table_name: str = None):
+    """
+    Similar to 'yaml2petab', but takes a yaml_model_dict as input,
+    instead of a file path.
+
+    Takes in a yaml model dict with the ODE specification, parses it, converts
+    it into SBML format, and writes the SBML file. Further it translates the
+    given information into PEtab tables.
+
+    If a petab_yaml_name is given, a .yaml file is created, that organizes
+    the petab problem. If additionally a measurement_table_file_name is
+    specified, this file name is written into the created .yaml file.
+
+    Arguments:
+        yaml_model_dict : dictionary, containing the yaml model
+        output_dir: path the output file(s) are be written out
+        model_name: name of SBML model
+        petab_yaml_name: name of yaml organizing the PEtab problem.
+        measurement_table_name: Name of measurement table
+
+    Returns:
+
+    Raises:
+
+    """
     # validate yaml
-    validate_yaml(yaml_file)
+    _validate_yaml_from_dict(yaml_model_dict)
 
     # output make directory, if it doesn't exist yet.
     if not os.path.exists(output_dir):
@@ -50,24 +87,23 @@ def yaml2petab(yaml_file: str,
     else:
         sbml_dir = os.path.join(output_dir, model_name + '.xml')
 
-    sbml_as_string = _parse_yaml(yaml_file)
+    sbml_as_string = _parse_yaml_dict(yaml_model_dict)
 
     with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
     # create petab tsv files:
-    yaml_dict = _load_yaml_file(yaml_file)
-    _create_petab_tables_from_yaml(yaml_dict, output_dir)
+    _create_petab_tables_from_yaml(yaml_model_dict, output_dir)
 
     # create yaml file, that organizes the petab problem:
     if (petab_yaml_name is None) and (measurement_table_name is not None):
 
         warnings.warn(f'Since no petab_yaml_file_name is specified, the '
-                      f'specified measurement_table_name will have no effect',
+                      f'specified measurement_table_name will have no effect.',
                       RuntimeWarning)
 
     elif petab_yaml_name is not None:
-        _create_petab_problem_yaml(yaml_dict,
+        _create_petab_problem_yaml(yaml_model_dict,
                                    output_dir,
                                    sbml_dir,
                                    petab_yaml_name,
