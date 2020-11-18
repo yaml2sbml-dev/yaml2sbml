@@ -170,11 +170,11 @@ class YamlModel:
         Returns:
             reduced_model_dict
         """
-        reduced_model_dict = copy.deepcopy(self._yaml_model)
+        reduced_model_dict = {}
 
-        for key in reduced_model_dict.keys():
-            if not reduced_model_dict[key]:
-                del reduced_model_dict[key]
+        for (key, val) in self._yaml_model.items():
+            if val:
+               reduced_model_dict[key] = copy.deepcopy(val)
 
         return reduced_model_dict
 
