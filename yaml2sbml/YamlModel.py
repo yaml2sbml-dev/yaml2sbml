@@ -180,7 +180,7 @@ class YamlModel:
 
     # functionalities regarding the time
     def is_set_time(self):
-        return 'time' in self._yaml_model.keys()
+        return bool(self._yaml_model['time'])
 
     def set_time(self,
                  time_variable: str):
