@@ -1,6 +1,7 @@
 import yaml
 import os.path
 from typing import Union
+import copy
 
 from .yaml2sbml import _parse_yaml_dict
 from .yaml2PEtab import _yaml2petab
@@ -16,7 +17,13 @@ class YamlModel:
         """
         Set up yaml model.
         """
-        self._yaml_model = {'odes': []}
+        self._yaml_model = {'time': None,
+                            'odes': [],
+                            'parameters': [],
+                            'assignments': [],
+                            'functions': [],
+                            'observables': [],
+                            'conditions': []}
 
     @staticmethod
     def load_from_yaml(yaml_file):
@@ -71,8 +78,10 @@ class YamlModel:
                                   f' already exists. Consider to set '
                                   f'over_write=True.')
 
+        reduced_model_dict = self._get_reduced_model_dict()
+
         with open(yaml_dir, 'w') as file:
-            yaml.dump(self._yaml_model, file)
+            yaml.dump(reduced_model_dict, file)
 
     def write_to_sbml(self,
                       sbml_dir: str,
@@ -103,7 +112,8 @@ class YamlModel:
                                   f'over_write=True.')
 
         # generate SBML as string
-        sbml_as_string = _parse_yaml_dict(self._yaml_model)
+        reduced_model_dict = self._get_reduced_model_dict()
+        sbml_as_string = _parse_yaml_dict(reduced_model_dict)
 
         with open(sbml_dir, 'w') as f_out:
             f_out.write(sbml_as_string)
@@ -127,7 +137,9 @@ class YamlModel:
             petab_yaml_name: name of yaml organizing the PEtab problem.
             measurement_table_name: Name of measurement table
         """
-        _yaml2petab(self._yaml_model,
+        reduced_model_dict = self._get_reduced_model_dict()
+
+        _yaml2petab(reduced_model_dict,
                     output_dir,
                     model_name,
                     petab_yaml_name,
@@ -145,6 +157,26 @@ class YamlModel:
             ValidationError
         """
         _validate_yaml_from_dict(self._yaml_model)
+
+    def _get_reduced_model_dict(self) -> dict:
+        """
+        Returns a reduced model dict, where keys without an entry, where deleted.
+        (Returns a copy of the model dict!!)
+
+        Arguments:
+
+        Raises:
+
+        Returns:
+            reduced_model_dict
+        """
+        reduced_model_dict = copy.deepcopy(self._yaml_model)
+
+        for key in reduced_model_dict.keys():
+            if not reduced_model_dict[key]:
+                del reduced_model_dict[key]
+
+        return reduced_model_dict
 
     # functionalities regarding the time
     def is_set_time(self):
@@ -337,10 +369,6 @@ class YamlModel:
 
         Returns:
         """
-        # if no parameters defined yet: Initialize
-        if block_key not in self._yaml_model.keys():
-            self._yaml_model[block_key] = []
-
         # filter out None values and append
         filtered_dict = _filter_none_values(entry_dict)
         self._yaml_model[block_key].append(filtered_dict)
@@ -387,11 +415,7 @@ class YamlModel:
         res:
             list of ids
         """
-
-        if block_key not in self._yaml_model.keys():
-            return []
-        else:
-            return [element[index_key] for element in self._yaml_model[block_key]]
+        return [element[index_key] for element in self._yaml_model[block_key]]
 
     # functionalities to get entry by Id:
     def get_parameter_by_id(self,
@@ -475,9 +499,6 @@ class YamlModel:
             Entry_dict. None, if entry is not found.
         """
         # check if block exists.
-        if block_key not in self._yaml_model.keys():
-            return None
-
         for entry in self._yaml_model[block_key]:
             if entry[index_key] == entry_id:
                 return entry
@@ -565,20 +586,13 @@ class YamlModel:
         Returns:
             Bool, that indicates, whether deletion was successful.
         """
-        # Check if block exists
-        if block_key not in self._yaml_model.keys():
-            return False
 
+        # Check if block exists
         for i, entry in enumerate(self._yaml_model[block_key]):
 
             # search for entry and delete
             if entry[index_key] == deleted_object_id:
                 self._yaml_model[block_key].pop(i)
-
-                # check, if block is empty after deletion
-                if len(self._yaml_model[block_key]) == 0:
-                    del self._yaml_model[block_key]
-
                 return True
 
         return False
