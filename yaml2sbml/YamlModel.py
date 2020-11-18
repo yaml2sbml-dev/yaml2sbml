@@ -59,6 +59,7 @@ class YamlModel:
         Returns:
 
         Raises:
+            ValueError
             FileExistsError
         """
         if not (yaml_dir.endswith('.yaml') or yaml_dir.endswith('.yml')):
@@ -88,6 +89,7 @@ class YamlModel:
         Returns:
 
         Raises:
+            ValueError
             FileExistsError
         """
         # Check file ending.
@@ -568,10 +570,17 @@ class YamlModel:
             return False
 
         for i, entry in enumerate(self._yaml_model[block_key]):
+
             # search for entry and delete
             if entry[index_key] == deleted_object_id:
                 self._yaml_model[block_key].pop(i)
+
+                # check, if block is empty after deletion
+                if len(self._yaml_model[block_key]) == 0:
+                    del self._yaml_model[block_key]
+
                 return True
+
         return False
 
 
