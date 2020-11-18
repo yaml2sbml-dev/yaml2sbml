@@ -44,6 +44,24 @@ def _parse_yaml(yaml_file: str) -> str:
     Raises:
         SystemExit
     """
+    yaml_dict = _load_yaml_file(yaml_file)
+    sbml_string = _parse_yaml_dict(yaml_dict)
+
+    return sbml_string
+
+
+def _parse_yaml_dict(yaml_dict) -> str:
+    """
+    Generates a string, containing the SBML from a yaml_dict.
+
+    Arguments:
+        yaml_dict: dictionary, containing to the yaml file with the ODEs specification.
+
+    Returns:
+        sbml_string: a string containing the ODEs in SBML format.
+
+    """
+
     try:
         document = sbml.SBMLDocument(3, 1)
     except ValueError:
@@ -52,8 +70,7 @@ def _parse_yaml(yaml_file: str) -> str:
     model = document.createModel()
     model = _create_compartment(model)
 
-    yaml_dic = _load_yaml_file(yaml_file)
-    _convert_yaml_blocks_to_sbml(model, yaml_dic)
+    _convert_yaml_blocks_to_sbml(model, yaml_dict)
 
     # check consistency and give warnings for errors in SBML:
     if document.checkConsistency():
