@@ -36,13 +36,14 @@ class TestYamlValidation(unittest.TestCase):
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 
-    def test_catch_invalid_time_block(self):
+    def test_catch_invalid_time_block_missing_variable_key(self):
         # time block without kew word "variable"
         file_in = os.path.join(self.test_folder, 'ode_input_invalid_time_1.yaml')
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 
-        # time block without kew word "variable"
+    def test_catch_invalid_time_block_as_array(self):
+        # time block as array instead of single object
         file_in = os.path.join(self.test_folder, 'ode_input_invalid_time_2.yaml')
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)

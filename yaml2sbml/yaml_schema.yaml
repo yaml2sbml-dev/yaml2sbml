@@ -13,7 +13,6 @@ properties:
         description: defines a time variable, in case the right hand side of the ODE is time-dependent.
     required:
       - variable
-    maxItems: 1
 
   parameters:
     type: array
