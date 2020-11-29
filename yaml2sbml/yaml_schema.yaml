@@ -6,11 +6,13 @@ description: yaml2sbml file format
 properties:
 
   time:
+    type: object
     items:
       variable:
         type: string
         description: defines a time variable, in case the right hand side of the ODE is time-dependent.
-
+    required:
+      - variable
 
   parameters:
     type: array
