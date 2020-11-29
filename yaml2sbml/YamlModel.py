@@ -17,7 +17,7 @@ class YamlModel:
         """
         Set up yaml model.
         """
-        self._yaml_model = {'time': [],
+        self._yaml_model = {'time': {},
                             'odes': [],
                             'parameters': [],
                             'assignments': [],
@@ -184,11 +184,11 @@ class YamlModel:
 
     def set_time(self,
                  time_variable: str):
-        self._add_entry({'variable': time_variable}, 'time')
+        self._yaml_model['time'] = {'variable': time_variable}
 
     def get_time(self):
         if self.is_set_time():
-            return self._get_ids('time', 'variable')[0]
+            return self._yaml_model['time']['variable']
         else:
             return None
 
