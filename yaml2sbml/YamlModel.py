@@ -17,7 +17,7 @@ class YamlModel:
         """
         Set up yaml model.
         """
-        self._yaml_model = {'time': None,
+        self._yaml_model = {'time': [],
                             'odes': [],
                             'parameters': [],
                             'assignments': [],
@@ -174,7 +174,7 @@ class YamlModel:
 
         for (key, val) in self._yaml_model.items():
             if val:
-               reduced_model_dict[key] = copy.deepcopy(val)
+                reduced_model_dict[key] = copy.deepcopy(val)
 
         return reduced_model_dict
 
@@ -184,10 +184,13 @@ class YamlModel:
 
     def set_time(self,
                  time_variable: str):
-        self._yaml_model['time'] = [time_variable]
+        self._add_entry({'variable': time_variable}, 'time')
 
     def get_time(self):
-        return self._yaml_model['time'][0]
+        if self.is_set_time():
+            return self._get_ids('time', 'variable')[0]
+        else:
+            return None
 
     # functions adding a value
     def add_parameter(self,

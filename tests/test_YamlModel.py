@@ -254,6 +254,21 @@ class TestYamlModel(unittest.TestCase):
         model.delete_condition(condition_id)
         self.assertListEqual(model.get_condition_ids(), [])
 
+    def test_valid_model(self):
+        """
+        Tests, whether the resulting models are valid.
+        """
+        model = YamlModel()
+
+        model.set_time('t')
+        model.add_ode(state_id='x',
+                      right_hand_side='k_1 * x + t',
+                      initial_value=0)
+        model.add_parameter(parameter_id='k_1',
+                            nominal_value=1)
+
+        model.validate_model()
+
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()

@@ -36,6 +36,17 @@ class TestYamlValidation(unittest.TestCase):
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 
+    def test_catch_invalid_time_block(self):
+        # time block without kew word "variable"
+        file_in = os.path.join(self.test_folder, 'ode_input_invalid_time_1.yaml')
+        with self.assertRaises(ValidationError):
+            validate_yaml(file_in)
+
+        # time block without kew word "variable"
+        file_in = os.path.join(self.test_folder, 'ode_input_invalid_time_2.yaml')
+        with self.assertRaises(ValidationError):
+            validate_yaml(file_in)
+
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
