@@ -80,8 +80,19 @@ class YamlModel:
 
         reduced_model_dict = self._get_reduced_model_dict()
 
+        #translate to string
+        yaml_as_string = yaml.dump(reduced_model_dict,
+                                   sort_keys=False,
+                                   indent=6)
+
+        # post-process: add empty line around blocks
+        for key in self._yaml_model.keys():
+            yaml_as_string = yaml_as_string.replace(f'{key}:',
+                                                    f'\n{key}:')
+        yaml_as_string = yaml_as_string.replace('-     ', '\n    - ')
+
         with open(yaml_dir, 'w') as file:
-            yaml.dump(reduced_model_dict, file)
+            file.write(yaml_as_string)
 
     def write_to_sbml(self,
                       sbml_dir: str,
