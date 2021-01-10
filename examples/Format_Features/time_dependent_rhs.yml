@@ -1,0 +1,7 @@
+time:
+   variable: t
+
+odes:
+    - stateId: x
+      rightHandSide: -x/(t+1)
+      initialValue: 1

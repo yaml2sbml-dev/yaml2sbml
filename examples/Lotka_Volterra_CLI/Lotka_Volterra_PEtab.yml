@@ -1,0 +1,47 @@
+odes:
+    - stateId: x_1
+      rightHandSide: alpha * x_1 - beta * x_1 * x_2
+      initialValue: 2
+
+    - stateId: x_2
+      rightHandSide: delta * x_1 * x_2 - gamma * x_2
+      initialValue: 2
+
+parameters: 
+   - parameterId: alpha
+     nominalValue: 2
+     parameterScale: log10
+     lowerBound: 0.01
+     upperBound: 100
+     estimate: 1
+  
+   - parameterId: beta
+     nominalValue: 4
+     parameterScale: log10
+     lowerBound: 0.01
+     upperBound: 100
+     estimate: 1
+
+   - parameterId: gamma
+     nominalValue: 3
+     parameterScale: log10
+     lowerBound: 0.01
+     upperBound: 100
+     estimate: 1
+     
+   - parameterId: delta
+     nominalValue: 3
+     parameterScale: log10
+     lowerBound: 0.01
+     upperBound: 100
+     estimate: 1
+
+observables:
+   - observableId: prey_measured
+     observableFormula: x_1
+     observableTransformation: log10
+     noiseFormula: noiseParameter1_prey_measured
+     noiseDistribution: normal
+
+conditions:
+   - conditionId: condition1

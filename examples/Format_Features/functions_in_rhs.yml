@@ -1,0 +1,13 @@
+odes:
+    - stateId: x_1
+      rightHandSide: f(x_2, 1, 2)
+      initialValue: 1
+
+    - stateId: x_2
+      rightHandSide: f(x_1, -1, 0)
+      initialValue: 1
+
+functions:
+    - functionId: f
+      arguments: x, a, b
+      formula: a * x + b
