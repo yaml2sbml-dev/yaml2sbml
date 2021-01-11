@@ -1,7 +1,0 @@
-time:
-   variable: t
-
-odes:
-    - stateId: x
-      rightHandSide: piecewise(x, t < 1, -x)
-      initialValue: 1
