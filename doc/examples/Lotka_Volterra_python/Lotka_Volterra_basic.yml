@@ -8,14 +8,14 @@ odes:
       initialValue: 2
 
 parameters:
-   - parameterId: alpha
-     nominalValue: 2
+    - parameterId: alpha
+      nominalValue: 2
   
-   - parameterId: beta
-     nominalValue: 4
+    - parameterId: beta
+      nominalValue: 4
 
-   - parameterId: gamma
-     nominalValue: 3
+    - parameterId: gamma
+      nominalValue: 3
      
-   - parameterId: delta
-     nominalValue: 3
+    - parameterId: delta
+      nominalValue: 3

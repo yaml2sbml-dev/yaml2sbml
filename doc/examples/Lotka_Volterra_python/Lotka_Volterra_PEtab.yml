@@ -8,40 +8,40 @@ odes:
       initialValue: 2
 
 parameters: 
-   - parameterId: alpha
-     nominalValue: 2
-     parameterScale: log10
-     lowerBound: 0.1
-     upperBound: 10
-     estimate: 1
+    - parameterId: alpha
+      nominalValue: 2
+      parameterScale: log10
+      lowerBound: 0.1
+      upperBound: 10
+      estimate: 1
   
-   - parameterId: beta
-     nominalValue: 4
-     parameterScale: log10
-     lowerBound: 0.1
-     upperBound: 10
-     estimate: 1
+    - parameterId: beta
+      nominalValue: 4
+      parameterScale: log10
+      lowerBound: 0.1
+      upperBound: 10
+      estimate: 1
 
-   - parameterId: gamma
-     nominalValue: 3
-     parameterScale: log10
-     lowerBound: 0.1
-     upperBound: 10
-     estimate: 1
+    - parameterId: gamma
+      nominalValue: 3
+      parameterScale: log10
+      lowerBound: 0.1
+      upperBound: 10
+      estimate: 1
      
-   - parameterId: delta
-     nominalValue: 3
-     parameterScale: log10
-     lowerBound: 0.1
-     upperBound: 10
-     estimate: 1
+    - parameterId: delta
+      nominalValue: 3
+      parameterScale: log10
+      lowerBound: 0.1
+      upperBound: 10
+      estimate: 1
 
 observables:
-   - observableId: prey_measured
-     observableFormula: log10(x_1)
-     observableTransformation: lin
-     noiseFormula: noiseParameter1_prey_measured
-     noiseDistribution: normal
+    - observableId: prey_measured
+      observableFormula: log10(x_1)
+      observableTransformation: lin
+      noiseFormula: noiseParameter1_prey_measured
+      noiseDistribution: normal
 
 conditions:
-   - conditionId: condition1
+    - conditionId: condition1
