@@ -8,29 +8,30 @@ yaml2sbml/tests/test_yaml2sbml/sbml_test.xml
 ### Files generated when running the notebooks (AMICI + PEtab files)
 
 ## Lotka Volterra Python
-./examples/Lotka_Volterra_python/amici_models
-./examples/Lotka_Volterra_python/amici_models/*
+./doc/examples/Lotka_Volterra_python/amici_models
+./doc/examples/Lotka_Volterra_python/amici_models/*
 
-./examples/Lotka_Volterra_python/Lotka_Volterra_AMICI
-./examples/Lotka_Volterra_python/Lotka_Volterra_AMICI/*
+./doc/examples/Lotka_Volterra_python/Lotka_Volterra_AMICI
+./doc/examples/Lotka_Volterra_python/Lotka_Volterra_AMICI/*
 
-./examples/Lotka_Volterra_python/Lotka_Volterra_basic.xml
+./doc/examples/Lotka_Volterra_python/Lotka_Volterra_basic.xml
 
-./examples/Lotka_Volterra_python/Lotka_Volterra_PEtab/*
-!./examples/Lotka_Volterra_python/Lotka_Volterra_PEtab/measurement_table.tsv
+./doc/examples/Lotka_Volterra_python/Lotka_Volterra_PEtab/*
+!./doc/examples/Lotka_Volterra_python/Lotka_Volterra_PEtab/measurement_table.tsv
 
 
 ## Lotka Volterra CLI
-./examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab/*
-!./examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab/measurement_table.tsv
+./doc/examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab/*
+./doc/examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab.yml
+./doc/examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab/*.xml
 
 
 ## Format Features
 
-./examples/Format_Features/__pycache__
-./examples/Format_Features/AMICI_models
+./doc/examples/Format_Features/__pycache__
+./doc/examples/Format_Features/AMICI_models
 
-./examples/Format_Features/*.xml
+./doc/examples/Format_Features/*.xml
 
 
 
