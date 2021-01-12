@@ -27,28 +27,24 @@ class TestYamlValidation(unittest.TestCase):
             validate_yaml(file_in)
 
     def test_validate_yaml_typos_required(self):
-        file_in = os.path.join(self.test_folder,
-                               'ode_input_typos_required.yaml')
+        file_in = os.path.join(self.test_folder, 'ode_input_typos_required.yaml')
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 
     def test_validate_yaml_empty_section(self):
-        file_in = os.path.join(self.test_folder,
-                               'ode_input_empty_section.yaml')
+        file_in = os.path.join(self.test_folder, 'ode_input_empty_section.yaml')
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 
     def test_catch_invalid_time_block_missing_variable_key(self):
         # time block without kew word "variable"
-        file_in = os.path.join(self.test_folder,
-                               'ode_input_invalid_time_1.yaml')
+        file_in = os.path.join(self.test_folder, 'ode_input_invalid_time_1.yaml')
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 
     def test_catch_invalid_time_block_as_array(self):
         # time block as array instead of single object
-        file_in = os.path.join(self.test_folder,
-                               'ode_input_invalid_time_2.yaml')
+        file_in = os.path.join(self.test_folder, 'ode_input_invalid_time_2.yaml')
         with self.assertRaises(ValidationError):
             validate_yaml(file_in)
 

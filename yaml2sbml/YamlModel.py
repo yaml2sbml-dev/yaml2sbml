@@ -80,7 +80,7 @@ class YamlModel:
 
         reduced_model_dict = self._get_reduced_model_dict()
 
-        # translate to string
+        #translate to string
         yaml_as_string = yaml.dump(reduced_model_dict,
                                    sort_keys=False,
                                    indent=6)
@@ -135,8 +135,8 @@ class YamlModel:
                        petab_yaml_name: str = None,
                        measurement_table_name: str = None):
         """
-        Writes the YamlModel as a petab problem. Equivalent to calling
-        yaml2petab on the file produced by the yaml output.
+        Writes the YamlModel as a petab problem. Equivalent to calling yaml2petab
+        on the file produced by the yaml output.
 
         If a petab_yaml_name is given, a .yaml file is created, that organizes
         the petab problem. If additionally a measurement_table_file_name is
@@ -171,7 +171,7 @@ class YamlModel:
 
     def _get_reduced_model_dict(self) -> dict:
         """
-        Returns a reduced model dict, where keys without an entry are deleted.
+        Returns a reduced model dict, where keys without an entry, where deleted.
         (Returns a copy of the model dict!!)
 
         Arguments:
@@ -222,9 +222,8 @@ class YamlModel:
             if over_write:
                 self.delete_parameter(parameter_id)
             else:
-                raise ValueError('Could not add parameter with id'
-                                 f' {parameter_id}: Parameter with the same'
-                                 ' id already exists.')
+                raise ValueError(f'Could not add parameter with id {parameter_id}: '
+                                 f'Parameter with the same id already exists.')
 
         entry_dict = {'parameterId': parameter_id,
                       'nominalValue': nominal_value,
@@ -250,8 +249,8 @@ class YamlModel:
             if over_write:
                 self.delete_ode(state_id)
             else:
-                raise ValueError(f'Could not add state/ODE with id {state_id}:'
-                                 f' State with the same id already exists.')
+                raise ValueError(f'Could not add state/ODE with id {state_id}: '
+                                 f'State with the same id already exists.')
 
         entry_dict = {'stateId': state_id,
                       'rightHandSide': right_hand_side,
@@ -272,9 +271,8 @@ class YamlModel:
             if over_write:
                 self.delete_assignment(assignment_id)
             else:
-                raise ValueError('Could not add assignment with id '
-                                 f'{assignment_id}: Assignment with the same '
-                                 'id already exists.')
+                raise ValueError(f'Could not add assignment with id {assignment_id}: '
+                                 f'Assignment with the same id already exists.')
 
         entry_dict = {'assignmentId': assignment_id,
                       'formula': formula}
@@ -295,9 +293,8 @@ class YamlModel:
             if over_write:
                 self.delete_function(function_id)
             else:
-                raise ValueError('Could not add function with id '
-                                 f' {function_id}: Function with the same '
-                                 'id already exists.')
+                raise ValueError(f'Could not add function with id {function_id}: '
+                                 f'Function with the same id already exists.')
 
         entry_dict = {'functionId': function_id,
                       'arguments': arguments,
@@ -322,9 +319,8 @@ class YamlModel:
             if over_write:
                 self.delete_observable(observable_id)
             else:
-                raise ValueError('Could not add observable with id '
-                                 f'{observable_id}: Observable with the same '
-                                 'id already exists.')
+                raise ValueError(f'Could not add observable with id {observable_id}: '
+                                 f'Observable with the same id already exists.')
 
         entry_dict = {'observableId': observable_id,
                       'observableName': observable_name,
@@ -350,8 +346,7 @@ class YamlModel:
             str, condition id
         condition_dict:
             dict, of the form {<parameter or state id>: <value>}.
-            Corresponds to entries in the PEtab condition table.
-            See details there.
+            Corresponds to entries in the PEtab condition table. See details there.
         over_write:
             bool, indicates if an existing condition should be overwritten
         condition_name:
@@ -364,9 +359,8 @@ class YamlModel:
             if over_write:
                 self.delete_condition(condition_id)
             else:
-                raise ValueError('Could not add condition with id '
-                                 f' {condition_id}: Condition with the same '
-                                 f'id already exists.')
+                raise ValueError(f'Could not add condition with id {condition_id}: '
+                                 f'Condition with the same id already exists.')
 
         entry_dict = {'conditionId': condition_id,
                       'conditionName': condition_name,
@@ -378,7 +372,7 @@ class YamlModel:
                    entry_dict: dict,
                    block_key: str):
         """
-        Adds the entry in 'entry_dict' to the block indexed by 'block_key'.
+        Adds an entry given in 'entry_dict' to the block indexed by 'block_key'.
         If 'over_write=True', an existing value for that key is overwritten.
 
         Arguments:
@@ -528,9 +522,7 @@ class YamlModel:
     # functionalities to delete entry by Id:
     def delete_parameter(self,
                          parameter_id: str):
-        """
-        Deletes a parameter. Raises a ValueError, if parameter does not exist.
-        """
+        """Deletes a parameter. Raises a ValueError, if parameter does not exist."""
         if not self._delete_entry('parameters',
                                   'parameterId',
                                   parameter_id):
@@ -540,9 +532,7 @@ class YamlModel:
 
     def delete_ode(self,
                    state_id: str):
-        """
-        Deletes a state + ODE. Raises a ValueError, if state does not exist.
-        """
+        """Deletes a state+ODE. Raises a ValueError, if state does not exist."""
         if not self._delete_entry('odes',
                                   'stateId',
                                   state_id):
@@ -552,10 +542,7 @@ class YamlModel:
 
     def delete_assignment(self,
                           assignment_id: str):
-        """
-        Deletes an assignment. Raises a ValueError,
-        if assignment does not exist.
-        """
+        """Deletes an assignment. Raises a ValueError, if assignment does not exist."""
         if not self._delete_entry('assignments',
                                   'assignmentId',
                                   assignment_id):
@@ -565,9 +552,7 @@ class YamlModel:
 
     def delete_function(self,
                         function_id: str):
-        """
-        Deletes a function. Raises a ValueError, if function does not exist.
-        """
+        """Deletes a function. Raises a ValueError, if function does not exist."""
         if not self._delete_entry('functions',
                                   'functionId',
                                   function_id):
@@ -577,10 +562,7 @@ class YamlModel:
 
     def delete_observable(self,
                           observable_id: str):
-        """
-        Deletes an observable. Raises a ValueError,
-        if observable does not exist.
-        """
+        """Deletes an observable. Raises a ValueError, if observable does not exist."""
         if not self._delete_entry('observables',
                                   'observableId',
                                   observable_id):
@@ -590,9 +572,7 @@ class YamlModel:
 
     def delete_condition(self,
                          condition_id: str):
-        """
-        Deletes a condition. Raises a ValueError, if condition does not exist.
-        """
+        """Deletes a condition. Raises a ValueError, if condition does not exist."""
         if not self._delete_entry('conditions',
                                   'conditionId',
                                   condition_id):
