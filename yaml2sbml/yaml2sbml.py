@@ -477,8 +477,9 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
 def main():
     parser = argparse.ArgumentParser(
         description='Takes in an ODE model in .yaml and converts it to SBML.')
-    parser.add_argument('yaml_file', type=str)
-    parser.add_argument('sbml_file', type=str)
+    parser.add_argument('yaml_file', type=str, help='Path to input YAML file.')
+    parser.add_argument('sbml_file', type=str,
+                        help='Path to output SBML file.')
 
     args = parser.parse_args()
 
