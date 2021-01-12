@@ -3,7 +3,8 @@ import setuptools
 ENTRY_POINTS = {
     'console_scripts': [
         'yaml2sbml = yaml2sbml.yaml2sbml:main',
-        'yaml2petab = yaml2sbml.yaml2PEtab:main'
+        'yaml2petab = yaml2sbml.yaml2PEtab:main',
+        'validate_yaml = yaml2sbml.yaml_validation:main'
     ]
 }
 

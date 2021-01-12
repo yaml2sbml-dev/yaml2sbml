@@ -342,6 +342,7 @@ def _petab_table_add_row(petab_table: pd.DataFrame, row_dict: dict):
 def main():
 
     parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to a PEtab file.')
+
     parser.add_argument('yaml_file', type=str, help='Input yaml directory')
     parser.add_argument('output_dir', type=str, help='Output directory')
     parser.add_argument('model_name', type=str,

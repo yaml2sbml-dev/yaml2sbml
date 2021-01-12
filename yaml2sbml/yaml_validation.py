@@ -1,6 +1,7 @@
 import os
 import yaml
 import jsonschema
+import argparse
 
 SCHEMA = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                       "yaml_schema.yaml")
@@ -46,3 +47,27 @@ def _validate_yaml_from_dict(yaml_dict: dict):
         schema = yaml.full_load(yaml_contents)
 
     jsonschema.validate(instance=yaml_dict, schema=schema)
+
+
+def main():
+    """
+    Function called by the CLI.
+    """
+    parser = argparse.ArgumentParser(
+        description='Validates a yaml model '
+                    'so that it can be used by yaml2bsml.')
+
+    parser.add_argument('yaml_file', type=str,
+                        help='Directory of yaml file, that '
+                             'should be validated.')
+
+    args = parser.parse_args()
+
+    print(f'Path to yaml file: {args.yaml_file}')
+    print('Validating...')
+
+    validate_yaml(args.yaml_file)
+
+
+if __name__ == '__main__':
+    main()
