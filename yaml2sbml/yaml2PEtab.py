@@ -98,8 +98,8 @@ def _yaml2petab(yaml_model_dict: dict,
     # create yaml file, that organizes the petab problem:
     if (petab_yaml_name is None) and (measurement_table_name is not None):
 
-        warnings.warn(f'Since no petab_yaml_file_name is specified, the '
-                      f'specified measurement_table_name will have no effect.',
+        warnings.warn('Since no petab_yaml_file_name is specified, the '
+                      'specified measurement_table_name will have no effect.',
                       RuntimeWarning)
 
     elif petab_yaml_name is not None:
