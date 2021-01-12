@@ -7,6 +7,9 @@ install:
   - pip install coveralls
 
 script:
-- coverage run -m unittest discover tests
+  - coverage run -m unittest discover tests
+  - ./run_flake8.sh
+  - pytest --nbmake
+  - ./tests/test_CLI.sh
 
 after_success: coveralls
