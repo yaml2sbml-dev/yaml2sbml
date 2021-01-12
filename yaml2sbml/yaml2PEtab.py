@@ -365,9 +365,9 @@ def main():
     parser.add_argument('output_dir', type=str, help='Output directory')
     parser.add_argument('model_name', type=str,
                         help='name of created SBML model.')
-    parser.add_argument('--petab_yaml', type=str,
+    parser.add_argument('-y', '--petab_yaml', type=str,
                         help='Optional argument, creates a petab .yml')
-    parser.add_argument('--measurement_table', type=str,
+    parser.add_argument('-m', '--measurement_table', type=str,
                         help='Optional argument, path to measurement table')
 
     args = parser.parse_args()
