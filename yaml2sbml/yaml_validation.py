@@ -3,8 +3,9 @@ import yaml
 import jsonschema
 import argparse
 
-SCHEMA = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                      "yaml_schema.yaml")
+SCHEMA = os.path.join(
+    os.path.abspath(os.path.dirname(os.path.abspath(__file__))),
+    "yaml_schema.yaml")
 
 
 def validate_yaml(yaml_file: str):
