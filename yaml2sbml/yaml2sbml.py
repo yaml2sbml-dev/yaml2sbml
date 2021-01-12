@@ -55,7 +55,8 @@ def _parse_yaml_dict(yaml_dict) -> str:
     Generates a string, containing the SBML from a yaml_dict.
 
     Arguments:
-        yaml_dict: dictionary, containing to the yaml file with the ODEs specification.
+        yaml_dict: dictionary, containing to the yaml file with the ODEs
+                   specification.
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format.
@@ -77,7 +78,9 @@ def _parse_yaml_dict(yaml_dict) -> str:
 
         for error_num in range(document.getErrorLog().getNumErrors()):
             if not document.getErrorLog().getError(error_num).isWarning():
-                warnings.warn(document.getErrorLog().getError(error_num).getMessage(), RuntimeWarning)
+                warnings.warn(
+                    document.getErrorLog().getError(error_num).getMessage(),
+                    RuntimeWarning)
 
     sbml_string = sbml.writeSBMLToString(document)
 
@@ -199,8 +202,8 @@ def _create_time(model: sbml.Model, time_var: str):
 
 def _read_parameters_block(model: sbml.Model, parameter_list: list):
     """
-    Reads and processes the parameters block in the ODE yaml file.
-    In particular, it reads the parameters and adds them to the given SBML model.
+    Reads and processes the parameters block in the ODE yaml file. In
+    particular, it reads the parameters and adds them to the given SBML model.
     The expected format for parameter definition is
     {'parameterId': <parameterId>, 'nominalValue': <nominalValue>}
 
@@ -215,7 +218,9 @@ def _read_parameters_block(model: sbml.Model, parameter_list: list):
     """
     for parameter_def in parameter_list:
         if 'nominalValue' in parameter_def.keys():
-            _create_parameter(model, parameter_def['parameterId'], parameter_def['nominalValue'])
+            _create_parameter(model,
+                              parameter_def['parameterId'],
+                              parameter_def['nominalValue'])
         else:
             _create_parameter(model, parameter_def['parameterId'])
 
@@ -248,8 +253,8 @@ def _create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
 
 def _read_assignments_block(model: sbml.Model, assignment_list: list):
     """
-    Reads and processes the assignments block in the ODE yaml file.
-    In particular, it reads the assignments and adds them to the given SBML file.
+    Reads and processes the assignments block in the ODE yaml file. In
+    particular, it reads the assignments and adds them to the given SBML file.
     The expected format of a state definition is:
     {'assignmentId': <assignmentId>, 'formula': <formula>}
 
@@ -257,7 +262,8 @@ def _read_assignments_block(model: sbml.Model, assignment_list: list):
 
     Arguments:
         model: the SBML model
-        assignment_list: a list of dictionaries where each entry is an assignment definition
+        assignment_list: a list of dictionaries where each entry is an
+                         assignment definition
 
     Returns:
 
@@ -265,7 +271,9 @@ def _read_assignments_block(model: sbml.Model, assignment_list: list):
 
     """
     for assignment_def in assignment_list:
-        _create_assignment(model, assignment_def['assignmentId'], assignment_def['formula'])
+        _create_assignment(model,
+                           assignment_def['assignmentId'],
+                           assignment_def['formula'])
 
 
 def _create_assignment(model: sbml.Model, assignment_id: str, formula: str):
@@ -298,11 +306,14 @@ def _read_functions_block(model: sbml.Model, functions_list: list):
     In particular, it reads the functions and adds them to the given SBML file
     as functionDefinitions.
     The expected format of a function definition is:
-    {'functionId': <functionId>, 'arguments': <arguments>,  'formula' : <formula>}
+        {'functionId': <functionId>,
+         'arguments': <arguments>,
+        'formula' : <formula>}
 
     Arguments:
         model: a SBML model
-        functions_list: a list of dictionaries where each entry is a function definition
+        functions_list: a list of dictionaries where each entry is a
+                        function definition
 
     Returns:
 
@@ -310,11 +321,16 @@ def _read_functions_block(model: sbml.Model, functions_list: list):
 
     """
     for function_def in functions_list:
-        _create_function(model, function_def['functionId'], function_def['arguments'],
+        _create_function(model,
+                         function_def['functionId'],
+                         function_def['arguments'],
                          function_def['formula'])
 
 
-def _create_function(model: sbml.Model, function_id: str, arguments: str, formula: str):
+def _create_function(model: sbml.Model,
+                     function_id: str,
+                     arguments: str,
+                     formula: str):
     """
     Creates a functionDefinition and adds it to the given SBML model.
 
@@ -337,10 +353,9 @@ def _create_function(model: sbml.Model, function_id: str, arguments: str, formul
 
 def _read_odes_block(model: sbml.Model, odes_list: list):
     """
-    Reads and processes the odes block in the ODE yaml file. 
-    In particular, it reads the odes and adds a species for 
-    the corresponding state and the right hand side as 
-    rateRules to the given SBML file.
+    Reads and processes the odes block in the ODE yaml file.
+    In particular, it reads the odes and adds a species for the corresponding
+    state and the right hand side as rateRules to the given SBML file.
 
     The expected format of an ode definition is:
     {'stateId': <state_variable>, 'rightHandSide' : <right_hand_side>,
@@ -427,7 +442,8 @@ def _read_observables_block(model: sbml.Model, observable_list: list):
 
     Arguments:
         model: SBML model (libsbml)
-        observable_list: observables block containing all observable definitions.
+        observable_list: observables block containing all
+                         observable definitions.
 
     Returns:
 
@@ -438,7 +454,7 @@ def _read_observables_block(model: sbml.Model, observable_list: list):
                   'only have an effect the output, when called via yaml2PEtab')
 
 
-def _read_conditions_block(model: sbml.Model, observable_list: list):
+def _read_conditions_block(model: sbml.Model, conditions_list: list):
     """
     Reads an processes the conditions block in the ODE yaml file.
     Since the conditions are not represented in the SBML, it only gives
@@ -446,7 +462,8 @@ def _read_conditions_block(model: sbml.Model, observable_list: list):
 
     Arguments:
         model: SBML model (libsbml)
-        observable_list: observables block containing all observable definitions.
+        conditions_list: conditions block containing all
+                         conditions definitions.
 
     Returns:
 

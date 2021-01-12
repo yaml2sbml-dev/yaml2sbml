@@ -125,17 +125,24 @@ def _create_petab_tables_from_yaml(yaml_dict: dict,
 
     """
     parameter_table = _create_parameter_table(yaml_dict)
-    parameter_table.to_csv(os.path.join(output_dir, 'parameter_table.tsv'), sep='\t', index=False)
+    parameter_table.to_csv(os.path.join(output_dir, 'parameter_table.tsv'),
+                           sep='\t',
+                           index=False)
 
-    # create PEtab observable table, if observables are present in the yaml file.
+    # create PEtab observable table, if observables occur in the yaml file.
     if 'observables' in yaml_dict.keys():
         observable_table = _create_observable_table(yaml_dict)
-        observable_table.to_csv(os.path.join(output_dir, 'observable_table.tsv'), sep='\t', index=False)
+        observable_table.to_csv(os.path.join(output_dir,
+                                             'observable_table.tsv'),
+                                sep='\t',
+                                index=False)
 
-    # create PEtab condition table, if conditions are present in the yaml file.
+    # create PEtab condition table, if conditions occur in the yaml file.
     if 'conditions' in yaml_dict.keys():
         condition_table = _create_condition_table(yaml_dict)
-        condition_table.to_csv(os.path.join(output_dir, 'condition_table.tsv'), sep='\t', index=False)
+        condition_table.to_csv(os.path.join(output_dir, 'condition_table.tsv'),
+                               sep='\t',
+                               index=False)
 
 
 def _create_petab_problem_yaml(yaml_dict: dict,
@@ -159,7 +166,8 @@ def _create_petab_problem_yaml(yaml_dict: dict,
     """
     petab_yaml_dict = {'format_version': 1,
                        'parameter_file': 'parameter_table.tsv',
-                       'problems': [{'sbml_files': [os.path.basename(sbml_dir)]}]}
+                       'problems': [{'sbml_files':
+                                         [os.path.basename(sbml_dir)]}]}
 
     # fill the corresponding entries, if they are contained in the yaml/input.
 
@@ -202,7 +210,8 @@ def _create_parameter_table(yaml_dict: dict):
 
 def _create_observable_table(yaml_dict: dict):
     """
-    Creates an observable table from the observable block  in the given yaml_dict.
+    Creates an observable table from the observable block
+    in the given yaml_dict.
 
     Arguments:
         yaml_dict
@@ -222,7 +231,7 @@ def _create_observable_table(yaml_dict: dict):
 
 def _create_condition_table(yaml_dict: dict):
     """
-    Creates a condition table from the observable block  in the given yaml_dict.
+    Creates a condition table from the observable block in the given yaml_dict.
 
     Arguments:
         yaml_dict
@@ -237,10 +246,12 @@ def _create_condition_table(yaml_dict: dict):
     mandatory_id_list = [petab.CONDITION_ID]
 
     optional_id_list = [petab.CONDITION_NAME] + \
-                       [param['parameterId'] for param in yaml_dict['parameters']] + \
+                       [p['parameterId'] for p in yaml_dict['parameters']] + \
                        [ode['stateId'] for ode in yaml_dict['odes']]
 
-    return _create_petab_table(yaml_dict['conditions'], mandatory_id_list, optional_id_list)
+    return _create_petab_table(yaml_dict['conditions'],
+                               mandatory_id_list,
+                               optional_id_list)
 
 
 def validate_petab_tables(sbml_dir: str, output_dir: str):
@@ -266,7 +277,9 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
 
     # check observable table, if the table exists
     if os.path.exists(observable_file_dir):
-        observable_df = pd.read_csv(observable_file_dir, sep='\t', index_col='observableId')
+        observable_df = pd.read_csv(observable_file_dir,
+                                    sep='\t',
+                                    index_col='observableId')
         petab.lint.check_observable_df(observable_df)
 
     else:
@@ -274,11 +287,15 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
 
     # check condition table, if the table exists
     if os.path.exists(condition_table_dir):
-        condition_df = pd.read_csv(condition_table_dir, sep='\t', index_col='conditionId')
+        condition_df = pd.read_csv(condition_table_dir,
+                                   sep='\t',
+                                   index_col='conditionId')
         petab.lint.check_condition_df(condition_df, model)
 
     # check parameter table
-    parameter_df = pd.read_csv(parameter_file_dir, sep='\t', index_col='parameterId')
+    parameter_df = pd.read_csv(parameter_file_dir,
+                               sep='\t',
+                               index_col='parameterId')
     petab.lint.check_parameter_df(parameter_df,
                                   sbml_model=model,
                                   observable_df=observable_df)
@@ -310,8 +327,8 @@ def _create_petab_table(block_list: list,
     # check if every column is part of PEtab standard.
     for col_name in petab_table.head():
         if not (col_name in mandatory_id_list or col_name in optional_id_list):
-            warnings.warn(f'PEtab warning: {col_name} is not part of the PEtab '
-                          f'standard and hence might have noe effect.')
+            warnings.warn(f'PEtab warning: {col_name} is not part of the '
+                          f'PEtab standard and hence might have noe effect.')
     return petab_table
 
 
@@ -341,7 +358,8 @@ def _petab_table_add_row(petab_table: pd.DataFrame, row_dict: dict):
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Takes in an ODE model in .yaml and converts it to a PEtab file.')
+    parser = argparse.ArgumentParser(description='Takes in an ODE model in '
+                                     '.yaml and converts it to a PEtab file.')
 
     parser.add_argument('yaml_file', type=str, help='Input yaml directory')
     parser.add_argument('output_dir', type=str, help='Output directory')
