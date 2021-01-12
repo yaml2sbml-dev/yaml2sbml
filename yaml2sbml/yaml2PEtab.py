@@ -87,7 +87,9 @@ def _yaml2petab(yaml_model_dict: dict,
     else:
         sbml_dir = os.path.join(output_dir, model_name + '.xml')
 
-    sbml_as_string = _parse_yaml_dict(yaml_model_dict)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=UserWarning)
+        sbml_as_string = _parse_yaml_dict(yaml_model_dict)
 
     with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
