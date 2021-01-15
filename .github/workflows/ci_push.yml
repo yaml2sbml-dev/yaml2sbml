@@ -20,7 +20,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install wheels
+        pip install wheel
         pip install . pytest pytest-cov
 
     - name: Run tests
