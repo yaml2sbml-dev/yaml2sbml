@@ -14,9 +14,8 @@ for par in "$@"; do
         swig3.0 libatlas-base-dev libhdf5-serial-dev
       sudo ln -s /usr/bin/Swig3.0 /usr/bin/swig
 
-      # amici dev
-      pip install \
-        git+https://github.com/amici-dev/amici.git@develop#egg=amici\&subdirectory=python/sdist
+      # install latest amici release
+      pip install amici
     ;;
 
     *)

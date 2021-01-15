@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  base:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,6 +17,12 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+
+    - name: Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache
+        key: ${{ runner.os }}-ci-base
 
     - name: Install dependencies
       run: |
