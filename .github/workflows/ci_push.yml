@@ -31,7 +31,7 @@ jobs:
 
     - name: flake8
       run: |
-        chmod +x ./run_flake8.sh
+        chmod u+x ./run_flake8.sh
         ./run_flake8.sh
 
     - name: Run tests
