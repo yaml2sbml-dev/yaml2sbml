@@ -5,6 +5,9 @@
 # required for wheel packages
 pip install wheel
 
+# required for tests
+pip install pytest pytest-cov
+
 # iterate over optional dependencies
 for par in "$@"; do
   case $par in
