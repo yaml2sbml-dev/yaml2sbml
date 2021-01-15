@@ -1,8 +1,8 @@
 # yaml2sbml
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/dc25c9a84ba54710bbb23a6e08ab5d22)](https://www.codacy.com/manual/martamatos/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.com/yaml2sbml-dev/yaml2sbml.svg?branch=master)](https://travis-ci.com/yaml2sbml-dev/yaml2sbml)
-[![Coverage Status](https://coveralls.io/repos/github/yaml2sbml-dev/yaml2sbml/badge.svg?branch=yaml_validation)](https://coveralls.io/github/yaml2sbml-dev/yaml2sbml?branch=yaml_validation)
+![CI](https://github.com/yannikschaelte/yaml2sbml/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/yannikschaelte/yaml2sbml/branch/master/graph/badge.svg?token=AORT3GREQJ)](https://codecov.io/gh/yannikschaelte/yaml2sbml)
 
 ## Table of contents
 
