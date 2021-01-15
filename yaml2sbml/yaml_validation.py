@@ -26,6 +26,7 @@ def validate_yaml(yaml_file: str):
         yaml_in = yaml.full_load(yaml_contents)
 
     _validate_yaml_from_dict(yaml_in)
+    print('YAML file is valid ✅')
 
 
 def _validate_yaml_from_dict(yaml_dict: dict):

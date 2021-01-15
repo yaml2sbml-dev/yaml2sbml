@@ -4,7 +4,7 @@ import warnings
 import libsbml as sbml
 import yaml
 
-from .yaml_validation import validate_yaml
+from .yaml_validation import _validate_yaml_from_dict
 
 
 def yaml2sbml(yaml_file: str, sbml_file: str):
@@ -21,8 +21,6 @@ def yaml2sbml(yaml_file: str, sbml_file: str):
     Raises:
 
     """
-    validate_yaml(yaml_file)
-
     sbml_as_string = _parse_yaml(yaml_file)
 
     # write sbml file
@@ -45,6 +43,7 @@ def _parse_yaml(yaml_file: str) -> str:
         SystemExit
     """
     yaml_dict = _load_yaml_file(yaml_file)
+    _validate_yaml_from_dict(yaml_dict)
     sbml_string = _parse_yaml_dict(yaml_dict)
 
     return sbml_string
