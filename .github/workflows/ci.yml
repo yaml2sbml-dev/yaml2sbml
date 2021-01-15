@@ -27,6 +27,5 @@ jobs:
         coverage run -m unittest discover tests
 
     - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.COVERALLS_TOKEN }}
+      env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: coveralls
