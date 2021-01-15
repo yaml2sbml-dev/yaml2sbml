@@ -21,8 +21,8 @@ jobs:
     - name: Cache
       uses: actions/cache@v1
       with:
-        path: ~/.cache
-        key: ${{ runner.os }}-ci-base
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
 
     - name: Install dependencies
       run: |
