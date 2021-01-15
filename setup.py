@@ -21,6 +21,11 @@ setuptools.setup(
                       "PyYAML>=5.1",
                       "pandas>=1.0.1",
                       "petab>=0.1.4"],
+    tests_require=["amici>=0.11.10",
+                   "pypesto>=0.2.2"
+                   "numpy>=1.19.4",
+                   "matplotlib>=3.1.0",
+                   "flake8>=3.7.2"],
     extras_require={'examples': ["amici>=0.11.10",
                                  "numpy>=1.19.4",
                                  "matplotlib>=3.1.0"]},
