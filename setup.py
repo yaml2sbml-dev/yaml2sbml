@@ -30,5 +30,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: Unix",
     ],
-    entry_points=ENTRY_POINTS
+    entry_points=ENTRY_POINTS,
+    include_package_data=True
 )
