@@ -15,7 +15,6 @@ for par in "$@"; do
       # for amici
       sudo apt-get install \
         swig3.0 libatlas-base-dev libhdf5-serial-dev
-      sudo ln -s /usr/bin/Swig3.0 /usr/bin/swig
 
       # install latest amici release
       pip install amici
