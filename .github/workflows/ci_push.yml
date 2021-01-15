@@ -20,8 +20,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install wheel
-        pip install . pytest pytest-cov
+        .github/workflows/install_deps.sh amici
+        pip install .
 
     - name: Run tests
       timeout-minutes: 5
