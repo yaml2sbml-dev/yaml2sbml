@@ -21,7 +21,7 @@ for par in "$@"; do
     ;;
 
     *)
-      echo "Unknown argument" >&2
+      echo "Unknown argument: $par" >&2
       exit 1
     ;;
   esac
