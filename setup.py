@@ -25,7 +25,8 @@ setuptools.setup(
                    "pypesto>=0.2.2"
                    "numpy>=1.19.4",
                    "matplotlib>=3.1.0",
-                   "flake8>=3.7.2"],
+                   "flake8>=3.7.2",
+                   "nbmake>=0.1.0", ],
     extras_require={'examples': ["amici>=0.11.10",
                                  "numpy>=1.19.4",
                                  "matplotlib>=3.1.0"]},

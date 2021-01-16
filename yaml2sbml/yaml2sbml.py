@@ -307,7 +307,7 @@ def _read_functions_block(model: sbml.Model, functions_list: list):
     The expected format of a function definition is:
         {'functionId': <functionId>,
          'arguments': <arguments>,
-        'formula' : <formula>}
+         'formula' : <formula>}
 
     Arguments:
         model: a SBML model

@@ -31,7 +31,6 @@ jobs:
 
     - name: flake8
       run: |
-        chmod u+x ./run_flake8.sh
         ./run_flake8.sh
 
     - name: Run tests
@@ -41,7 +40,6 @@ jobs:
 
     - name: Test CLI
       run: |
-        chmod +x ./tests/test_CLI.sh
         ./tests/test_CLI.sh
 
     - name: Codecov

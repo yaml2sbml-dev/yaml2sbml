@@ -18,7 +18,7 @@ class TestYaml2SBML(unittest.TestCase):
         """
         Test yaml import/SBML generation...
         """
-        ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
+        ode_file = os.path.join(self.test_folder, 'ode_input1.yaml')
         expected_result_file = os.path.join(self.test_folder,
                                             'true_sbml_output.xml')
 
@@ -36,6 +36,10 @@ class TestYaml2SBML(unittest.TestCase):
         os.remove(sbml_test_dir)
 
     def test_yaml_import_observables(self):
+        """
+        Test yaml import/export for a model containing observables
+        (that are not translated).
+        """
         ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
 
         expected_result_file = \
