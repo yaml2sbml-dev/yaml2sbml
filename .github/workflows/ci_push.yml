@@ -29,10 +29,18 @@ jobs:
         .github/workflows/install_deps.sh amici
         pip install .
 
+    - name: flake8
+      run: |
+        ./run_flake8.sh
+
     - name: Run tests
       timeout-minutes: 5
       run: |
-        python -m pytest --cov=yaml2sbml --cov-report=xml tests -s
+        python -m pytest --nbmake --cov=yaml2sbml --cov-report=xml tests -s
+
+    - name: Test CLI
+      run: |
+        ./tests/test_CLI.sh
 
     - name: Codecov
       uses: codecov/codecov-action@v1

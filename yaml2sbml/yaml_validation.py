@@ -3,7 +3,7 @@ import yaml
 import jsonschema
 import argparse
 
-SCHEMA = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+SCHEMA = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                       "yaml_schema.yaml")
 
 

@@ -13,13 +13,20 @@ setuptools.setup(
     version="0.1.1",
     author="Jakob Vanhoefer, Marta R. A. Matos",
     author_email="marta.ra.matos@gmail.com",
-    description="A small package to convert ODEs specified in a yaml file to SBML/PEtab.",
+    description="A small package to convert ODEs specified in "
+                "a yaml file to SBML/PEtab.",
     url="https://github.com/martamatos/yaml2sbml",
     packages=setuptools.find_packages(),
     install_requires=["python-libsbml>=5.18.0",
                       "PyYAML>=5.1",
                       "pandas>=1.0.1",
                       "petab>=0.1.4"],
+    tests_require=["amici>=0.11.10",
+                   "pypesto>=0.2.2"
+                   "numpy>=1.19.4",
+                   "matplotlib>=3.1.0",
+                   "flake8>=3.7.2",
+                   "nbmake>=0.1.0", ],
     extras_require={'examples': ["amici>=0.11.10",
                                  "numpy>=1.19.4",
                                  "matplotlib>=3.1.0"]},
@@ -29,5 +36,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: Unix",
     ],
-    entry_points=ENTRY_POINTS
+    entry_points=ENTRY_POINTS,
+    include_package_data=True
 )
