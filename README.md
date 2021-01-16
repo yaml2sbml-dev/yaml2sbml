@@ -6,118 +6,46 @@
 
 ## Table of contents
 
-* [Introduction](#introduction)
+* [About](#about)
 
 * [Installation](#installation)
 
-* [Usage](#usage)
+* [Getting Started](#getting-started)
 
-  * [Command line interface](#Command_line_interface)
+## About
 
-  * [Python](#Python)
+`yaml2sbml` is a small package to convert an ODE model specified in a yaml file into an 
+[**SBML**](http://www.sbml.org/) for ODE simulation and into 
+[**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. `yaml2sbml` offers:
 
-* [Known issues and limitations](#known-issues-and-limitations)
-
-## Introduction
-
-yaml2sbml is a small package to convert an ODE model specified in a yaml file into an [**SBML**](http://www.sbml.org/) for ODE simulation and into [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. These file formats can be used with other packages.
-
-* [format_documentation.md](format_documentation.md) provides a documentation of the format of the input yaml. 
-
-* Examples can be found in the `examples` folder.
+* Functionality to translate ODE models in YAML into SBML and PEtab.
+* A format validator for the input YAML.
+* A Python and a command line interface for translation and validation functionality.
+* A model editor, that allows to generate, import and export a YAML models.
 
 ## Installation
 
 To install go to the main folder and do:
 
-```pip install .```
-
-## Requirements
-
- * Python 3.6+
- * python-libsbml>=5.18.0
- * PyYAML>=5.3
- * pandas >= 1.0.1 
- * PEtab >= 0.1.4
-
-#### Requirements files
-
- * `requirements.txt` 
-
-#### How to get Python 3.6+
-
-If you don't have Python 3.6 or higher in your system, the best way to get it is either using pyenv or conda.
-
-With conda you can create a virtual environment with a specific python version. To do so start by installing miniconda if you don't have any sort of conda installed yet, and then create a virtual environment using a specific version of python:
-
-``` conda create -n <virtual_env_name> python=3.7```
-
-To activate the virtual environment do
-
-``` source activate <virtual_env_ńame>```
-
-To install packages use either pip or conda: 
-
-``` conda/pip install <package_name> ```
-
-## Usage
-
-You can either call `yaml2sbml` via its [command line interface](#Command_line_interface) or within your [python code](#Python): 
-
-### Command line interface
-
-#### yaml2sbml command
-
-To convert an ODE model encoded in a yaml file to SBML using the terminal, go to the `yaml2sbml` folder and run:
-
 ```shell
- yaml2sbml <yaml_input_file> <sbml_output_file>
+# clone the repository
+git clone https://github.com/yaml2sbml-dev/yaml2sbml
+
+# go to the folder of yaml2bsml
+cd yaml2sbml 
+
+# install
+pip install .
 ```
 
-For instance, using the yaml file in the examples folder:
+## Getting Started
 
-```shell
- yaml2sbml ../examples/ode_input1.yaml ../examples/sbml_out.xml
-```
+The [format documentation](doc/format_documentation.md) describes the input YAML. 
+Examples of jupyter notebooks can be found under [`doc/example`](doc/example). 
+Most notably:
+* [Lotka_Volterra.ipynb](dox/examples/Lotka_Volterra_python/Lotka_Volterra.ipynb), a simple example showing the python package.
+* [Lotka_Volterra_CLI.ipynb](dox/examples/Lotka_Volterra_/Lotka_Volterra_CLI.ipynb), a simple example showing the command line interface.
 
-#### yaml2PEtab command
 
-If you want to generate PEtab parameter, observable and condition tables, additionally to the SBML file using the terminal, go to the `yaml2sbml` folderand run:
-
-```shell
- yaml2petab <yaml_input_file> <petab_output_directory> <model_name>
-```
-
-For instance, again using the yaml file in the examples folder:
-```shell
- yaml2petab ../examples/ode_input1.yaml ../examples/ example_model.xml
-```
-
-### Python
-
-Alternatively you can call `yaml2sbml` within your python code via
-
-```python
-import yaml2sbml
-
-yaml2sbml.yaml2sbml(yaml_file, sbml_file)
-```
-
-Here all inputs ar given as strings.
-
-To generate PEtab files call `yaml2petab` via
-
-```python
-import yaml2sbml
-
-yaml2sbml.yaml2petab(yaml_file,
-                     output_dir,
-                     model_name)
-```
-Here `yaml_file, output_dir` and `model_name` are strings.
-
-## Known issues and limitations
-
-* **Compartments** are not supported.
-* **Units** are not supported, all quantities are dimensionless.
-* Specification of PEtab **data tables** are not in the scope of this tool. 
+## Contact
+If you have a question regarding the tool: Please drop us an issue or a message, we are happy to help.
