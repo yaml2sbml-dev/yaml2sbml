@@ -1,4 +1,5 @@
 import setuptools
+import os
 
 ENTRY_POINTS = {
     'console_scripts': [
@@ -8,9 +9,13 @@ ENTRY_POINTS = {
     ]
 }
 
+# automatically extract version:
+with os.path.join(os.path.dirname(__file__), 'yaml2sbml', 'version.py') as f:
+    version = f.read().split("'")[1]
+
 setuptools.setup(
     name="yaml2sbml",
-    version="0.1.1",
+    version=version,
     author="Jakob Vanhoefer, Marta R. A. Matos",
     author_email="marta.ra.matos@gmail.com",
     description="A small package to convert ODEs specified in "
