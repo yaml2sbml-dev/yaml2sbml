@@ -14,7 +14,7 @@
 
 ## About
 
-`yaml2sbml` is a small package to convert an ODE model specified in a yaml file into an 
+`yaml2sbml` is a small package in Python to convert an ODE model specified in a yaml file into an 
 [**SBML**](http://www.sbml.org/) for ODE simulation and into 
 [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. `yaml2sbml` offers:
 
@@ -25,7 +25,7 @@
 
 ## Installation
 
-To install go to the main folder and do:
+To install open your terminal and run:
 
 ```shell
 # clone the repository
@@ -41,9 +41,9 @@ pip install .
 ## Getting Started
 
 The [format documentation](doc/format_documentation.md) describes the input YAML. 
-Examples of jupyter notebooks can be found under [`doc/example`](doc/example). 
+Jupyter notebooks containging examples can be found under [`doc/example`](doc/example). 
 Most notably:
-* [Lotka_Volterra.ipynb](dox/examples/Lotka_Volterra_python/Lotka_Volterra.ipynb), a simple example showing the python package.
+* [Lotka_Volterra.ipynb](dox/examples/Lotka_Volterra_python/Lotka_Volterra.ipynb), a simple example showing the Python package.
 * [Lotka_Volterra_CLI.ipynb](dox/examples/Lotka_Volterra_/Lotka_Volterra_CLI.ipynb), a simple example showing the command line interface.
 
 
