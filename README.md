@@ -12,6 +12,8 @@
 
 * [Getting Started](#getting-started)
 
+* [Contact](#contact)
+
 ## About
 
 `yaml2sbml` is a small package in Python to convert an ODE model specified in a yaml file into an 
@@ -41,7 +43,7 @@ pip install .
 ## Getting Started
 
 The [format documentation](doc/format_documentation.md) describes the input YAML. 
-Jupyter notebooks containging examples can be found under [`doc/example`](doc/example). 
+Jupyter notebooks containging examples can be found under [`doc/examples`](doc/examples). 
 Most notably:
 * [Lotka_Volterra.ipynb](dox/examples/Lotka_Volterra_python/Lotka_Volterra.ipynb), a simple example showing the Python package.
 * [Lotka_Volterra_CLI.ipynb](dox/examples/Lotka_Volterra_/Lotka_Volterra_CLI.ipynb), a simple example showing the command line interface.
