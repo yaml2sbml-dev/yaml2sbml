@@ -7,8 +7,10 @@ The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates
 * [Lotka Volterra](./Lotka_Volterra_python/Lotka_Volterra.ipynb) (Python)
   * Introduces the input format, syntax & capabilities of `yaml2sbml`
   * Showcases ODE simulation & parameter fitting using [AMICI](https://github.com/AMICI-dev/AMICI) & [pyPESTO](https://github.com/ICB-DCM/pyPESTO)
+* [Lotka Volterra Model Editor](.Lotka_Volterra_Model_Editor/Lotka_Volterra_Model_Editor.ipynb)
+  * Shows model construction using the model editor of `yaml2sbml`
 * [Lotka Volterra CLI](./Lotka_Volterra_CLI/Lotka_Volterra_CLI.ipynb)
-  * Shows the command line interface of `yaml2sbml`
+  * Shows the command line interface for model translation and validation of `yaml2sbml`
 * Sorensen (planned)
   * Application example, model of glucose and insulin metabolism 
 * Pom1p (planned, work in progress)
