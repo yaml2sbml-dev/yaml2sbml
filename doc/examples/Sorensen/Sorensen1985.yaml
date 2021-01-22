@@ -1,0 +1,590 @@
+time:
+      variable: t
+
+odes:
+
+    - initialValue: GlucBV0
+      rightHandSide: (GlucH - GlucBV) * QfloGB / VolGBV - VolBI / (TdifB * VolGBV)
+            * (GlucBV - GlucBI)
+      stateId: GlucBV
+
+    - initialValue: GlucBI0
+      rightHandSide: 1 / TdifB * (GlucBV - GlucBI) - GammaBGU / VolBI
+      stateId: GlucBI
+
+    - initialValue: GlucH0
+      rightHandSide: (QfloGB * GlucBV + QfloGL * GlucL +  QfloGK * GlucK + QfloGP
+            * GlucPV - QfloGH * GlucH - GammaRBCU) / VolGH
+      stateId: GlucH
+
+    - initialValue: GlucJ0
+      rightHandSide: (GlucH - GlucJ) * QfloGJ / VolGJ - GammaJGU / VolGJ
+      stateId: GlucJ
+
+    - initialValue: GlucL0
+      rightHandSide: (QfloGA * GlucH + QfloGJ * GlucJ - QfloGL * GlucL + GammaHGP
+            - GammaHGU) / VolGL
+      stateId: GlucL
+
+    - initialValue: GlucK0
+      rightHandSide: (GlucH - GlucK) * QfloGK / VolGK - GammaKGE / VolGK
+      stateId: GlucK
+
+    - initialValue: GlucPV0
+      rightHandSide: QfloGP / VolGPV * (GlucH - GlucPV) - VolPI / (TdifGP * VolGPV)
+            * (GlucPV - GlucPI)
+      stateId: GlucPV
+
+    - initialValue: GlucPI0
+      rightHandSide: (GlucPV - GlucPI) / TdifGP - GammaPGU / VolPI
+      stateId: GlucPI
+
+    - initialValue: MIHGP0
+      rightHandSide: (MIHGPinf - MIHGP) / tauInsu
+      stateId: MIHGP
+
+    - initialValue: Func20
+      rightHandSide: ((MC0HGP - 1.0) / 2.0 - Fun2) / tauCgon
+      stateId: Fun2
+
+    - initialValue: MIHGU0
+      rightHandSide: (MIHGUinf - MIHGU) / tauInsu
+      stateId: MIHGU
+
+    - initialValue: InsuB0
+      rightHandSide: QfloIB / VolIB * (InsuH - InsuB)
+      stateId: InsuB
+
+    - initialValue: InsuH0
+      rightHandSide: (QfloIB * InsuB + QfloIL * InsuL + QfloIK * InsuK + QfloIP *
+            InsuPV - QfloIH * InsuH) / VolIH
+      stateId: InsuH
+
+    - initialValue: InsuJ0
+      rightHandSide: QfloIJ / VolIJ * (InsuH - InsuJ)
+      stateId: InsuJ
+
+    - initialValue: InsuL0
+      rightHandSide: (QfloIA * InsuH + QfloIJ * InsuJ - QfloIL * InsuL + GammaPIR
+            - GammaLIC) / VolIL
+      stateId: InsuL
+
+    - initialValue: InsuK0
+      rightHandSide: (QfloIK / VolIK) * (InsuH - InsuK) - GammaKIC / VolIK
+      stateId: InsuK
+
+    - initialValue: InsuPV0
+      rightHandSide: (QfloIP/VolIPV) * (InsuH - InsuPV) - VolPI / (VolIPV * TdifIP)
+            * (InsuPV - InsuPI)
+      stateId: InsuPV
+
+    - initialValue: InsuPI0
+      rightHandSide: (1 / TdifIP) * (InsuPV - InsuPI) - GammaPIC / VolPI
+      stateId: InsuPI
+
+    - initialValue: Potn0
+      rightHandSide: KappaPotnPtgt * (Ptgt - Potn)
+      stateId: Potn
+
+    - initialValue: Pinh0
+      rightHandSide: KappaPinhPrp * (Pprp - Pinh)
+      stateId: Pinh
+
+    - initialValue: InitialRinsu0
+      rightHandSide: KappaRinsu * (Rinsu0 - Rinsu) + KappaRinsuPotn * Potn - Secr
+      stateId: Rinsu
+
+    - initialValue: Cgon0
+      rightHandSide: (GammaPCR - GammaPCC) / VolC
+      stateId: Cgon
+
+parameters:
+
+    - nominalValue: 0.59
+      parameterId: QfloGB
+
+    - nominalValue: 0.35
+      parameterId: VolGBV
+
+    - nominalValue: 0.45
+      parameterId: VolBI
+
+    - nominalValue: 2.1
+      parameterId: TdifB
+
+    - nominalValue: 5.07333
+      parameterId: GlucH0
+
+    - nominalValue: 0.388889
+      parameterId: GammaBGU
+
+    - nominalValue: 1.26
+      parameterId: QfloGL
+
+    - nominalValue: 1.01
+      parameterId: QfloGK
+
+    - nominalValue: 1.51
+      parameterId: QfloGP
+
+    - nominalValue: 4.37
+      parameterId: QfloGH
+
+    - nominalValue: 0.0555556
+      parameterId: GammaRBCU
+
+    - nominalValue: 1.38
+      parameterId: VolGH
+
+    - nominalValue: 1.01
+      parameterId: QfloGJ
+
+    - nominalValue: 1.12
+      parameterId: VolGJ
+
+    - nominalValue: 0.111111
+      parameterId: GammaJGU
+
+    - nominalValue: 0.25
+      parameterId: QfloGA
+
+    - nominalValue: 2.51
+      parameterId: VolGL
+
+    - nominalValue: 0.66
+      parameterId: VolGK
+
+    - nominalValue: 1.04
+      parameterId: VolGPV
+
+    - nominalValue: 6.74
+      parameterId: VolPI
+
+    - nominalValue: 5.0
+      parameterId: TdifGP
+
+    - nominalValue: 0.194444
+      parameterId: GammaBPGU
+
+    - nominalValue: 7.03
+      parameterId: beta0PGU
+
+    - nominalValue: 6.52
+      parameterId: beta1PGU
+
+    - nominalValue: 0.338
+      parameterId: beta2PGU
+
+    - nominalValue: 5.82
+      parameterId: beta3PGU
+
+    - nominalValue: 2.7
+      parameterId: beta0HGP
+
+    - nominalValue: 0.388852
+      parameterId: beta1HGP
+
+    - nominalValue: 65.0
+      parameterId: tauCgon
+
+    - nominalValue: 1.21
+      parameterId: beta2HGP
+
+    - nominalValue: 1.14
+      parameterId: beta3HGP
+
+    - nominalValue: 1.66
+      parameterId: beta4HGP
+
+    - nominalValue: 0.887748
+      parameterId: beta5HGP
+
+    - nominalValue: 25.0
+      parameterId: tauInsu
+
+    - nominalValue: 1.42
+      parameterId: beta6HGP
+
+    - nominalValue: 1.41
+      parameterId: beta7HGP
+
+    - nominalValue: 0.62
+      parameterId: beta8HGP
+
+    - nominalValue: 0.504543
+      parameterId: beta9HGP
+
+    - nominalValue: 0.861111
+      parameterId: GammaHGP0
+
+    - nominalValue: 2.0
+      parameterId: beta0HGU
+
+    - nominalValue: 0.549306
+      parameterId: beta1HGU
+
+    - nominalValue: 5.66
+      parameterId: beta2HGU
+
+    - nominalValue: 5.66
+      parameterId: beta3HGU
+
+    - nominalValue: 2.44
+      parameterId: beta4HGU
+
+    - nominalValue: 1.4783
+      parameterId: beta5HGU
+
+    - nominalValue: 0.111111
+      parameterId: GammaHGU0
+
+    - nominalValue: 0.394444
+      parameterId: beta0KGE
+
+    - nominalValue: 0.394444
+      parameterId: beta1KGE
+
+    - nominalValue: 0.198
+      parameterId: beta2KGE
+
+    - nominalValue: 25.5556
+      parameterId: beta3KGE
+
+    - nominalValue: 1.834
+      parameterId: beta4KGE
+
+    - nominalValue: 0.0872
+      parameterId: beta5KGE
+
+    - nominalValue: 0.45
+      parameterId: QfloIB
+
+    - nominalValue: 0.26
+      parameterId: VolIB
+
+    - nominalValue: 0.99
+      parameterId: VolIH
+
+    - nominalValue: 0.9
+      parameterId: QfloIL
+
+    - nominalValue: 0.72
+      parameterId: QfloIK
+
+    - nominalValue: 1.05
+      parameterId: QfloIP
+
+    - nominalValue: 3.12
+      parameterId: QfloIH
+
+    - nominalValue: 0.94
+      parameterId: VolIJ
+
+    - nominalValue: 0.72
+      parameterId: QfloIJ
+
+    - nominalValue: 1.14
+      parameterId: VolIL
+
+    - nominalValue: 0.18
+      parameterId: QfloIA
+
+    - nominalValue: 0.4
+      parameterId: FracLIC
+
+    - nominalValue: 0.3
+      parameterId: FracKIC
+
+    - nominalValue: 0.51
+      parameterId: VolIK
+
+    - nominalValue: 0.74
+      parameterId: VolIPV
+
+    - nominalValue: 20.0
+      parameterId: TdifIP
+
+    - nominalValue: 0.15
+      parameterId: FracPIC
+
+    - nominalValue: 3.27
+      parameterId: beta1PIR
+
+    - nominalValue: 7.33333
+      parameterId: beta2PIR
+
+    - nominalValue: 2.879
+      parameterId: beta3PIR
+
+    - nominalValue: 3.02
+      parameterId: beta4PIR
+
+    - nominalValue: 1.11
+      parameterId: beta5PIR
+
+    - nominalValue: 0.00794
+      parameterId: KappaRinsu
+
+    - nominalValue: 44310.0
+      parameterId: Rinsu0
+
+    - nominalValue: 4025.0
+      parameterId: KappaRinsuPotn
+
+    - nominalValue: 0.0482
+      parameterId: KappaPotnPtgt
+
+    - nominalValue: 0.931
+      parameterId: KappaPinhPrp
+
+    - nominalValue: 0.00747
+      parameterId: EMME1
+
+    - nominalValue: 0.0958
+      parameterId: EMME2
+
+    - nominalValue: 91.0
+      parameterId: InsuPV0
+
+    - nominalValue: 11.48
+      parameterId: Cgon0
+
+    - nominalValue: 0.91
+      parameterId: GammaMCC
+
+    - nominalValue: 11.31
+      parameterId: VolC
+
+    - nominalValue: 2.93
+      parameterId: beta0PCR
+
+    - nominalValue: 2.1
+      parameterId: beta1PCR
+
+    - nominalValue: 4.18
+      parameterId: beta2PCR
+
+    - nominalValue: 0.621325
+      parameterId: beta3PCR
+
+    - nominalValue: 1.31
+      parameterId: beta4PCR
+
+    - nominalValue: 0.61
+      parameterId: beta5PCR
+
+    - nominalValue: 1.06
+      parameterId: beta6PCR
+
+    - nominalValue: 0.471419
+      parameterId: beta7PCR
+
+    - nominalValue: 0.0
+      parameterId: Func20
+
+assignments:
+
+    - assignmentId: InsuH0
+      formula: InsuPV0/(1-FracPIC)
+
+    - assignmentId: InsuK0
+      formula: InsuH0*(1-FracKIC)
+
+    - assignmentId: InsuB0
+      formula: InsuH0
+
+    - assignmentId: InsuJ0
+      formula: InsuH0
+
+    - assignmentId: InsuPI0
+      formula: InsuPV0-((QfloIP*TdifIP/VolPI)*(InsuH0-InsuPV0))
+
+    - assignmentId: InsuL0
+      formula: 1/QfloIL*(QfloIH*InsuH0-QfloIB*InsuB0-QfloIK*InsuK0-QfloIP*InsuPV0)
+
+    - assignmentId: GammaBPIR
+      formula: QfloIL/(1-FracLIC)*InsuL0 - QfloIJ*InsuJ0-QfloIA*InsuH0
+
+    - assignmentId: GammaPIC0
+      formula: InsuPI0/(((1-FracPIC)/FracPIC)*(1/QfloIP)-TdifIP/VolPI)
+
+    - assignmentId: Pprp0
+      formula: (GlucH0^beta1PIR) /((beta2PIR^beta1PIR)+beta3PIR*(GlucH0^beta4PIR))
+
+    - assignmentId: Ptgt0
+      formula: (Pprp0^beta5PIR)
+
+    - assignmentId: Pinh0
+      formula: Pprp0
+
+    - assignmentId: Potn0
+      formula: Ptgt0
+
+    - assignmentId: InitialRinsu0
+      formula: ((KappaRinsu*Rinsu0)+ KappaRinsuPotn * Potn0)/(KappaRinsu+EMME1* Potn0)
+
+    - assignmentId: Secr0
+      formula: EMME1*Ptgt0*InitialRinsu0
+
+    - assignmentId: GlucPV0
+      formula: GlucH0 - GammaBPGU/QfloGP
+
+    - assignmentId: GlucK0
+      formula: GlucH0
+
+    - assignmentId: GlucBV0
+      formula: GlucH0 - GammaBGU/QfloGB
+
+    - assignmentId: GlucJ0
+      formula: GlucH0-GammaJGU/QfloGJ
+
+    - assignmentId: GlucL0
+      formula: (QfloGA*GlucH0+QfloGJ*GlucJ0+GammaHGP0-GammaHGU0)/QfloGL
+
+    - assignmentId: GlucBI0
+      formula: GlucBV0-(GammaBGU*TdifB)/VolBI
+
+    - assignmentId: GlucPI0
+      formula: GlucPV0-GammaBPGU*TdifGP/VolPI
+
+    - assignmentId: MIPGU0
+      formula: beta0PGU+beta1PGU*tanh(beta2PGU*(1-beta3PGU))
+
+    - assignmentId: MCHGP0
+      formula: beta0HGP   * tanh(beta1HGP * 1) - Func20
+
+    - assignmentId: MC0HGP0
+      formula: beta0HGP   * tanh(beta1HGP * 1)
+
+    - assignmentId: MIHGP0
+      formula: beta2HGP - beta3HGP * tanh(beta4HGP * (1-beta5HGP))
+
+    - assignmentId: MIHGPinf0
+      formula: MIHGP0
+
+    - assignmentId: MGHGP0
+      formula: beta6HGP-beta7HGP*tanh(beta8HGP*(1-beta9HGP))
+
+    - assignmentId: MIHGU0
+      formula: beta0HGU * tanh(beta1HGU)
+
+    - assignmentId: MIHGUinf0
+      formula: MIHGU0
+
+    - assignmentId: MGHGU0
+      formula: beta2HGU+beta3HGU*tanh(beta4HGU*(1-beta5HGU))
+
+    - assignmentId: GammaKGE0
+      formula: piecewise(beta0KGE+beta1KGE*tanh(beta2KGE*(GlucK0-beta3KGE)), GlucK0<beta3KGE,
+            -beta4KGE+beta5KGE*GlucK0)
+
+    - assignmentId: GammaLIC0
+      formula: FracLIC*(QfloIA*InsuH0+QfloIJ*InsuJ0+GammaBPIR)
+
+    - assignmentId: GammaKIC0
+      formula: FracKIC*(QfloIK*InsuH0)
+
+    - assignmentId: MGPCR0
+      formula: beta0PCR - beta1PCR * tanh(beta2PCR * (1-beta3PCR))
+
+    - assignmentId: MIPCR0
+      formula: beta4PCR - beta5PCR * tanh(beta6PCR * (1-beta7PCR))
+
+    - assignmentId: GammaPCC0
+      formula: Cgon0*GammaMCC
+
+    - assignmentId: GammaBPCR
+      formula: GammaPCC0
+
+    - assignmentId: GlucNH
+      formula: GlucH / GlucH0
+
+    - assignmentId: GlucNL
+      formula: GlucL / GlucL0
+
+    - assignmentId: GlucNPI
+      formula: GlucPI / GlucPI0
+
+    - assignmentId: GammaPGU
+      formula: GammaBPGU * GlucNPI * MIPGU
+
+    - assignmentId: MIPGU
+      formula: beta0PGU + beta1PGU * tanh(beta2PGU * (InsuNPI - beta3PGU))
+
+    - assignmentId: GammaHGP
+      formula: GammaHGP0 * MIHGP * MCHGP * MGHGP
+
+    - assignmentId: MIHGPinf
+      formula: beta2HGP - beta3HGP * tanh(  beta4HGP*( InsuNL - beta5HGP ) )
+
+    - assignmentId: MCHGP
+      formula: MC0HGP - Fun2
+
+    - assignmentId: MC0HGP
+      formula: beta0HGP * tanh(beta1HGP * CgonN)
+
+    - assignmentId: MGHGP
+      formula: (beta6HGP - beta7HGP * tanh(beta8HGP * (GlucNL - beta9HGP)))
+
+    - assignmentId: GammaHGU
+      formula: GammaHGU0 * MIHGU * MGHGU
+
+    - assignmentId: MIHGUinf
+      formula: beta0HGU * tanh(beta1HGU *  InsuNL)
+
+    - assignmentId: MGHGU
+      formula: beta2HGU + beta3HGU * tanh(beta4HGU * (GlucNL -  beta5HGU))
+
+    - assignmentId: GammaKGE
+      formula: piecewise(beta0KGE + beta1KGE * tanh(beta2KGE*( GlucK - beta3KGE )),
+            GlucK < beta3KGE, -beta4KGE + beta5KGE * GlucK)
+
+    - assignmentId: InsuNH
+      formula: InsuH / InsuH0
+
+    - assignmentId: InsuNPI
+      formula: InsuPI / InsuPI0
+
+    - assignmentId: InsuNL
+      formula: InsuL / InsuL0
+
+    - assignmentId: GammaLIC
+      formula: FracLIC * (QfloIA * InsuH + QfloIJ * InsuJ + GammaPIR)
+
+    - assignmentId: GammaKIC
+      formula: FracKIC * (QfloIK * InsuH)
+
+    - assignmentId: GammaPIC
+      formula: InsuPI / (((1.0 - FracPIC  ) / FracPIC) * (1 / QfloIP) - (TdifIP /
+            VolPI))
+
+    - assignmentId: GammaPIR
+      formula: SecrN * GammaBPIR
+
+    - assignmentId: Secr
+      formula: piecewise((EMME1 * Ptgt + EMME2 * (Pprp - Pinh)) * Rinsu, Pprp > Pinh,
+            EMME1 * Ptgt * Rinsu)
+
+    - assignmentId: SecrN
+      formula: Secr / Secr0
+
+    - assignmentId: Pprp
+      formula: (GlucH^beta1PIR)/((beta2PIR^beta1PIR)+beta3PIR*(GlucH^beta4PIR))
+
+    - assignmentId: Ptgt
+      formula: Pprp^beta5PIR
+
+    - assignmentId: CgonN
+      formula: Cgon / Cgon0
+
+    - assignmentId: GammaPCC
+      formula: GammaMCC * Cgon
+
+    - assignmentId: GammaPCR
+      formula: GammaBPCR * MGPCR * MIPCR
+
+    - assignmentId: MGPCR
+      formula: beta0PCR - beta1PCR * tanh(beta2PCR * (GlucNH - beta3PCR))
+
+    - assignmentId: MIPCR
+      formula: beta4PCR - beta5PCR * tanh(beta6PCR * (InsuNH - beta7PCR))
