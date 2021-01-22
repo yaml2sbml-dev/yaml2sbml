@@ -9,9 +9,9 @@ ENTRY_POINTS = {
     ]
 }
 
-# automatically extract version:
-with os.path.join(os.path.dirname(__file__), 'yaml2sbml', 'version.py') as f:
-    version = f.readline().split("'")[1]
+with open(os.path.join(os.path.dirname(__file__),
+          "yaml2sbml", "version.py")) as f:
+    version = f.read().split('\n')[0].split('=')[-1].strip(' ').strip('"')
 
 setuptools.setup(
     name="yaml2sbml",
