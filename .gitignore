@@ -21,9 +21,13 @@ yaml2sbml/tests/test_yaml2sbml/sbml_test.xml
 
 
 ## Lotka Volterra CLI
-./doc/examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab/*
-./doc/examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab.yml
-./doc/examplesLotka_Volterra_CLI/Lotka_Volterra_PEtab/*.xml
+./doc/examples/Lotka_Volterra_CLI/Lotka_Volterra_PEtab/*
+./doc/examples/Lotka_Volterra_CLI/Lotka_Volterra_PEtab.yml
+./doc/examples/Lotka_Volterra_CLI/Lotka_Volterra_PEtab/*.xml
+
+
+## Sorensen example
+./doc/examples/Sorensen/*.xml
 
 
 ## Format Features
