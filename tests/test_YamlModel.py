@@ -54,6 +54,9 @@ class TestYamlModel(unittest.TestCase):
         self.assertTrue(model.is_set_time())
         self.assertEqual(model.get_time(), time_var)
 
+        model.delete_time()
+        self.assertFalse(model.is_set_time())
+
     def test_parameter(self):
         """
         Test all functionality regarding the 'parameters' keyword.
