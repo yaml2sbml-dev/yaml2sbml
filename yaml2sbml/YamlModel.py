@@ -44,7 +44,10 @@ class YamlModel:
         # read in yaml_file
         with open(yaml_file, 'r') as f_in:
             yaml_contents = f_in.read()
-            new_model._yaml_model = yaml.full_load(yaml_contents)
+            yaml_dict_from_file = yaml.full_load(yaml_contents)
+
+        for key in yaml_dict_from_file.keys():
+            new_model._yaml_model[key] = yaml_dict_from_file[key]
 
         # check, if the model is valid
         new_model.validate_model()
@@ -191,7 +194,7 @@ class YamlModel:
 
     # functionalities regarding the time
     def is_set_time(self):
-        return bool(self._yaml_model['time'])
+        return 'time' in self._yaml_model.keys()
 
     def set_time(self,
                  time_variable: str):
