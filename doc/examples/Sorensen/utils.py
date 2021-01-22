@@ -9,8 +9,8 @@ import sys
 
 
 def simulate_and_plot_sorensen(sbml_dir: str):
-    """
-    Plots and simulates the Sorensen model.
+    """Plots and simulates the Sorensen model.
+    
     This function is highly specific to the Sorensen model.
 
     Parameters:
@@ -54,8 +54,7 @@ def simulate_and_plot_sorensen(sbml_dir: str):
 
 
 def compile_model(sbml_dir: str):
-    """
-    Compiles the Sorensen model and specifies the observables.
+    """Compiles the Sorensen model and specifies the observables.
 
     Parameters:
     -----------
