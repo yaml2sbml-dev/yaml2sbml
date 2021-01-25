@@ -56,14 +56,14 @@ class YamlModel:
 
     def write_to_yaml(self,
                       yaml_dir: str,
-                      over_write: bool = False):
+                      overwrite: bool = False):
         """
         Write model to yaml file given as directory yaml_dir.
 
         Arguments:
         yaml_dir:
             path/file, where the yaml should be written
-        over_write:
+        overwrite:
             Indicates, whether an existing yaml should be overwritten
 
         Returns:
@@ -76,10 +76,10 @@ class YamlModel:
             raise ValueError('yaml_dir should contain path to the yaml '
                              'and hence end with .yaml or .yml')
 
-        if (not over_write) and os.path.exists(yaml_dir):
+        if (not overwrite) and os.path.exists(yaml_dir):
             raise FileExistsError(f'Can not write yaml model. File {yaml_dir}'
                                   f' already exists. Consider to set '
-                                  f'over_write=True.')
+                                  f'overwrite=True.')
 
         reduced_model_dict = self._get_reduced_model_dict()
 
@@ -99,14 +99,14 @@ class YamlModel:
 
     def write_to_sbml(self,
                       sbml_dir: str,
-                      over_write: bool = False):
+                      overwrite: bool = False):
         """
         Writes the model as an SBML file to the directory given in sbml_dir.
 
         Arguments:
         sbml_dir:
             path/file, where the sbml should be written
-        over_write:
+        overwrite:
             Indicates, whether an existing yaml should be overwritten
 
         Returns:
@@ -120,10 +120,10 @@ class YamlModel:
             raise ValueError('sbml_dir should contain path to the sbml '
                              'and hence end with .xml or .sbml')
 
-        if (not over_write) and os.path.exists(sbml_dir):
+        if (not overwrite) and os.path.exists(sbml_dir):
             raise FileExistsError(f'Can not write SBML model. File {sbml_dir}'
                                   f' already exists. Consider to set '
-                                  f'over_write=True.')
+                                  f'overwrite=True.')
 
         # generate SBML as string
         reduced_model_dict = self._get_reduced_model_dict()
@@ -212,7 +212,7 @@ class YamlModel:
     # functions adding a value
     def add_parameter(self,
                       parameter_id: str,
-                      over_write: bool = False,
+                      overwrite: bool = False,
                       nominal_value: float = None,
                       parameter_name: str = None,
                       parameter_scale: str = None,
@@ -221,11 +221,11 @@ class YamlModel:
                       estimate: float = None):
         """
         Adds a parameter. Overwrites an existing parameter with the same id,
-        if over_write=True.
+        if overwrite=True.
         """
         # if parameter exists: delete if overwrite
         if parameter_id in self.get_parameter_ids():
-            if over_write:
+            if overwrite:
                 self.delete_parameter(parameter_id)
             else:
                 raise ValueError('Could not add parameter with id'
@@ -246,14 +246,14 @@ class YamlModel:
                 state_id: str,
                 right_hand_side: Union[float, str],
                 initial_value: Union[float, str],
-                over_write: bool = False):
+                overwrite: bool = False):
         """
         Adds a state/ODE. Overwrites an existing state/ODE with the same id,
-        if over_write=True.
+        if overwrite=True.
         """
-        # if state exists: delete if over_write
+        # if state exists: delete if overwrite
         if state_id in self.get_ode_ids():
-            if over_write:
+            if overwrite:
                 self.delete_ode(state_id)
             else:
                 raise ValueError(f'Could not add state/ODE with id {state_id}:'
@@ -268,14 +268,14 @@ class YamlModel:
     def add_assignment(self,
                        assignment_id: str,
                        formula: str,
-                       over_write: bool = False):
+                       overwrite: bool = False):
         """
         Adds an assignment. Overwrites an existing assignment with the same id,
-        if over_write=True.
+        if overwrite=True.
         """
-        # if assignment exists: delete if over_write
+        # if assignment exists: delete if overwrite
         if assignment_id in self.get_assignment_ids():
-            if over_write:
+            if overwrite:
                 self.delete_assignment(assignment_id)
             else:
                 raise ValueError('Could not add assignment with id '
@@ -291,14 +291,14 @@ class YamlModel:
                      function_id: str,
                      arguments: str,
                      formula: str,
-                     over_write: bool = False):
+                     overwrite: bool = False):
         """
         Adds a function. Overwrites an existing function with the same id,
-        if over_write=True.
+        if overwrite=True.
         """
-        # if function exists: delete if over_write
+        # if function exists: delete if overwrite
         if function_id in self.get_function_ids():
-            if over_write:
+            if overwrite:
                 self.delete_function(function_id)
             else:
                 raise ValueError('Could not add function with id '
@@ -315,17 +315,17 @@ class YamlModel:
                        observable_id: str,
                        observable_formula: str,
                        noise_formula: str,
-                       over_write: bool = False,
+                       overwrite: bool = False,
                        observable_name: str = None,
                        observable_transformation: str = None,
                        noise_distribution: str = None):
         """
         Adds an observable. Overwrites an existing observable with the same id,
-        if over_write=True.
+        if overwrite=True.
         """
-        # if observable exists: delete if over_write
+        # if observable exists: delete if overwrite
         if observable_id in self.get_observable_ids():
-            if over_write:
+            if overwrite:
                 self.delete_observable(observable_id)
             else:
                 raise ValueError('Could not add observable with id '
@@ -344,12 +344,12 @@ class YamlModel:
     def add_condition(self,
                       condition_id: str,
                       condition_dict: dict,
-                      over_write: bool = False,
+                      overwrite: bool = False,
                       condition_name: str = None):
 
         """
         Adds a condition. Overwrites an existing condition with the same id,
-        if over_write=True.
+        if overwrite=True.
 
         Arguments:
         condition_id:
@@ -358,16 +358,16 @@ class YamlModel:
             dict, of the form {<parameter or state id>: <value>}.
             Corresponds to entries in the PEtab condition table.
             See details there.
-        over_write:
+        overwrite:
             bool, indicates if an existing condition should be overwritten
         condition_name:
             Condition name. Optional.
 
         Returns:
         """
-        # if condition exists: delete if over_write
+        # if condition exists: delete if overwrite
         if condition_id in self.get_condition_ids():
-            if over_write:
+            if overwrite:
                 self.delete_condition(condition_id)
             else:
                 raise ValueError('Could not add condition with id '
@@ -385,7 +385,7 @@ class YamlModel:
                    block_key: str):
         """
         Adds the entry in 'entry_dict' to the block indexed by 'block_key'.
-        If 'over_write=True', an existing value for that key is overwritten.
+        If 'overwrite=True', an existing value for that key is overwritten.
 
         Arguments:
         entry_dict:
