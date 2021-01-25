@@ -25,10 +25,16 @@ yaml2sbml/tests/test_yaml2sbml/sbml_test.xml
 ./doc/examples/Lotka_Volterra_CLI/Lotka_Volterra_PEtab.yml
 ./doc/examples/Lotka_Volterra_CLI/Lotka_Volterra_PEtab/*.xml
 
+
 ## Lotka Volterra Model Editor
 ./doc/examples/Lotka_Volterra_Model_Editor/*.yaml
 ./doc/examples/Lotka_Volterra_Model_Editor/*.xml
 ./doc/examples/Lotka_Volterra_Model_Editor/Lotka_Volterra_PEtab
+
+
+## Sorensen example
+./doc/examples/Sorensen/*.xml
+./doc/examples/Sorensen/amici_models
 
 
 ## Format Features
