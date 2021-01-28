@@ -19,7 +19,7 @@ The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates
     * Application example of a stochastic gene transcription model having hundreds of states.
     * Generates a complex and realistic model within a few lines of python.
 * [Format Features](./Format_Features/Format_Features.ipynb)
-    * several didactic examples, that show individual features of `yaml2sbml`:
+    * Several didactic examples, that show individual features of `yaml2sbml`:
         * Time-dependent right hand sides
         * Step functions in the right hand side
         * Function definitions
