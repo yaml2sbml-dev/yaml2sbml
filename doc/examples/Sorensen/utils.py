@@ -83,10 +83,10 @@ def compile_model(sbml_dir: str):
     }
 
     # Compile the model with AMICI.
-    sbml_importer = amici.sbml_import.SbmlImporter('Fig71_Sorensen1985.xml')
+    sbml_importer = amici.sbml_import.SbmlImporter(sbml_dir)
     sbml_importer.sbml2amici(
         model_name='Fig71_Sorensen1985',
-        output_dir=os.path.join('amici_models', 'Fig71_Sorensen1985'),
+        output_dir=os.path.join('amici_models', sbml_dir),
         observables=observables,
     )
 

@@ -37,6 +37,10 @@ yaml2sbml/tests/test_yaml2sbml/sbml_test.xml
 ./doc/examples/Sorensen/amici_models
 
 
+## FSP examples
+./doc/examples/Finite_State_Projection/amici_models
+./doc/examples/Finite_State_Projection/*.xml
+
 ## Format Features
 
 ./doc/examples/Format_Features/__pycache__
