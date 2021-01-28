@@ -4,7 +4,7 @@ The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates
 
 # Scope of the Notebooks
 
-* [Lotka Volterra Notebooks]
+* _Lotka Volterra Notebooks_
     * [Lotka Volterra (Python) ](./Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb)
         * Introduces the input format, syntax & capabilities of `yaml2sbml`
         * Showcases ODE simulation & parameter fitting using [AMICI](https://github.com/AMICI-dev/AMICI) & [pyPESTO](https://github.com/ICB-DCM/pyPESTO)
