@@ -21,10 +21,10 @@ def plot_AMICI(sbml_dir: str,
                                              p_max)
 
     def get_obs_idx_by_id(obs_id: str):
-        for idx, obs in enumerate(model.getObservableIds()):
-            if obs == obs_id:
-                return idx
-        raise IndexError(f'No observable with id {obs_id}')
+        try:
+            return model.getObservableIds().index(obs_id)
+        except ValueError:
+            raise IndexError(f'No observable with id {obs_id}')
 
     for i in range(n_t):
 
