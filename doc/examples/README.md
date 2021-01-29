@@ -17,6 +17,7 @@ The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates
     *   Shows the extension of an existing YAML model by the model editor
 *   [Finite State Projection](./Finite_State_Projection/Finite_State_Projection.ipynb)
     *   Application example of a stochastic gene transcription model having hundreds of states.
+
     *   Generates a complex and realistic model within a few lines of Python.
 *   [Format Features](./Format_Features/Format_Features.ipynb)
     *   Several didactic examples, that show individual features of `yaml2sbml`:
