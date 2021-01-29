@@ -102,10 +102,7 @@ def compile_and_simulate(sbml_dir: str,
 
 
 def get_marginal_rna_obs(r: int, p_max: int):
-    """
-    Returns a dict of containing the observable for the given marginalized
-    rna abundance of r in AMICI.
-    """
+    """Get the observable for a marginalized RNA abundance."""
     marginal = ''
     for p in range(p_max-1):
         marginal += f'x_{r}_{p} + '
@@ -115,10 +112,7 @@ def get_marginal_rna_obs(r: int, p_max: int):
 
 
 def get_marginal_protein_obs(p: int, r_max: int):
-    """
-    Returns a dict of containing the observable for the given marginalized
-    protein abundance of p in AMICI.
-    """
+    """Get the observable for a marginalized protein abundance."""
     marginal = ''
     for r in range(r_max-1):
         marginal += f'x_{r}_{p} + '
