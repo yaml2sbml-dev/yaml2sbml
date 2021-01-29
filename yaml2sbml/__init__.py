@@ -1,5 +1,7 @@
+"""Import of yaml2sbml's public API."""
+
 # version
-from .version import __version__
+from .version import __version__   # noqa: F401
 
 # API
 from yaml2sbml.yaml2sbml import yaml2sbml
