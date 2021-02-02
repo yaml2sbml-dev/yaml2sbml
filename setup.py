@@ -25,7 +25,8 @@ setuptools.setup(
     install_requires=["python-libsbml>=5.18.0",
                       "PyYAML>=5.1",
                       "pandas>=1.0.1",
-                      "petab>=0.1.4"],
+                      "petab>=0.1.4",
+                      "jsonschema>=3.0.1"],
     tests_require=["amici>=0.11.10",
                    "pypesto>=0.2.2"
                    "numpy>=1.19.4",
