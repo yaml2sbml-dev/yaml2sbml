@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 project = 'yaml2sbml'
 copyright = '2021'
-author = 'jakob, yannik, marta, dilan, etc. [TODO]'
+author = 'Jakob Vanhoefer, Marta R. A. Matos, Dilan Pathirana, Yannik Schälte'
 
 
 # -- General configuration ---------------------------------------------------
