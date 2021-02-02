@@ -11,6 +11,7 @@ Examples can also be found in the examples folder.
 
    install
    format_specification
+   examples/examples.rst
    api_doc
 
 

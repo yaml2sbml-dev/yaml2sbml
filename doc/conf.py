@@ -27,8 +27,15 @@ author = 'jakob, yannik, marta, dilan, etc. [TODO]'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage',
-              'sphinx.ext.napoleon', 'sphinx_autodoc_typehints']
+extensions = ['sphinx.ext.autodoc', 
+              'sphinx.ext.coverage',
+              'sphinx.ext.napoleon', 
+              'sphinx_autodoc_typehints',
+              'nbsphinx',
+              'sphinx.ext.mathjax']
+
+# Default language for syntax highlighting in reST and Markdown cells:
+highlight_language = 'none'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_themes']
