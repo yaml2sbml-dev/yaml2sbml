@@ -9,9 +9,14 @@ ENTRY_POINTS = {
     ]
 }
 
+# read version
 with open(os.path.join(os.path.dirname(__file__),
           "yaml2sbml", "version.py")) as f:
     version = f.read().split('\n')[0].split("'")[-2]
+
+# read README as long_description
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
+    long_description = f.read()
 
 setuptools.setup(
     name="yaml2sbml",
@@ -20,6 +25,8 @@ setuptools.setup(
     author_email="marta.ra.matos@gmail.com",
     description="A small package to convert ODEs specified in "
                 "a yaml file to SBML/PEtab.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/martamatos/yaml2sbml",
     packages=setuptools.find_packages(),
     install_requires=["python-libsbml>=5.18.0",
