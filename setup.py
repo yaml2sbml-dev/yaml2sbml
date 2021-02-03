@@ -43,7 +43,8 @@ setuptools.setup(
             "sphinx>=3.4.3",
             "nbsphinx>=0.8.0",
             "nbconvert>=6.0.7",
-            "sphinx-rtd-theme>=0.5.1"]},
+            "sphinx-rtd-theme>=0.5.1",
+            "sphinx_autodoc_typehints>=1.11.1"]},
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3.6",
