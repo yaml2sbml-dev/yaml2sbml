@@ -4,7 +4,7 @@
 ![CI](https://github.com/yannikschaelte/yaml2sbml/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/yannikschaelte/yaml2sbml/branch/master/graph/badge.svg?token=AORT3GREQJ)](https://codecov.io/gh/yannikschaelte/yaml2sbml)
 
-<img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.svg.png" width="80%" alt="yaml2sbml logo"/>
+<img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.png" width="80%" alt="yaml2sbml logo"/>
 
 ## Table of contents
 
