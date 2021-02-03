@@ -17,7 +17,7 @@ yaml2sbml
 .. image:: logo/logo_yaml2sbml_long.svg.png
    :alt: yaml2sbml logo
    :align: center
-   :scale: 70 %
+   :scale: 30 %
 
 **yaml2sbml** allows the user to convert a system of ODEs specified in a yaml
 file to SBML.
