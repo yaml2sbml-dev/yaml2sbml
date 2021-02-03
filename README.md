@@ -6,6 +6,8 @@
 
 <img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.png" width="80%" alt="yaml2sbml logo"/>
 
+<img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.png" width="80%" alt="yaml2sbml logo"/>
+
 ## Table of contents
 
 * [Introduction](#introduction)
