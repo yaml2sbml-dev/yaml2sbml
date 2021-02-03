@@ -39,11 +39,11 @@ setuptools.setup(
             "numpy>=1.19.4",
             "matplotlib>=3.1.0",
             "scipy>=1.6.0"],
-        "docs": [
-            "sphinx",
-            "nbsphinx",
-            "nbconvert",
-            "sphinx-rtd-theme"]},
+        "doc": [
+            "sphinx>=3.4.3",
+            "nbsphinx>=0.8.0",
+            "nbconvert>=6.0.7",
+            "sphinx-rtd-theme>=0.5.1"]},
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3.6",
