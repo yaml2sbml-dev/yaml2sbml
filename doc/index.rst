@@ -6,7 +6,10 @@ yaml2sbml
    :alt: Build status
 .. image:: https://codecov.io/gh/yaml2sbml-dev/yaml2sbml/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/yaml2sbml-dev/yaml2sbml
-.. image::
+   :alt: Code coverage
+.. image:: https://app.codacy.com/project/badge/Grade/dc25c9a84ba54710bbb23a6e08ab5d22
+   :target: https://www.codacy.com/manual/martamatos/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade
+   :alt: Code quality
 
 **yaml2sbml** allows the user to convert a system of ODEs specified in a yaml
 file to SBML.
