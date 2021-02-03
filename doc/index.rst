@@ -14,7 +14,7 @@ yaml2sbml
 :Release: |version|
 :Source code: https://github.com/yaml2sbml-dev/yaml2sbml
 
-.. image:: logo/logo_yaml2sbml_long.svg.png
+.. image:: logo/logo_yaml2sbml_long.png
    :alt: yaml2sbml logo
    :align: center
    :scale: 30 %
