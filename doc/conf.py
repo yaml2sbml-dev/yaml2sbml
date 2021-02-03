@@ -21,6 +21,15 @@ project = 'yaml2sbml'
 copyright = '2021, The yaml2sbml authors'
 author = 'Jakob Vanhoefer, Marta R. A. Matos, Dilan Pathirana, Yannik Schälte'
 
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+#
+# The short X.Y version.
+import yaml2sbml
+version = yaml2sbml.__version__
+# The full version, including alpha/beta/rc tags.
+release = version
 
 # -- General configuration ---------------------------------------------------
 

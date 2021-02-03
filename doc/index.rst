@@ -11,6 +11,14 @@ yaml2sbml
    :target: https://www.codacy.com/manual/martamatos/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade
    :alt: Code quality
 
+:Release: |version|
+:Source code: https://github.com/yaml2sbml-dev/yaml2sbml
+
+.. image:: logo/logo_yaml2sbml_long.svg.png
+   :alt: yaml2sbml logo
+   :align: center
+   :scale: 70 %
+
 **yaml2sbml** allows the user to convert a system of ODEs specified in a yaml
 file to SBML.
 In addition, if experimental data is provided in the yaml file it can also be
