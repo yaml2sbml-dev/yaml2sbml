@@ -2,7 +2,7 @@
 
 The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates ODEs specified in YAML into [SBML](http://sbml.org/) for model simulation and [PEtab](https://github.com/PEtab-dev/PEtab) for parameter fitting. This folder contains several example notebooks for the usage of `yaml2sbml`.
 
-# Scope of the Notebooks
+## Scope of the Notebooks
 
 *   _Lotka Volterra Notebooks_
     *   [Lotka Volterra (Python)](./Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb)
@@ -18,6 +18,7 @@ The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates
 *   [Finite State Projection](./Finite_State_Projection/Finite_State_Projection.ipynb)
     *   Application example of a stochastic gene transcription model having hundreds of states.
     *   Generates a complex and realistic model within a few lines of Python.
+
 *   [Format Features](./Format_Features/Format_Features.ipynb)
     *   Several didactic examples, that show individual features of `yaml2sbml`:
         *   Time-dependent right hand sides

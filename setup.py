@@ -1,4 +1,5 @@
 import setuptools
+import os
 
 ENTRY_POINTS = {
     'console_scripts': [
@@ -8,9 +9,13 @@ ENTRY_POINTS = {
     ]
 }
 
+with open(os.path.join(os.path.dirname(__file__),
+          "yaml2sbml", "version.py")) as f:
+    version = f.read().split('\n')[0].split("'")[-2]
+
 setuptools.setup(
     name="yaml2sbml",
-    version="0.1.1",
+    version=version,
     author="Jakob Vanhoefer, Marta R. A. Matos",
     author_email="marta.ra.matos@gmail.com",
     description="A small package to convert ODEs specified in "
@@ -26,13 +31,18 @@ setuptools.setup(
                    "numpy>=1.19.4",
                    "matplotlib>=3.1.0",
                    "flake8>=3.7.2",
-                   "nbmake>=0.1.0", ],
+                   "nbmake>=0.1.0",
+                   "scipy>=1.6.0"],
     extras_require={'examples': ["amici>=0.11.10",
                                  "numpy>=1.19.4",
-                                 "matplotlib>=3.1.0"]},
+                                 "matplotlib>=3.1.0",
+                                 "scipy>=1.6.0"]},
     python_requires='>=3.6',
     classifiers=[
-        "Programming Language :: Python :: 3.6+",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Unix",
     ],
