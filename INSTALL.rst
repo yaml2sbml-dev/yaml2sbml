@@ -1,7 +1,8 @@
 Installation
 ============
 
-This package requires Python 3.6 or later. We recommend Miniconda_.
+This package requires Python 3.6 or later. Miniconda_ provides a small
+installation.
 
 Install from Pypi
 -----------------
@@ -10,11 +11,11 @@ Install yaml2sbml from PyPI_ via::
 
     pip install yaml2sbml
 
-
 Install from GitHub
 -------------------
 
-To work with the latest development version, install from GitHub_ via::
+To work with the latest development version, install yaml2sbml from
+GitHub_ via::
 
     pip install https://github.com/yaml2sbml-dev/yaml2sbml/archive/develop
 
