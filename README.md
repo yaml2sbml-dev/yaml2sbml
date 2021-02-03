@@ -1,8 +1,8 @@
 # yaml2sbml
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/dc25c9a84ba54710bbb23a6e08ab5d22)](https://www.codacy.com/manual/martamatos/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade)
-![CI](https://github.com/yannikschaelte/yaml2sbml/workflows/CI/badge.svg)
-[![codecov](https://codecov.io/gh/yannikschaelte/yaml2sbml/branch/master/graph/badge.svg?token=AORT3GREQJ)](https://codecov.io/gh/yannikschaelte/yaml2sbml)
+![CI](https://github.com/yaml2sbml-dev/yaml2sbml/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/yaml2sbml-dev/yaml2sbml/branch/master/graph/badge.svg)](https://codecov.io/gh/yaml2sbml-dev/yaml2sbml)
 
 ## Table of contents
 

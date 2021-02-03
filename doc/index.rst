@@ -1,6 +1,13 @@
 yaml2sbml
 =========
 
+.. image:: https://github.com/yaml2sbml-dev/yaml2sbml/workflows/CI/badge.svg
+   :target: https://github.com/yaml2sbml-dev/yaml2sbml/actions
+   :alt: Build status
+.. image:: https://codecov.io/gh/yaml2sbml-dev/yaml2sbml/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/yaml2sbml-dev/yaml2sbml
+.. image::
+
 **yaml2sbml** allows the user to convert a system of ODEs specified in a yaml
 file to SBML.
 In addition, if experimental data is provided in the yaml file it can also be
