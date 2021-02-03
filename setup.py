@@ -24,7 +24,7 @@ setuptools.setup(
     author="Jakob Vanhoefer, Marta R. A. Matos",
     author_email="marta.ra.matos@gmail.com",
     description="A small package to convert ODEs specified in "
-                "a yaml file to SBML/PEtab.",
+                "a YAML file to SBML/PEtab.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/martamatos/yaml2sbml",
