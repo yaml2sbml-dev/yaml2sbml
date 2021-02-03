@@ -2,7 +2,7 @@
 
 The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates ODEs specified in YAML into [SBML](http://sbml.org/) for model simulation and [PEtab](https://github.com/PEtab-dev/PEtab) for parameter fitting. This folder contains several example notebooks for the usage of `yaml2sbml`.
 
-# Scope of the Notebooks
+## Scope of the Notebooks
 
 *   _Lotka Volterra Notebooks_
     *   [Lotka Volterra (Python)](./Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb)

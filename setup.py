@@ -11,7 +11,7 @@ ENTRY_POINTS = {
 
 with open(os.path.join(os.path.dirname(__file__),
           "yaml2sbml", "version.py")) as f:
-    version = f.read().split('\n')[0].split('=')[-1].strip(' ').strip('"')
+    version = f.read().split('\n')[0].split("'")[-2]
 
 setuptools.setup(
     name="yaml2sbml",
@@ -39,7 +39,10 @@ setuptools.setup(
                                  "scipy>=1.6.0"]},
     python_requires='>=3.6',
     classifiers=[
-        "Programming Language :: Python :: 3.6+",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Unix",
     ],
