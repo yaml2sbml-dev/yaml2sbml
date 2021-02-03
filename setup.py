@@ -27,7 +27,7 @@ setuptools.setup(
                 "a YAML file to SBML/PEtab.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/martamatos/yaml2sbml",
+    url="https://github.com/yaml2sbml-dev/yaml2sbml",
     packages=setuptools.find_packages(),
     install_requires=["python-libsbml>=5.18.0",
                       "PyYAML>=5.1",
