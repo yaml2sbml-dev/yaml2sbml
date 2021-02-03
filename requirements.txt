@@ -1,5 +1,0 @@
-python-libsbml>=5.18.0
-PyYAML>=5.3
-pandas>=1.0.1
-petab>=0.1.2
-jsonschema >= 3.0.1

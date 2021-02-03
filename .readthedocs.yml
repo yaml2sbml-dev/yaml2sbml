@@ -1,0 +1,25 @@
+# .rtd.yml
+# readthedocs configuration file
+# see https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# required
+version: 2
+
+# Build documentation in the docs/ directory with Sphinx
+sphinx:
+  configuration: docs/conf.py
+
+# python requirements
+python:
+  version: 3.7
+  install:
+    - method: pip
+      path: .
+      extra_requirements:
+        - docs
+
+# What to build
+formats:
+  - htmlzip
+  - pdf
+~                                 

@@ -33,10 +33,17 @@ setuptools.setup(
                    "flake8>=3.7.2",
                    "nbmake>=0.1.0",
                    "scipy>=1.6.0"],
-    extras_require={'examples': ["amici>=0.11.10",
-                                 "numpy>=1.19.4",
-                                 "matplotlib>=3.1.0",
-                                 "scipy>=1.6.0"]},
+    extras_require={
+        "examples": [
+            "amici>=0.11.10",
+            "numpy>=1.19.4",
+            "matplotlib>=3.1.0",
+            "scipy>=1.6.0"],
+        "docs": [
+            "sphinx",
+            "nbsphinx",
+            "nbconvert",
+            "sphinx-rtd-theme"]},
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3.6",
