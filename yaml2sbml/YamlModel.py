@@ -31,12 +31,12 @@ class YamlModel:
         Creates a model instance from a yaml file.
 
         Arguments:
-        yaml_dir:
-            directory to the yaml file, that should be imported
+            yaml_dir:
+                directory to the yaml file, that should be imported
 
         Returns:
-        cls:
-            new model
+            cls:
+                new model
         """
 
         new_model = YamlModel()
@@ -58,10 +58,10 @@ class YamlModel:
         Write model to yaml file given as directory yaml_dir.
 
         Arguments:
-        yaml_dir:
-            path/file, where the yaml should be written
-        overwrite:
-            Indicates, whether an existing yaml should be overwritten
+            yaml_dir:
+                path/file, where the yaml should be written
+            overwrite:
+                Indicates, whether an existing yaml should be overwritten
 
         Returns:
 
@@ -101,10 +101,10 @@ class YamlModel:
         Writes the model as an SBML file to the directory given in sbml_dir.
 
         Arguments:
-        sbml_dir:
-            path/file, where the sbml should be written
-        overwrite:
-            Indicates, whether an existing yaml should be overwritten
+            sbml_dir:
+                path/file, where the sbml should be written
+            overwrite:
+                Indicates, whether an existing yaml should be overwritten
 
         Returns:
 
@@ -343,22 +343,21 @@ class YamlModel:
                       condition_dict: dict,
                       overwrite: bool = False,
                       condition_name: str = None):
-
         """
         Adds a condition. Overwrites an existing condition with the same id,
         if overwrite=True.
 
         Arguments:
-        condition_id:
-            str, condition id
-        condition_dict:
-            dict, of the form {<parameter or state id>: <value>}.
-            Corresponds to entries in the PEtab condition table.
-            See details there.
-        overwrite:
-            bool, indicates if an existing condition should be overwritten
-        condition_name:
-            Condition name. Optional.
+            condition_id:
+                str, condition id
+            condition_dict:
+                dict, of the form {<parameter or state id>: <value>}.
+                Corresponds to entries in the PEtab condition table.
+                See details there.
+            overwrite:
+                bool, indicates if an existing condition should be overwritten
+            condition_name:
+                Condition name. Optional.
 
         Returns:
         """
