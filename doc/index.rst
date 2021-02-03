@@ -23,6 +23,7 @@ converted to PEtab.
 
    release_notes
    license
+   contact
 
 .. toctree::
    :caption: Developers
