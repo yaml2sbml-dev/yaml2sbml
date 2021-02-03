@@ -54,6 +54,9 @@ class TestYamlModel(unittest.TestCase):
         self.assertTrue(model.is_set_time())
         self.assertEqual(model.get_time(), time_var)
 
+        model.delete_time()
+        self.assertFalse(model.is_set_time())
+
     def test_parameter(self):
         """
         Test all functionality regarding the 'parameters' keyword.
@@ -68,13 +71,13 @@ class TestYamlModel(unittest.TestCase):
         # test get_parameter_by_id
         self.assertIsInstance(model.get_parameter_by_id(parameter_id), dict)
 
-        # test over_write
+        # test overwrite
         with self.assertRaises(ValueError):
             model.add_parameter(parameter_id=parameter_id)
 
         # now over write parameter
         model.add_parameter(parameter_id=parameter_id,
-                            over_write=True)
+                            overwrite=True)
 
         # test get_parameter_ids
         self.assertListEqual(model.get_parameter_ids(),
@@ -99,7 +102,7 @@ class TestYamlModel(unittest.TestCase):
         # test get_ode_by_id
         self.assertIsInstance(model.get_ode_by_id(state_id), dict)
 
-        # test over_write
+        # test overwrite
         with self.assertRaises(ValueError):
             model.add_ode(state_id, right_hand_side, initial_value)
 
@@ -107,7 +110,7 @@ class TestYamlModel(unittest.TestCase):
         model.add_ode(state_id,
                       right_hand_side,
                       initial_value,
-                      over_write=True)
+                      overwrite=True)
 
         # test get_ode_ids
         self.assertListEqual(model.get_ode_ids(),
@@ -131,12 +134,12 @@ class TestYamlModel(unittest.TestCase):
         # test get_assignment_by_id
         self.assertIsInstance(model.get_assignment_by_id(assignment_id), dict)
 
-        # test over_write
+        # test overwrite
         with self.assertRaises(ValueError):
             model.add_assignment(assignment_id, formula)
 
         # now over write assignment
-        model.add_assignment(assignment_id, formula, over_write=True)
+        model.add_assignment(assignment_id, formula, overwrite=True)
 
         # test get_assignment_ids
         self.assertListEqual(model.get_assignment_ids(),
@@ -161,12 +164,12 @@ class TestYamlModel(unittest.TestCase):
         # test get_function_by_id
         self.assertIsInstance(model.get_function_by_id(function_id), dict)
 
-        # test over_write
+        # test overwrite
         with self.assertRaises(ValueError):
             model.add_function(function_id, arguments, formula)
 
         # now over write function
-        model.add_function(function_id, arguments, formula, over_write=True)
+        model.add_function(function_id, arguments, formula, overwrite=True)
 
         # test get_function_ids
         self.assertListEqual(model.get_function_ids(),
@@ -195,7 +198,7 @@ class TestYamlModel(unittest.TestCase):
         # test get_observable_by_id
         self.assertIsInstance(model.get_observable_by_id(observable_id), dict)
 
-        # test over_write
+        # test overwrite
         with self.assertRaises(ValueError):
             model.add_observable(observable_id,
                                  observable_formula,
@@ -206,7 +209,7 @@ class TestYamlModel(unittest.TestCase):
         model.add_observable(observable_id,
                              observable_formula,
                              noise_formula,
-                             over_write=True,
+                             overwrite=True,
                              observable_name=observable_name)
 
         # test get_observable_ids
@@ -234,7 +237,7 @@ class TestYamlModel(unittest.TestCase):
         # test get_condition_by_id
         self.assertIsInstance(model.get_condition_by_id(condition_id), dict)
 
-        # test over_write
+        # test overwrite
         with self.assertRaises(ValueError):
             model.add_condition(condition_id,
                                 condition_dict,
@@ -244,7 +247,7 @@ class TestYamlModel(unittest.TestCase):
         model.add_condition(condition_id,
                             condition_dict,
                             condition_name=condition_name,
-                            over_write=True)
+                            overwrite=True)
 
         # test get_condition_ids
         self.assertListEqual(model.get_condition_ids(),
