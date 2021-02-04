@@ -6,7 +6,7 @@
 
 <img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.png" width="80%" alt="yaml2sbml logo"/>
 
-<img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.png" width="80%" alt="yaml2sbml logo"/>
+![yaml2sbml logo](https://github.com/yaml2sbml-dev/yaml2sbml/blob/master/doc/logo/logo_yaml2sbml_long.png?raw=true)
 
 ## Table of contents
 
@@ -24,7 +24,7 @@
 
 ## Introduction
 
-yaml2sbml is a small package to convert an ODE model specified in a yaml file into an [**SBML**](http://www.sbml.org/) for ODE simulation and into [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. These file formats can be used with other packages.
+yaml2sbml is a small package to convert an ODE model specified in a yaml file into an [**SBML**](http://www.sbml.org/) for ODE simulation and into [**PEtab**](https://github.com/PEtab-dev/PEtab) for parameter fitting. These file formats can be used with other packages.
 
 * [format_documentation.md](format_documentation.md) provides a documentation of the format of the input yaml. 
 
@@ -43,10 +43,6 @@ To install go to the main folder and do:
  * PyYAML>=5.3
  * pandas >= 1.0.1 
  * PEtab >= 0.1.4
-
-#### Requirements files
-
- * `requirements.txt` 
 
 #### How to get Python 3.6+
 
@@ -84,7 +80,7 @@ For instance, using the yaml file in the examples folder:
  yaml2sbml ../examples/ode_input1.yaml ../examples/sbml_out.xml
 ```
 
-#### yaml2PEtab command
+#### yaml2petab command
 
 If you want to generate PEtab parameter, observable and condition tables, additionally to the SBML file using the terminal, go to the `yaml2sbml` folderand run:
 
