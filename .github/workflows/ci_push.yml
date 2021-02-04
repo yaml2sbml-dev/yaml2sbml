@@ -24,26 +24,13 @@ jobs:
         path: ~/.cache/pip
         key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
 
-    - name: Install dependencies
-      run: |
-        .github/workflows/install_deps.sh amici
-        pip install .
+    - name: Install tox
+      run: pip install tox
 
-    - name: flake8
-      run: |
-        ./run_flake8.sh
-
-    - name: Run tests
-      timeout-minutes: 5
-      run: |
-        python -m pytest --nbmake --cov=yaml2sbml --cov-report=xml tests -s
-
-    - name: Test CLI
-      run: |
-        ./tests/test_CLI.sh
+    - name: Run tox
+      run: tox
 
     - name: Codecov
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
