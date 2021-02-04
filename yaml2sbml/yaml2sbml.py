@@ -449,8 +449,9 @@ def _read_observables_block(model: sbml.Model, observable_list: list):
     Raises:
 
     """
-    warnings.warn('Observables are not represented in the SBML and therefore '
-                  'only have an effect the output, when called via yaml2PEtab')
+    warnings.warn(
+        'Observables are not represented in the SBML and therefore only have '
+        'an effect on the output when called via yaml2PEtab')
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
@@ -469,8 +470,9 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
     Raises:
 
     """
-    warnings.warn('Conditions are not represented in the SBML and therefore '
-                  'only have an effect the output, when called via yaml2PEtab')
+    warnings.warn(
+        'Conditions are not represented in the SBML and therefore only have '
+        'an effect on the output when called via yaml2PEtab')
 
 
 def main():
