@@ -6,7 +6,7 @@
 
 <img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/feature_logo/doc/logo/logo_yaml2sbml_long.png" width="80%" alt="yaml2sbml logo"/>
 
-![yaml2sbml logo](doc/logo/logo_yaml2sbml_long.png)
+![yaml2sbml logo](https://github.com/yaml2sbml-dev/yaml2sbml/blob/master/doc/logo/logo_yaml2sbml_long.png?raw=true)
 
 ## Table of contents
 
