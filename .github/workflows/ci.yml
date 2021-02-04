@@ -27,7 +27,7 @@ jobs:
     - name: Install tox
       run: pip install tox
 
-    - name: Run tox
+    - name: Run tests
       run: tox
 
     - name: Codecov
@@ -56,6 +56,10 @@ jobs:
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
+
+    - name: Install apt dependencies
+      run: |
+        .github/workflows/install_deps.sh amici
 
     - name: Install tox
       run: pip install tox
