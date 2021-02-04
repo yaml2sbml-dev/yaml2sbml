@@ -34,7 +34,7 @@ Merge into master
 2. check that all tests pass,
 3. check that the documentation is up-to-date,
 4. adapt the version number in ``yaml2sbml/version.py`` (see above),
-5. update the release notes in ``doc/releasenotes.rst``,
+5. update the release notes in ``doc/release_notes.rst``,
 6. request a code review,
 7. merge into the origin master branch.
 
@@ -50,8 +50,8 @@ in
 `Git Basics - Tagging <https://git-scm.com/book/en/v2/Git-Basics-Tagging>`_.
 In the release form,
 
-* specify a tag with the new version as specified in ``pyabc/version.py``,
-* include the latest additions to ``doc/releasenotes.rst`` in the release
+* specify a tag with the new version as specified in ``yaml2sbml/version.py``,
+* include the latest additions to ``doc/release_notes.rst`` in the release
   description.
 
 Upload to PyPI

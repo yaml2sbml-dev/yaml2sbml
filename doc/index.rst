@@ -19,10 +19,10 @@ yaml2sbml
    :align: center
    :scale: 30 %
 
-**yaml2sbml** allows the user to convert a system of ODEs specified in a yaml
-file to SBML.
-In addition, if experimental data is provided in the yaml file it can also be
-converted to PEtab.
+**yaml2sbml** allows the user to convert a system of ODEs specified in a YAML_
+file to SBML_.
+In addition, if experimental data is provided in the YAML file, it can also be
+converted to PEtab_.
 
 .. toctree::
    :caption: Main
@@ -50,3 +50,7 @@ converted to PEtab.
 
    contribute
    deploy
+
+.. _YAML: https://yaml.org
+.. _SBML: http://sbml.org
+.. _PEtab: https://petab.readthedocs.io/en/stable/

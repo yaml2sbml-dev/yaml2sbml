@@ -19,8 +19,7 @@ Contribute tests
 ----------------
 
 Tests are located in the ``tests`` folder. All files starting with ``test_``
-contain tests and are automatically run on Travis CI. To run them manually,
-type::
+contain tests and are automatically run on GitHub Actions. Run them manually via::
 
     python3 -m pytest test
 

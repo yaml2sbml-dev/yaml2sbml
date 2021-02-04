@@ -17,7 +17,7 @@ Install from GitHub
 To work with the latest development version, install yaml2sbml from
 GitHub_ via::
 
-    pip install https://github.com/yaml2sbml-dev/yaml2sbml/archive/develop
+    pip install https://github.com/yaml2sbml-dev/yaml2sbml/archive/develop.zip
 
 or clone the repository and install from local via::
 
