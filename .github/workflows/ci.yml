@@ -64,5 +64,5 @@ jobs:
     - name: Install tox
       run: pip install tox
 
-    - name: Run tox on notebooks
+    - name: Test notebooks
       run: tox -e notebooks
