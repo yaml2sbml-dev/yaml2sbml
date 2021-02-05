@@ -167,7 +167,7 @@ class YamlModel:
         Raises:
             ValidationError
         """
-        _validate_yaml_from_dict(self._yaml_model)
+        _validate_yaml_from_dict(self._get_reduced_model_dict())
 
     def _get_reduced_model_dict(self) -> dict:
         """
