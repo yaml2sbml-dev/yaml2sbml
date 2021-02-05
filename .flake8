@@ -5,7 +5,9 @@
 [flake8]
 
 ignore =
-    T001 
+    # print
+    T001
 
 per-file-ignores =
+    # imported but unused
     */__init__.py:F401
