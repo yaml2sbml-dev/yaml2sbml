@@ -124,3 +124,11 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# tox
+/.tox
+
+# coverage
+/.coverage
+/htmlcov
+/coverage.xml
