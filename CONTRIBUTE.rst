@@ -69,8 +69,8 @@ You can run it locally via::
 
     tox -e flake8
 
-Pull requests
--------------
+Workflow
+--------
 
 If you start working on a new feature or a fix, please create an issue on
 GitHub shortly describing the issue and assign yourself.
