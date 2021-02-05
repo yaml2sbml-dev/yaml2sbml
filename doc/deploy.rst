@@ -27,7 +27,7 @@ released.
 Merge into main
 ~~~~~~~~~~~~~~~
 
-1. create a pull request from develop to main,
+1. create a pull request from ``develop`` to ``main``,
 2. check that all tests pass,
 3. check that the documentation is up-to-date,
 4. update the version number in ``yaml2sbml/version.py`` (see above),
