@@ -41,6 +41,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.9]
+    continue-on-error: true
 
     steps:
     - name: Check out repository
