@@ -86,7 +86,7 @@ def compile_model(sbml_dir: str):
     sbml_importer = amici.sbml_import.SbmlImporter(sbml_dir)
     sbml_importer.sbml2amici(
         model_name='Fig71_Sorensen1985',
-        output_dir=os.path.join('amici_models', sbml_dir),
+        output_dir=os.path.join('amici_models', 'Fig71_Sorensen1985'),
         observables=observables,
     )
 
