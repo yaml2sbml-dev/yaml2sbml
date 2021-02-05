@@ -1,9 +1,9 @@
 import argparse
 import os
-import pandas as pd
 import warnings
 
 import libsbml as sbml
+import pandas as pd
 import petab
 import yaml
 

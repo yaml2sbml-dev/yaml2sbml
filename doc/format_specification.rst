@@ -1,9 +1,9 @@
 Input Format for yaml2sbml
-===============================================
+==========================
 
 
 General scope
--------------------------------------
+-------------
 
 *  `yaml2sbml`: Translates ODEs (Initial value problems) of the form `x' = f(t, x, p)` with time `t`, states `x` and (potentially) unknown parameters `p` into a SBML file for simulation purpose.
 
@@ -11,7 +11,7 @@ General scope
 
 
 time \[optional\]
--------------------------------------
+-----------------
 
 
 .. code-block:: yaml
@@ -25,7 +25,7 @@ Defines a **time variable**, in case the right hand side of the ODE is time-depe
 
   
 parameters \[optional\]
--------------------------------------
+-----------------------
 
 .. code-block:: yaml
 
@@ -46,7 +46,7 @@ Further entries are possible and will be written to the _parameter table_ as wel
 
 
 odes
--------------------------------------
+----
 
 .. code-block:: yaml
 
@@ -66,7 +66,7 @@ For a more detailed description of the parsing of mathematical expressions ( for
 
 
 assignments \[optional\]
--------------------------------------
+------------------------
 
 .. code-block:: yaml
 
@@ -85,7 +85,7 @@ For a more detailed description of the parsing of mathematical expressions (e.g.
 
 
 functions \[optional\]
--------------------------------------
+----------------------
 
 .. code-block:: yaml
 
@@ -106,7 +106,7 @@ For a more detailed description of the parsing of mathematical expressions (e.g.
 
 
 observables \[optional\]
--------------------------------------
+------------------------
 
 .. code-block:: yaml
 
@@ -128,7 +128,7 @@ For a detailed discussion see the `corresponding part of the PEtab documentation
 
 
 conditons \[optional\]
--------------------------------------
+----------------------
 
 .. code-block:: yaml
 
@@ -154,8 +154,8 @@ For a detailed discussion see the `corresponding part of the PEtab documentation
 
 
 
-Parsing of Mathematical Equations
--------------------------------------
+Parsing of mathematical equations
+---------------------------------
 
  Throughout `yaml2sbml` formulas are parsed by `libsbml's` `parseL3Formula` function. Further information on the syntax are given by:
 
