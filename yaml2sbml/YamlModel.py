@@ -9,7 +9,9 @@ from .yaml_validation import _validate_yaml_from_dict
 
 
 class YamlModel:
-    """Functionality to set up, edit, load and write yaml models."""
+    """
+    Functionality to set up, edit, load and write yaml models.
+    """
 
     def __init__(self):
         """
