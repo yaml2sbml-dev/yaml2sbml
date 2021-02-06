@@ -12,18 +12,19 @@
 
 * [Getting Started](#getting-started)
 
+* [Basic Syntax](#basic-syntax)
+
 * [Contact](#contact)
 
 
 ## About
 
-`yaml2sbml` is a small package in Python to convert an ODE model specified in a yaml file into an 
+`yaml2sbml` is a small package in Python to convert an ODE model specified in a YAML file into an 
 [**SBML**](http://www.sbml.org/) for ODE simulation and into 
 [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. `yaml2sbml` offers:
 
-* Translate ODE models in YAML into SBML and PEtab.
+* Translate ODE models in YAML into SBML and PEtab via a Python and a command line interface.
 * A format validator for the input YAML.
-* A Python and a command line interface for translation and validation functionality.
 * A model editor, that allows to generate, import and export a YAML models.
 
 ## Installation
@@ -44,6 +45,27 @@ For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/#).
     * [Lotka_Volterra.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb) showing the Python package.
     * [Lotka_Volterra_CLI.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_CLI.ipynb) showing the command line interface.
     * [Lotka_Volterra_Mock.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_Model_Editor.ipynb) showing the Model Editor.
-    
+
+## Basic Syntax
+
+A YAML model can be translated to SBML/PEtab in python via
+```python
+import yaml2sbml
+
+# SBML conversion
+yaml2sbml.yaml2sbml(input_yaml_dir, output_sbml_dir)
+
+#PEtab conversion
+yaml2sbml.yaml2petab(input_yaml_dir, 
+                     output_petab_dir,
+                     sbml_name)
+```
+and in the command line via 
+```shell
+yaml2sbml <yaml_input_file> <sbml_output_file>
+yaml2petab <yaml_input_file> <petab_output_directory> <model_name>
+```
+Format validation is possible in python via `yaml2sbml.validate_yaml` and in command line via `yaml2sbml_validate`.
+
 ## Contact
 If you have a question regarding the tool: Please drop us an [issue](https://github.com/yaml2sbml-dev/yaml2sbml/issues/new) or a [mail](mailto:jakob.vanhoefer@uni-bonn.de), we are happy to help.
