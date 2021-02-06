@@ -1,3 +1,4 @@
+"""Utility functions, that simulate and plot the FSP example."""
 import amici
 import amici.plotting
 
@@ -12,9 +13,7 @@ def plot_AMICI(sbml_dir: str,
                t: np.ndarray,
                r_max: int,
                p_max: int):
-    """
-    Compiles, simulates and plots the AMICI model for the FSP example.
-    """
+    """Compiles, simulates and plots the AMICI model for the FSP example."""
     n_t = len(t)
     # compile and Simulate model
     simulation, model = compile_and_simulate(sbml_dir,
@@ -66,9 +65,7 @@ def compile_and_simulate(sbml_dir: str,
                          t: np.ndarray,
                          r_max: int,
                          p_max: int):
-    """
-    Utility function, that compiles and simulates the FSP model.
-    """
+    """Compile and simulate the FSP model."""
     model_name = 'Gene_regulation_FSP'
 
     # define marginal rna concentrations

@@ -8,9 +8,7 @@ from yaml2sbml.YamlModel import YamlModel
 
 
 class TestYamlModel(unittest.TestCase):
-    """
-    TestCase class for testing YamlModel.
-    """
+    """TestCase class for testing YamlModel."""
 
     def setUp(self):
         # input directory
@@ -258,9 +256,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_condition_ids(), [])
 
     def test_valid_model(self):
-        """
-        Tests, whether the resulting models are valid.
-        """
+        """Tests, whether the resulting models are valid."""
         model = YamlModel()
 
         model.set_time('t')

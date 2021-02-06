@@ -1,3 +1,4 @@
+"""Utlity functions for simulating and plotting the Sorensen model."""
 import amici
 import amici.plotting
 
@@ -9,8 +10,9 @@ import sys
 
 
 def simulate_and_plot_sorensen(sbml_dir: str):
-    """Plots and simulates the Sorensen model.
-    
+    """
+    Plot and simulate the Sorensen model.
+
     This function is highly specific to the Sorensen model.
 
     Parameters:
@@ -26,7 +28,7 @@ def simulate_and_plot_sorensen(sbml_dir: str):
     simulation = amici.runAmiciSimulation(model, solver)
 
     # Reproduce the figure.
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
+    _, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
 
     amici.plotting.plotObservableTrajectories(
         simulation,
@@ -54,7 +56,8 @@ def simulate_and_plot_sorensen(sbml_dir: str):
 
 
 def compile_model(sbml_dir: str):
-    """Compiles the Sorensen model and specifies the observables.
+    """
+    Compiles the Sorensen model and specifies the observables.
 
     Parameters:
     -----------
