@@ -29,18 +29,12 @@
 
 ## Installation
 
-To install open your terminal and run:
+`yaml2sbml`can be `pip`-installed via
 
 ```shell
-# clone the repository
-git clone https://github.com/yaml2sbml-dev/yaml2sbml
-
-# go to the folder of yaml2bsml
-cd yaml2sbml 
-
-# install
-pip install .
+pip install yaml2sbml
 ```
+For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/#).
 
 ## Getting Started
 
