@@ -1,9 +1,8 @@
+![yaml2sbml logo](https://github.com/yaml2sbml-dev/yaml2sbml/blob/master/doc/logo/logo_yaml2sbml_long.png?raw=true)
+
 [![CI](https://github.com/yaml2sbml-dev/yaml2sbml/workflows/CI/badge.svg)](https://github.com/yaml2sbml-dev/yaml2sbml/actions)
 [![codecov](https://codecov.io/gh/yaml2sbml-dev/yaml2sbml/branch/master/graph/badge.svg)](https://codecov.io/gh/yaml2sbml-dev/yaml2sbml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/632acdc8d4ef4f50bf69892b8862fd24)](https://www.codacy.com/gh/yaml2sbml-dev/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade)
-
-![yaml2sbml logo](https://github.com/yaml2sbml-dev/yaml2sbml/blob/master/doc/logo/logo_yaml2sbml_long.png?raw=true)
-
 
 ## Table of contents
 
