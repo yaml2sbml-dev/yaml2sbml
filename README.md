@@ -75,7 +75,7 @@ yaml2petab <yaml_input_file> <petab_output_directory> <model_name>
 
 ### Format Validation
 
-Format validation is possible in Python via `yaml2sbml.validate_yaml` and in command line via `yaml2sbml_validate`.
+Format validation is possible in Python via `yaml2sbml.validate_yaml` and in the command line via `yaml2sbml_validate`.
 
 ## Contact
 If you have a question regarding the tool: Please drop us an [issue](https://github.com/yaml2sbml-dev/yaml2sbml/issues/new) or a [mail](mailto:jakob.vanhoefer@uni-bonn.de), we are happy to help.
