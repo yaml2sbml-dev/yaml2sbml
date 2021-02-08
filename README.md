@@ -34,7 +34,7 @@
 ```shell
 pip install yaml2sbml
 ```
-For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/#).
+For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/).
 
 ## Getting Started
 
