@@ -9,6 +9,11 @@ for par in "$@"; do
         swig3.0 libatlas-base-dev libhdf5-serial-dev
     ;;
 
+    doc)
+      # documentation
+      sudo apt-get install pandoc
+    ;;
+
     *)
       echo "Unknown argument: $par" >&2
       exit 1
