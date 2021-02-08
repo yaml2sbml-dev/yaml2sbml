@@ -88,6 +88,10 @@ jobs:
         path: ~/.cache/pip
         key: ${{ runner.os }}-${{ matrix.python-version }}-ci-doc
 
+    - name: Install apt dependencies
+      run: |
+        .github/workflows/install_deps.sh doc
+
     - name: Install tox
       run: pip install tox
 
