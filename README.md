@@ -38,7 +38,7 @@ For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/).
 
 ## Getting Started
 
-* The documentation of the tool is hosted on [read the docs](https://yaml2sbml.readthedocs.io/en/latest/)
+* The documentation of the tool is hosted on [Read the Docs](https://yaml2sbml.readthedocs.io/en/latest/).
 * The [format documentation](https://github.com/yaml2sbml-dev/yaml2sbml/blob/main/doc/format_specification.rst) describes the input YAML. 
 
 * Jupyter notebooks containging examples can be found under [`doc/examples`](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples).  Most notably:
