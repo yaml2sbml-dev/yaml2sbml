@@ -92,5 +92,5 @@ jobs:
       run: pip install tox
 
     - name: Test documentation build
-      run: tox -e notebooks
+      run: tox -e doc
 
