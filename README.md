@@ -29,7 +29,7 @@
 
 ## Installation
 
-`yaml2sbml`can be `pip`-installed via
+`yaml2sbml`can be installed from PyPI with
 
 ```shell
 pip install yaml2sbml
