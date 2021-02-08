@@ -41,7 +41,24 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.napoleon',
               'sphinx_autodoc_typehints',
               'nbsphinx',
-              'sphinx.ext.mathjax']
+              'sphinx.ext.mathjax',
+              # link to code
+              'sphinx.ext.viewcode',
+              # link to other projects' docs
+              'sphinx.ext.intersphinx',
+              # code highlighting in jupyter cells
+              'IPython.sphinxext.ipython_console_highlighting',
+              ]
+
+# links for intersphinx
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'numpy': ('https://numpy.org/devdocs/', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
+    'pandas': ('https://pandas.pydata.org/docs/', None),
+    'petab': ('https://petab.readthedocs.io/en/stable/', None),
+    'amici': ('https://amici.readthedocs.io/en/latest/', None),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 #templates_path = ['_templates']
