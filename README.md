@@ -25,7 +25,7 @@
 
 * Translate ODE models specified in YAML into SBML/PEtab via a Python and a command line interface.
 * A format validator for the input YAML.
-* A model editor, that allows to generate, import and export a YAML models.
+* A model editor that allows to generate, import and export YAML models.
 
 ## Installation
 
