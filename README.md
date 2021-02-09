@@ -23,13 +23,14 @@
 [**SBML**](http://www.sbml.org/) for ODE simulation and into 
 [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. `yaml2sbml` offers:
 
-* Translate ODE models specified in YAML into SBML/PEtab via a Python and a command line interface.
-* A format validator for the input YAML.
-* A model editor that allows to generate, import and export YAML models.
+
+* A translator of ODE models specified in YAML into SBML/PEtab via a Python and a command line interface;
+* a format validator for the input YAML; and
+* a model editor, which provides a simplified interface to generate, import and export YAML models.
 
 ## Installation
 
-`yaml2sbml`can be installed from PyPI with
+`yaml2sbml` can be installed from PyPI with
 
 ```shell
 pip install yaml2sbml
@@ -55,11 +56,11 @@ A YAML model can be translated to SBML/PEtab in Python via
 import yaml2sbml
 
 # SBML conversion
-yaml2sbml.yaml2sbml(input_yaml_dir, output_sbml_dir)
+yaml2sbml.yaml2sbml(yaml_dir, sbml_dir)
 
 #PEtab conversion
-yaml2sbml.yaml2petab(input_yaml_dir, 
-                     output_petab_dir,
+yaml2sbml.yaml2petab(yaml_dir, 
+                     output_dir,
                      sbml_name)
 ```
 ### Command Line Interface
@@ -67,10 +68,10 @@ yaml2sbml.yaml2petab(input_yaml_dir,
 And in the command line via 
 ```shell
 # SBML conversion
-yaml2sbml <yaml_input_file> <sbml_output_file>
+yaml2sbml <yaml_dir> <sbml_dir>
 
 #PEtab conversion
-yaml2petab <yaml_input_file> <petab_output_directory> <model_name>
+yaml2petab <yaml_dir> <output_dir> <sbml_name>
 ```
 
 ### Format Validation

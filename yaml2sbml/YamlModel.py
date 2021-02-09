@@ -26,7 +26,7 @@ class YamlModel:
                             'conditions': []}
 
     @staticmethod
-    def load_from_yaml(yaml_file):
+    def load_from_yaml(yaml_dir):
         """
         Creates a model instance from a yaml file.
 
@@ -42,7 +42,7 @@ class YamlModel:
         new_model = YamlModel()
 
         # read in yaml_file
-        with open(yaml_file, 'r') as f_in:
+        with open(yaml_dir, 'r') as f_in:
             yaml_contents = f_in.read()
             new_model._yaml_model.update(yaml.full_load(yaml_contents))
 
