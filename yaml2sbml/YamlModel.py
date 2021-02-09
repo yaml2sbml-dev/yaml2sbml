@@ -26,7 +26,7 @@ class YamlModel:
                             'conditions': []}
 
     @staticmethod
-    def load_from_yaml(yaml_file):
+    def load_from_yaml(yaml_dir):
         """
         Creates a model instance from a yaml file.
 
@@ -42,7 +42,7 @@ class YamlModel:
         new_model = YamlModel()
 
         # read in yaml_file
-        with open(yaml_file, 'r') as f_in:
+        with open(yaml_dir, 'r') as f_in:
             yaml_contents = f_in.read()
             new_model._yaml_model.update(yaml.full_load(yaml_contents))
 
@@ -442,7 +442,7 @@ class YamlModel:
     # functionalities to get entry by Id:
     def get_parameter_by_id(self,
                             parameter_id: str):
-        """returns dict for corresponding parameter."""
+        """Returns dict for corresponding parameter."""
         if parameter_id not in self.get_parameter_ids():
             raise IndexError(f'Could not find parameter {parameter_id}.')
 
@@ -452,7 +452,7 @@ class YamlModel:
 
     def get_ode_by_id(self,
                       state_id: str):
-        """returns dict for corresponding ODE/state."""
+        """Returns dict for corresponding ODE/state."""
         if state_id not in self.get_ode_ids():
             raise IndexError(f'Could not find state/ODE {state_id}.')
 
@@ -462,7 +462,7 @@ class YamlModel:
 
     def get_assignment_by_id(self,
                              assignment_id: str):
-        """returns dict for corresponding assignment."""
+        """Returns dict for corresponding assignment."""
         if assignment_id not in self.get_assignment_ids():
             raise IndexError(f'Could not find assignment {assignment_id}.')
 
@@ -472,7 +472,7 @@ class YamlModel:
 
     def get_function_by_id(self,
                            function_id: str):
-        """returns dict for corresponding function."""
+        """Returns dict for corresponding function."""
         if function_id not in self.get_function_ids():
             raise IndexError(f'Could not find function {function_id}.')
 
@@ -482,7 +482,7 @@ class YamlModel:
 
     def get_observable_by_id(self,
                              observable_id: str):
-        """returns dict for corresponding observable."""
+        """Returns dict for corresponding observable."""
         if observable_id not in self.get_observable_ids():
             raise IndexError(f'Could not find observable {observable_id}.')
 
@@ -492,7 +492,7 @@ class YamlModel:
 
     def get_condition_by_id(self,
                             condition_id: str):
-        """returns dict for corresponding condition."""
+        """Returns dict for corresponding condition."""
         if condition_id not in self.get_condition_ids():
             raise IndexError(f'Could not find condition {condition_id}.')
 
