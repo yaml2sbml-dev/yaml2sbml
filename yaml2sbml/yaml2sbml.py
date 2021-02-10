@@ -7,34 +7,34 @@ import yaml
 from .yaml_validation import _validate_yaml_from_dict
 
 
-def yaml2sbml(yaml_file: str, sbml_file: str):
+def yaml2sbml(yaml_dir: str, sbml_dir: str):
     """
     Takes in a yaml file with the ODE specification, parses it, converts it
     into SBML format, and writes the SBML file.
 
     Arguments:
-        yaml_file : path to the yaml file with the ODEs specification
-        sbml_file: path to the SBML file to be written out
+        yaml_dir : path to the yaml file with the ODEs specification
+        sbml_dir: path to the SBML file to be written out
 
     Returns:
 
     Raises:
 
     """
-    sbml_as_string = _parse_yaml(yaml_file)
+    sbml_as_string = _parse_yaml(yaml_dir)
 
     # write sbml file
-    with open(sbml_file, 'w') as f_out:
+    with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
 
-def _parse_yaml(yaml_file: str) -> str:
+def _parse_yaml(yaml_dir: str) -> str:
     """
     Takes in a yaml file with the specification of ODEs, parses it, and
     returns the corresponding SBML string.
 
     Arguments:
-        yaml_file: path to the yaml file with the ODEs specification
+        yaml_dir: path to the yaml file with the ODEs specification
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format
@@ -42,7 +42,7 @@ def _parse_yaml(yaml_file: str) -> str:
     Raises:
         SystemExit
     """
-    yaml_dict = _load_yaml_file(yaml_file)
+    yaml_dict = _load_yaml_file(yaml_dir)
     _validate_yaml_from_dict(yaml_dict)
     sbml_string = _parse_yaml_dict(yaml_dict)
 
@@ -449,8 +449,9 @@ def _read_observables_block(model: sbml.Model, observable_list: list):
     Raises:
 
     """
-    warnings.warn('Observables are not represented in the SBML and therefore '
-                  'only have an effect the output, when called via yaml2PEtab')
+    warnings.warn(
+        'Observables are not represented in the SBML and therefore only have '
+        'an effect on the output when called via yaml2PEtab')
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
@@ -469,8 +470,9 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
     Raises:
 
     """
-    warnings.warn('Conditions are not represented in the SBML and therefore '
-                  'only have an effect the output, when called via yaml2PEtab')
+    warnings.warn(
+        'Conditions are not represented in the SBML and therefore only have '
+        'an effect on the output when called via yaml2PEtab')
 
 
 def main():
