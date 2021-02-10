@@ -13,9 +13,9 @@ from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
 from .yaml_validation import _validate_yaml_from_dict
 
 
-def yaml2petab(yaml_file: str,
+def yaml2petab(yaml_dir: str,
                output_dir: str,
-               model_name: str,
+               sbml_name: str,
                petab_yaml_name: str = None,
                measurement_table_name: str = None):
     """
@@ -30,16 +30,16 @@ def yaml2petab(yaml_file: str,
     specified, this file name is written into the created .yaml file.
 
     Arguments:
-        yaml_file : path to the yaml file with the ODEs specification
+        yaml_dir : path to the yaml file with the ODEs specification
         output_dir: path the output file(s) are be written out
-        model_name: name of SBML model
+        sbml_name: name of SBML model
         petab_yaml_name: name of yaml organizing the PEtab problem.
         measurement_table_name: Name of measurement table
     """
-    yaml_model_dict = _load_yaml_file(yaml_file)
+    yaml_model_dict = _load_yaml_file(yaml_dir)
     _yaml2petab(yaml_model_dict,
                 output_dir,
-                model_name,
+                sbml_name,
                 petab_yaml_name,
                 measurement_table_name)
 
