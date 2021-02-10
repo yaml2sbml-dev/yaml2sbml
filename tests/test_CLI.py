@@ -1,5 +1,5 @@
 import os
-import pytest
+import shutil
 from pytest_console_scripts import script_runner
 
 
@@ -28,7 +28,8 @@ def test_yaml2petab_cli(script_runner):
     # run with optional Arguments
     script_runner.run('yaml2petab', yaml_dir, output_dir, model_name, '-y test_yaml.yml')
 
-    # TODO delete the generated files
+    # delete the generated files
+    shutil.rmtree(output_dir)
 
 
 def test_yaml2sbml_validate_cli(script_runner):
