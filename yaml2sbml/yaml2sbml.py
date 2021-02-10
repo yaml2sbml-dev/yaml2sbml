@@ -8,7 +8,7 @@ import yaml
 from .yaml_validation import _validate_yaml_from_dict
 
 
-def yaml2sbml(yaml_file: str, sbml_file: str):
+def yaml2sbml(yaml_dir: str, sbml_dir: str):
     """
     Parse a YAML file with the specification of ODEs and write it to SBML.
 
@@ -18,21 +18,21 @@ def yaml2sbml(yaml_file: str, sbml_file: str):
         yaml_file : path to the yaml file with the ODEs specification
         sbml_file: path to the SBML file to be written out
     """
-    sbml_as_string = _parse_yaml(yaml_file)
+    sbml_as_string = _parse_yaml(yaml_dir)
 
     # write sbml file
-    with open(sbml_file, 'w') as f_out:
+    with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
 
-def _parse_yaml(yaml_file: str) -> str:
+def _parse_yaml(yaml_dir: str) -> str:
     """
     Parse a YAML file with the specification of ODEs to SBML.
 
     The SBML is returned as string.
 
     Arguments:
-        yaml_file: path to the yaml file with the ODEs specification
+        yaml_dir: path to the yaml file with the ODEs specification
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format
@@ -40,7 +40,7 @@ def _parse_yaml(yaml_file: str) -> str:
     Raises:
         SystemExit
     """
-    yaml_dict = _load_yaml_file(yaml_file)
+    yaml_dict = _load_yaml_file(yaml_dir)
     _validate_yaml_from_dict(yaml_dict)
     sbml_string = _parse_yaml_dict(yaml_dict)
 
