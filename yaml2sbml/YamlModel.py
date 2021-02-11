@@ -129,7 +129,8 @@ class YamlModel:
         """
         Write the YamlModel as a PEtab problem.
 
-        Equivalent to calling yaml2petab on the file produced by the yaml output.
+        Equivalent to calling yaml2petab on the file produced by the yaml
+        output.
 
         If a petab_yaml_name is given, a .yaml file is created, that organizes
         the petab problem. If additionally a measurement_table_file_name is
