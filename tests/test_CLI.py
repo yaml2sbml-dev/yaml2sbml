@@ -20,7 +20,8 @@ def test_yaml2sbml_cli(script_runner):
     with open(sbml_dir, 'r') as f_in:
         sbml_from_cli = f_in.read()
 
-    assert sbml_from_cli == sbml_from_python
+    if not (sbml_from_cli == sbml_from_python):
+        raise AssertionError('SBML from CLI and python interface differ.')
 
     os.remove(sbml_dir)
 
