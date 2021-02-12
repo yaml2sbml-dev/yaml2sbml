@@ -1,3 +1,4 @@
+"""Utility functions for simulation and plotting in AMICI."""
 import amici
 import amici.plotting
 import matplotlib.pyplot as plt
@@ -39,10 +40,7 @@ def simulate_AMICI(sbml_name: str):
 def plot_AMICI(amici_model,
                rdata,
                title: str):
-    """
-    Plots the AMICI simulation from the given rdata...
-    """
-
+    """Plot the AMICI simulation from the given rdata..."""
     fig, ax = plt.subplots()
     amici.plotting.plotStateTrajectories(rdata, ax=ax)
 
