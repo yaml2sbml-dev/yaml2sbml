@@ -15,7 +15,7 @@ def test_yaml2sbml_cli(script_runner):
     script_runner.run('yaml2sbml', yaml_dir, sbml_dir)
 
     # test if SBML created by the python yaml2sbml command is the same.
-    sbml_from_python = _parse_yaml(yaml_dir)
+    sbml_from_python = _parse_yaml(yaml_dir, 'python_sbml')
 
     with open(sbml_dir, 'r') as f_in:
         sbml_from_cli = f_in.read()

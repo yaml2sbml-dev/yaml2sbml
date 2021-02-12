@@ -15,8 +15,8 @@ def yaml2sbml(yaml_dir: str, sbml_dir: str):
     SBML is written within this function.
 
     Arguments:
-        yaml_file : path to the yaml file with the ODEs specification
-        sbml_file: path to the SBML file to be written out
+        yaml_dir : directory of the yaml file with the ODEs specification
+        sbml_dir: pdirectory of the SBML file to be written out
     """
     sbml_as_string = _parse_yaml(yaml_dir)
 
@@ -25,7 +25,8 @@ def yaml2sbml(yaml_dir: str, sbml_dir: str):
         f_out.write(sbml_as_string)
 
 
-def _parse_yaml(yaml_dir: str) -> str:
+def _parse_yaml(yaml_dir: str,
+                model_name: str) -> str:
     """
     Parse a YAML file with the specification of ODEs to SBML.
 
@@ -33,6 +34,7 @@ def _parse_yaml(yaml_dir: str) -> str:
 
     Arguments:
         yaml_dir: path to the yaml file with the ODEs specification
+        model_name: model name as specified in the SBML
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format
@@ -42,18 +44,22 @@ def _parse_yaml(yaml_dir: str) -> str:
     """
     yaml_dict = _load_yaml_file(yaml_dir)
     _validate_yaml_from_dict(yaml_dict)
-    sbml_string = _parse_yaml_dict(yaml_dict)
+
+    sbml_string = _parse_yaml_dict(yaml_dict,
+                                   model_name)
 
     return sbml_string
 
 
-def _parse_yaml_dict(yaml_dict) -> str:
+def _parse_yaml_dict(yaml_dict: dict,
+                     model_name: str) -> str:
     """
     Generate a string, containing the SBML from a yaml_dict.
 
     Arguments:
         yaml_dict: dictionary, containing to the yaml file with the ODEs
                    specification.
+        model_name: model name as specified in the SBML
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format.
@@ -65,6 +71,14 @@ def _parse_yaml_dict(yaml_dict) -> str:
         raise SystemExit('Could not create SBMLDocument object')
 
     model = document.createModel()
+
+    # remove file extension
+    if model_name.endswith('.xml') or model_name.endswith('.sbml'):
+        model_name = model_name[:-4]
+
+    model.setId(model_name)
+    model.setName(model_name)
+
     model = _create_compartment(model)
 
     _convert_yaml_blocks_to_sbml(model, yaml_dict)

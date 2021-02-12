@@ -22,7 +22,8 @@ class TestYaml2SBML(unittest.TestCase):
         expected_result_file = os.path.join(self.test_folder,
                                             'true_sbml_output.xml')
 
-        sbml_contents = _parse_yaml(ode_file)
+        sbml_contents = _parse_yaml(ode_file,
+                                    'ode_input1')
 
         with open(expected_result_file, 'r') as f_in:
             expected_sbml_contents = f_in.read()
@@ -47,7 +48,8 @@ class TestYaml2SBML(unittest.TestCase):
 
         test_sbml_dir = os.path.join(self.test_folder, 'sbml_test.xml')
 
-        sbml_contents = _parse_yaml(ode_file)
+        sbml_contents = _parse_yaml(ode_file,
+                                    'ode_input2')
 
         with open(expected_result_file, 'r') as f_in:
             expected_sbml_contents = f_in.read()

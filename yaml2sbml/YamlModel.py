@@ -109,6 +109,9 @@ class YamlModel:
             raise ValueError('sbml_dir should contain path to the sbml '
                              'and hence end with .xml or .sbml')
 
+        # model name = sbml name without file extension
+        model_name = os.path.splitext(sbml_dir)[0][:-4]
+
         if (not overwrite) and os.path.exists(sbml_dir):
             raise FileExistsError(f'Can not write SBML model. File {sbml_dir}'
                                   f' already exists. Consider to set '
@@ -116,7 +119,8 @@ class YamlModel:
 
         # generate SBML as string
         reduced_model_dict = self._get_reduced_model_dict()
-        sbml_as_string = _parse_yaml_dict(reduced_model_dict)
+        sbml_as_string = _parse_yaml_dict(reduced_model_dict,
+                                          model_name)
 
         with open(sbml_dir, 'w') as f_out:
             f_out.write(sbml_as_string)
