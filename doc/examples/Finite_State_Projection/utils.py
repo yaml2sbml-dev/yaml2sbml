@@ -29,11 +29,14 @@ def plot_AMICI(sbml_dir: str,
 
     for i in range(n_t):
 
-        r_marginal = [simulation.y[i, get_obs_idx_by_id(f'x_r{r}')] for r in range(r_max)]
-        p_marginal = [simulation.y[i, get_obs_idx_by_id(f'x_p{p}')] for p in range(p_max)]
+        r_marginal = [simulation.y[i, get_obs_idx_by_id(f'x_r{r}')]
+                      for r in range(r_max)]
+        p_marginal = [simulation.y[i, get_obs_idx_by_id(f'x_p{p}')]
+                      for p in range(p_max)]
         # rna
         plt.subplot(n_t, 2, 2*i+1)
-        plt.fill_between(np.arange(r_max), 0, r_marginal, facecolor='blue', alpha=0.5)
+        plt.fill_between(np.arange(r_max), 0, r_marginal,
+                         facecolor='blue', alpha=0.5)
         plt.plot(r_marginal)
         plt.ylabel(f't={int(t[i])}')
         plt.yticks([])
@@ -47,7 +50,8 @@ def plot_AMICI(sbml_dir: str,
 
         # protein
         plt.subplot(n_t, 2, 2*(i+1))
-        plt.fill_between(np.arange(p_max), 0, p_marginal, facecolor='blue', alpha=0.5)
+        plt.fill_between(np.arange(p_max), 0, p_marginal,
+                         acecolor='blue', alpha=0.5)
         plt.plot(p_marginal)
         plt.yticks([ ])
         plt.xlim(0, p_max-1)
