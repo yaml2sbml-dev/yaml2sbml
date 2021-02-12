@@ -51,7 +51,7 @@ def plot_AMICI(sbml_dir: str,
         # protein
         plt.subplot(n_t, 2, 2*(i+1))
         plt.fill_between(np.arange(p_max), 0, p_marginal,
-                         acecolor='blue', alpha=0.5)
+                         facecolor='blue', alpha=0.5)
         plt.plot(p_marginal)
         plt.yticks([ ])
         plt.xlim(0, p_max-1)
