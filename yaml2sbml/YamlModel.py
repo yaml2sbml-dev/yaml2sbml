@@ -1,4 +1,4 @@
-"""Code of the Model Editor for creating YAML models."""
+"""A Model Editor for creating YAML models."""
 import yaml
 import os.path
 from typing import Union
@@ -92,7 +92,7 @@ class YamlModel:
                       sbml_dir: str,
                       overwrite: bool = False):
         """
-        Write the model as an SBML file to the directory given in sbml_dir.
+        Write the model as an SBML file to the directory given in `sbml_dir`.
 
         Arguments:
             sbml_dir:

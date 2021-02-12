@@ -8,7 +8,7 @@ def test_yaml2sbml_cli(script_runner):
     """Test the command line command `yaml2sbml`."""
     path = os.path.dirname(os.path.abspath(__file__))
 
-    yaml_dir = os.path.join(path, 'test_yaml2sbml/ode_input1.yaml')
+    yaml_dir = os.path.join(path, 'test_yaml2sbml', 'ode_input1.yaml')
     sbml_dir = os.path.join(path, 'test_sbml.xml')
 
     # run CLI command
@@ -29,7 +29,7 @@ def test_yaml2sbml_cli(script_runner):
 def test_yaml2petab_cli(script_runner):
     """Test the command line command `yaml2petab."""
     path = os.path.dirname(os.path.abspath(__file__))
-    yaml_dir = os.path.join(path, 'test_yaml2sbml/ode_input2.yaml')
+    yaml_dir = os.path.join(path, 'test_yaml2sbml', 'ode_input2.yaml')
     output_dir = os.path.join(path, 'test_output')
     model_name = 'petab_test_sbml.xml'
 
