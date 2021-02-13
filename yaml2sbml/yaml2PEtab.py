@@ -84,7 +84,12 @@ def _yaml2petab(yaml_model_dict: dict,
         f_out.write(sbml_as_string)
 
     # create petab tsv files:
-    _create_petab_tables_from_yaml(yaml_model_dict, output_dir)
+    if model_name.endswith('.xml') or model_name.endswith('.sbml'):
+        model_name = model_name[:-4]
+
+    _create_petab_tables_from_yaml(yaml_model_dict,
+                                   output_dir,
+                                   model_name)
 
     # create yaml file, that organizes the petab problem:
     if (petab_yaml_name is None) and (measurement_table_name is not None):
@@ -104,16 +109,23 @@ def _yaml2petab(yaml_model_dict: dict,
 
 
 def _create_petab_tables_from_yaml(yaml_dict: dict,
-                                   output_dir: str):
+                                   output_dir: str,
+                                   model_name: str):
     """
     Parse the yaml dict to a PEtab observable/parameter table.
+
+    The table will be named (if the corresponding information is in the YAML):
+    `parameters_<model_name>.tsv`,
+    `observables_<model_name>.tsv` and
+    `experimental_conditions_<model_name>.tsv`.
 
     Arguments:
         yaml_dict: dict, that contains the yaml file.
         output_dir: directory, where the PEtab tables should be written.
     """
     parameter_table = _create_parameter_table(yaml_dict)
-    parameter_table.to_csv(os.path.join(output_dir, 'parameter_table.tsv'),
+    parameter_table.to_csv(os.path.join(output_dir,
+                                        f'parameters_{model_name}.tsv'),
                            sep='\t',
                            index=False)
 
@@ -121,22 +133,25 @@ def _create_petab_tables_from_yaml(yaml_dict: dict,
     if 'observables' in yaml_dict.keys():
         observable_table = _create_observable_table(yaml_dict)
         observable_table.to_csv(os.path.join(output_dir,
-                                             'observable_table.tsv'),
+                                             f'observables_{model_name}.tsv'),
                                 sep='\t',
                                 index=False)
 
     # create PEtab condition table, if conditions occur in the yaml file.
     if 'conditions' in yaml_dict.keys():
         condition_table = _create_condition_table(yaml_dict)
-        condition_table.to_csv(os.path.join(output_dir, 'condition_table.tsv'),
-                               sep='\t',
-                               index=False)
+        condition_table.to_csv(
+            os.path.join(output_dir,
+                         f'experimental_conditions_{model_name}.tsv'),
+            sep='\t',
+            index=False)
 
 
 def _create_petab_problem_yaml(yaml_dict: dict,
                                output_dir: str,
                                sbml_dir: str,
                                petab_yaml_name: str,
+                               model_name: str,
                                measurement_table_name: str = None):
     """
     Create the yaml file, that can be used for structuring a PEtab problem.
@@ -146,10 +161,11 @@ def _create_petab_problem_yaml(yaml_dict: dict,
         output_dir: directory, where the PEtab tables should be written.
         sbml_dir: directory of the SBML model.
         petab_yaml_name: name of file, where PEtab yaml is written.
+        model_name: Name of the model, in order to name the PEtab tables.
         measurement_table_name: directory of the  measurement table.
     """
     petab_yaml_dict = {'format_version': 1,
-                       'parameter_file': 'parameter_table.tsv',
+                       'parameter_file': f'parameters_{model_name}.tsv',
                        'problems': [{'sbml_files':
                                          [os.path.basename(sbml_dir)]}]}
 
@@ -157,11 +173,11 @@ def _create_petab_problem_yaml(yaml_dict: dict,
 
     if 'observables' in yaml_dict.keys():
         petab_yaml_dict['problems'][0]['observable_files'] = \
-            ['observable_table.tsv']
+            [f'observables_{model_name}.tsv']
 
     if 'conditions' in yaml_dict.keys():
         petab_yaml_dict['problems'][0]['condition_files'] = \
-            ['condition_table.tsv']
+            [f'experimental_conditions_{model_name}.tsv']
 
     if measurement_table_name is not None:
         petab_yaml_dict['problems'][0]['measurement_files'] = \
@@ -226,7 +242,8 @@ def _create_condition_table(yaml_dict: dict):
                                optional_id_list)
 
 
-def validate_petab_tables(sbml_dir: str, output_dir: str):
+def validate_petab_tables(sbml_dir: str,
+                          output_dir: str):
     """
     Validate the PEtab tables via petab.lint.
 
@@ -240,10 +257,14 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
         Errors are raised by lint, if PEtab files are invalid...
     """
     model = sbml.readSBML(sbml_dir).getModel()
+    model_name = model.getId()
 
-    parameter_file_dir = os.path.join(output_dir, 'parameter_table.tsv')
-    observable_file_dir = os.path.join(output_dir, 'observable_table.tsv')
-    condition_table_dir = os.path.join(output_dir, 'condition_table.tsv')
+    parameter_file_dir = \
+        os.path.join(output_dir, f'parameters_{model_name}.tsv')
+    observable_file_dir = \
+        os.path.join(output_dir, f'observables_{model_name}.tsv')
+    condition_table_dir = \
+        os.path.join(output_dir, f'experimental_conditions_{model_name}.tsv')
 
     # check observable table, if the table exists
     if os.path.exists(observable_file_dir):
@@ -266,6 +287,7 @@ def validate_petab_tables(sbml_dir: str, output_dir: str):
     parameter_df = pd.read_csv(parameter_file_dir,
                                sep='\t',
                                index_col='parameterId')
+
     petab.lint.check_parameter_df(parameter_df,
                                   sbml_model=model,
                                   observable_df=observable_df)
