@@ -40,7 +40,7 @@ For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/).
 ## Getting Started
 
 * The documentation of the tool is hosted on [Read the Docs](https://yaml2sbml.readthedocs.io/en/latest/).
-* The [format documentation](https://github.com/yaml2sbml-dev/yaml2sbml/blob/main/doc/format_specification.rst) describes the input YAML. 
+* The [format documentation](https://yaml2sbml.readthedocs.io/en/latest/format_specification.html) describes the input YAML. 
 
 * Jupyter notebooks containing examples can be found under [`doc/examples`](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples).  Most notably:
     * [Lotka_Volterra.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb) showing the Python package.
