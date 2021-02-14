@@ -1,6 +1,7 @@
 """Translate ODEs in the YAML format into SBML."""
 import argparse
 import warnings
+import os
 
 import libsbml as sbml
 import yaml
@@ -18,7 +19,13 @@ def yaml2sbml(yaml_dir: str, sbml_dir: str):
         yaml_dir : directory of the yaml file with the ODEs specification
         sbml_dir: pdirectory of the SBML file to be written out
     """
-    sbml_as_string = _parse_yaml(yaml_dir)
+    # check file extension in sbml_dir
+    if not (sbml_dir.endswith('.xml') or sbml_dir.endswith('.sbml')):
+        raise ValueError('sbml_dir should end with .xml or .sbml.')
+
+    model_name = os.path.basename(sbml_dir)[:-4]
+
+    sbml_as_string = _parse_yaml(yaml_dir, model_name)
 
     # write sbml file
     with open(sbml_dir, 'w') as f_out:

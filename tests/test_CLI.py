@@ -20,8 +20,15 @@ def test_yaml2sbml_cli(script_runner):
     with open(sbml_dir, 'r') as f_in:
         sbml_from_cli = f_in.read()
 
-    if not (sbml_from_cli == sbml_from_python):
-        raise AssertionError('SBML from CLI and python interface differ.')
+    for line_cli, line_python in zip(sbml_from_cli.split('\n'),
+                                     sbml_from_python.split('\n')):
+
+        # the line containing name & id will not match...
+        if not (line_cli == line_python or line_cli.startswith(
+                '  <model id=')):
+
+            raise AssertionError('SBML from CLI and '
+                                 'Python interface differ.')
 
     os.remove(sbml_dir)
 
