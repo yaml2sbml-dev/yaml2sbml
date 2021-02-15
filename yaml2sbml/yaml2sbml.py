@@ -444,8 +444,6 @@ def _read_observables_block(model: sbml.Model,
             'Observables are not represented in the SBML and therefore only '
             'have an effect on the output when called via yaml2PEtab')
 
-    # TODO: the examples...
-
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
     """
