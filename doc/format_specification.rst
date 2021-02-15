@@ -121,7 +121,8 @@ observables \[optional\]
       - observableId: Obs_2
         ...
 
-Defines the **observables**. Observables are not part of the SBML standard and hence only influence the _observable table_ generated in `yaml2PEtab`. The entries are written to the corresponding columns of the PEtab observable table. According to the PEtab standard, an observable table can take the following entries:  `observableId, observableName, observableFormula, observableTransformation, noiseFormula, noiseDistribution`. 
+Defines the **observables**. Observables are not part of the SBML standard. If the SBML is generated via the `yaml2sbml.yaml2sbml` command and the `observables_as_assignments` flag is set to `True`, observables are represented as assignments to parameters of the form observable_<observable_id>.
+If the SBML is created via `yaml2sbml.yaml2petab`, observables are represented in the PEtab observables table. The entries are written to the corresponding columns of the PEtab observable table. According to the PEtab standard, an observable table can take the following entries:  `observableId, observableName, observableFormula, observableTransformation, noiseFormula, noiseDistribution`.
 
 For a detailed discussion see the `corresponding part of the PEtab documentation <https://github.com/PEtab-dev/PEtab/blob/master/doc/documentation_data_format.rst#observables-table>`_.
 
