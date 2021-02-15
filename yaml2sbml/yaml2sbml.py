@@ -444,7 +444,7 @@ def _read_observables_block(model: sbml.Model,
             'Observables are not represented in the SBML and therefore only '
             'have an effect on the output when called via yaml2PEtab')
 
-    # TODO: change the tests + the CLI + the examples...
+    # TODO: the examples...
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
@@ -471,6 +471,11 @@ def main():
     parser.add_argument('yaml_file', type=str, help='Path to input YAML file.')
     parser.add_argument('sbml_file', type=str,
                         help='Path to output SBML file.')
+    parser.add_argument('-o', '--observables_as_assignments',
+                        action='store_true',
+                        help='Optional argument, flag, that indicates, if '
+                             'observables should be represented in the SBML'
+                             'as assignments. Potential Values: 1/0 (yes/no).')
 
     args = parser.parse_args()
 
@@ -479,7 +484,9 @@ def main():
 
     print('Converting...')
 
-    yaml2sbml(args.yaml_file, args.sbml_file)
+    yaml2sbml(args.yaml_file,
+              args.sbml_file,
+              args.observables_as_assignments)
 
 
 if __name__ == '__main__':

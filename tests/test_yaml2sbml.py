@@ -44,8 +44,7 @@ class TestYaml2SBML(unittest.TestCase):
 
     def test_yaml_import_observables(self):
         """
-        Test yaml import/export for a model containing observables
-        (that are not translated).
+        Test yaml import/export for a model containing observables.
         """
         yaml_dir = os.path.join(self.test_folder, 'ode_input2.yaml')
 
@@ -54,6 +53,12 @@ class TestYaml2SBML(unittest.TestCase):
 
         sbml_test_dir = os.path.join(self.test_folder, 'sbml_test.xml')
 
+        # Call yaml2sbml with observables as assignments
+        yaml2sbml(yaml_dir,
+                  sbml_test_dir,
+                  observables_as_assignments=True)
+
+        # Call yaml2sbml with observables not translated
         yaml2sbml(yaml_dir, sbml_test_dir)
 
         with open(expected_result_file, 'r') as f_in:
