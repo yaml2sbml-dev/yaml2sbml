@@ -1,3 +1,4 @@
+"""Validator of the input yaml."""
 import os
 import yaml
 import jsonschema
@@ -9,16 +10,13 @@ SCHEMA = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 def validate_yaml(yaml_file: str):
     """
-    Validates the syntax of the yaml file.
+    Validate the syntax of the yaml file.
 
     Arguments:
         yaml_file: path to yaml file to be validated
 
     Returns:
         jsonschema.validate
-
-    Raises:
-
     """
     # read in yaml_file
     with open(yaml_file, 'r') as f_in:
@@ -31,16 +29,13 @@ def validate_yaml(yaml_file: str):
 
 def _validate_yaml_from_dict(yaml_dict: dict):
     """
-    Validates the syntax of the yaml file, using a dict as input.
+    Validate the syntax of the yaml file, using a dict as input.
 
     Arguments:
         yaml_dict: yaml model as dict.
 
     Returns:
         jsonschema.validate
-
-    Raises:
-
     """
     # read in SCHEMA
     with open(SCHEMA, 'r') as f_in:
@@ -51,9 +46,7 @@ def _validate_yaml_from_dict(yaml_dict: dict):
 
 
 def main():
-    """
-    Function called by the CLI.
-    """
+    """Command Line Interface."""
     parser = argparse.ArgumentParser(
         description='Validates a yaml model '
                     'so that it can be used by yaml2bsml.')
