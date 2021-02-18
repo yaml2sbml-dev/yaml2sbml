@@ -28,7 +28,7 @@ def validate_yaml(yaml_dir: str):
 
     except ScannerError:
         raise RuntimeError('YAML file can not be parsed due to a Scanner '
-                           'Error. This commonly happens, if formulas are '
+                           'Error. This commonly happens if formulas are '
                            'starting with a minus. Please set them inside of '
                            'brackets "(...)" or quotation marks.')
 
