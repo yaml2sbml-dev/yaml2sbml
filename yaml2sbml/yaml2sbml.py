@@ -5,6 +5,7 @@ import os
 
 import libsbml as sbml
 import yaml
+from yaml.scanner import ScannerError
 
 from .yaml_validation import _validate_yaml_from_dict
 
@@ -143,19 +144,29 @@ def _create_compartment(model: sbml.Model):
 
 def _load_yaml_file(yaml_file: str) -> dict:
     """
-    Load YAML file to a dictionary.
+    Load YAML file from a dictionary.
 
     Arguments:
-        yaml_file: SBML model
+        yaml_file: directory YAML model
 
     Returns:
         yaml_dic: dictionary with parsed yaml file contents
+    Raises:
+        RuntimeError, if yaml can not be parsed, e.g. to incorrectly
+            formatted entries
     """
-    with open(yaml_file, 'r') as f_in:
-        yaml_contents = f_in.read()
-        yaml_dic = yaml.full_load(yaml_contents)
+    try:
 
-    return yaml_dic
+        with open(yaml_file, 'r') as f_in:
+            yaml_contents = f_in.read()
+            yaml_dict = yaml.full_load(yaml_contents)
+
+    except ScannerError:
+        raise RuntimeError('YAML file can not be parsed due to a Scanner '
+                           'Error. This commonly happens if formulas are '
+                           'starting with a minus. Please set them inside of '
+                           'brackets "(...)" or quotation marks.')
+    return yaml_dict
 
 
 def _convert_yaml_blocks_to_sbml(model: sbml.Model,

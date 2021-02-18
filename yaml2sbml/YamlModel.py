@@ -4,7 +4,7 @@ import os.path
 from typing import Union
 import copy
 
-from .yaml2sbml import _parse_yaml_dict
+from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
 from .yaml2PEtab import _yaml2petab
 from .yaml_validation import _validate_yaml_from_dict
 
@@ -23,7 +23,7 @@ class YamlModel:
                             'conditions': []}
 
     @staticmethod
-    def load_from_yaml(yaml_dir):
+    def load_from_yaml(yaml_dir: str):
         """
         Create a model instance from a yaml file.
 
@@ -37,10 +37,8 @@ class YamlModel:
         """
         new_model = YamlModel()
 
-        # read in yaml_file
-        with open(yaml_dir, 'r') as f_in:
-            yaml_contents = f_in.read()
-            new_model._yaml_model.update(yaml.full_load(yaml_contents))
+        yaml_contents = _load_yaml_file(yaml_dir)
+        new_model._yaml_model.update(yaml_contents)
 
         # check, if the model is valid
         new_model.validate_model()

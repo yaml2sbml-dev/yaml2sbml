@@ -2,28 +2,37 @@
 import os
 import yaml
 import jsonschema
+from yaml.scanner import ScannerError
 import argparse
+
 
 SCHEMA = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                       "yaml_schema.yaml")
 
 
-def validate_yaml(yaml_file: str):
+def validate_yaml(yaml_dir: str):
     """
     Validate the syntax of the yaml file.
 
     Arguments:
-        yaml_file: path to yaml file to be validated
+        yaml_dir: path to yaml file to be validated
 
     Returns:
         jsonschema.validate
     """
-    # read in yaml_file
-    with open(yaml_file, 'r') as f_in:
-        yaml_contents = f_in.read()
-        yaml_in = yaml.full_load(yaml_contents)
+    try:
 
-    _validate_yaml_from_dict(yaml_in)
+        with open(yaml_dir, 'r') as f_in:
+            yaml_contents = f_in.read()
+            yaml_dict = yaml.full_load(yaml_contents)
+
+    except ScannerError:
+        raise RuntimeError('YAML file can not be parsed due to a Scanner '
+                           'Error. This commonly happens if formulas are '
+                           'starting with a minus. Please set them inside of '
+                           'brackets "(...)" or quotation marks.')
+
+    _validate_yaml_from_dict(yaml_dict)
     print('YAML file is valid ✅')
 
 

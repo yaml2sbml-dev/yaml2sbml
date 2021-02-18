@@ -5,6 +5,7 @@ import unittest
 import tempfile
 
 from yaml2sbml.YamlModel import YamlModel
+from yaml2sbml.yaml_validation import validate_yaml
 
 
 class TestYamlModel(unittest.TestCase):
@@ -267,6 +268,21 @@ class TestYamlModel(unittest.TestCase):
                             nominal_value=1)
 
         model.validate_model()
+
+    def test_minus_in_formula(self):
+        """Test writing a model for a right hand side starting with a minus."""
+        model = YamlModel()
+
+        model.add_ode(state_id='x',
+                      right_hand_side='-x',
+                      initial_value=1)
+
+        model.validate_model()
+
+        yaml_dir = os.path.join(self.test_dir, 'test_minus_sign.yaml')
+        model.write_to_yaml(yaml_dir)
+
+        validate_yaml(yaml_dir)
 
 
 if __name__ == '__main__':
