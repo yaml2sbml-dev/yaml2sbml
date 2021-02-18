@@ -13,7 +13,7 @@ General remarks
 ---------------
 
 * All identifiers of states, parameters etc. need to be valid SBML identifiers. Therefore identifiers must consist of only upper and lower case letters, digits and underscores, and must not start with a digit.
-* Mathematical equations are parsed by `libsbml`s `parseL3Formula`. Hence see it's `documentation <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/namespacelibsbml.html#ae79acc3be958963c55f1d03944add36b>`_ and the corresponding section of the format specification.
+* Mathematical equations are parsed by `libsbml`s `parseL3Formula`. Hence for correct syntax see its `documentation <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/namespacelibsbml.html#ae79acc3be958963c55f1d03944add36b>`_ and the corresponding section of the format specification.
 * Equations starting with a minus must be surrounded by brackets or quotation marks, since a leading minus also has a syntactic meaning in YAML and the YAML file will not be valid otherwise.
 
 time \[optional\]
