@@ -125,7 +125,7 @@ def _load_yaml_file(yaml_file: str) -> dict:
 
     except ScannerError:
         raise RuntimeError('YAML file can not be parsed due to a Scanner '
-                           'Error. This commonly happens, if formulas are '
+                           'Error. This commonly happens if formulas are '
                            'starting with a minus. Please set them inside of '
                            'brackets "(...)" or quotation marks.')
     return yaml_dict
