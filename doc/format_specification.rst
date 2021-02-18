@@ -9,6 +9,12 @@ General scope
 
 *  `yaml2PEtab`: Defines a fitting problem of the form `y(t_i) = h(x(t_i), p) + eps_i` with independent Normal or Laplace distributed error terms `eps`. `h` denotes the mapping from system states to observables. PEtab allows to formulate MLE and MAP based fitting problems.
 
+General remarks
+---------------
+
+* All identifiers of states, parameters etc. need to be valid SBML identifiers. Therefore identifiers must consist only of upper and lower case letters, digits and underscores, and must not start with a digit.
+* Mathematical equations are parsed by `libsbml`s `parseL3Formula`. Hence see it's `documentation <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/namespacelibsbml.html#ae79acc3be958963c55f1d03944add36b>`_ and the corresponding section of the format specification.
+* Equations starting with a minus must be surrounded by brackets or quotation marks, since a leading minus also has a syntactic meaning in YAML and the YAML file will not be valid otherwise.
 
 time \[optional\]
 -----------------
