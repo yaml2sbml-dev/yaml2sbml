@@ -8,7 +8,7 @@ import libsbml as sbml
 import yaml
 from yaml.scanner import ScannerError
 
-from .yaml_validation import _validate_yaml_from_dict
+from yaml_validation import _validate_yaml_from_dict
 
 
 def yaml2sbml(yaml_dir: str,
