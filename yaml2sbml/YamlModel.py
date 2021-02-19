@@ -1,10 +1,11 @@
 """A Model Editor for creating YAML models."""
 import yaml
 import os.path
-from typing import Union
 import copy
+from typing import Union
+from pathlib import Path
 
-from .yaml2sbml import _parse_yaml_dict
+from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
 from .yaml2PEtab import _yaml2petab
 from .yaml_validation import _validate_yaml_from_dict
 
@@ -23,7 +24,7 @@ class YamlModel:
                             'conditions': []}
 
     @staticmethod
-    def load_from_yaml(yaml_dir):
+    def load_from_yaml(yaml_dir: str):
         """
         Create a model instance from a yaml file.
 
@@ -37,10 +38,8 @@ class YamlModel:
         """
         new_model = YamlModel()
 
-        # read in yaml_file
-        with open(yaml_dir, 'r') as f_in:
-            yaml_contents = f_in.read()
-            new_model._yaml_model.update(yaml.full_load(yaml_contents))
+        yaml_contents = _load_yaml_file(yaml_dir)
+        new_model._yaml_model.update(yaml_contents)
 
         # check, if the model is valid
         new_model.validate_model()
@@ -109,6 +108,9 @@ class YamlModel:
             raise ValueError('sbml_dir should contain path to the sbml '
                              'and hence end with .xml or .sbml')
 
+        # model name = sbml name without file extension
+        model_name = Path(sbml_dir).stem
+
         if (not overwrite) and os.path.exists(sbml_dir):
             raise FileExistsError(f'Can not write SBML model. File {sbml_dir}'
                                   f' already exists. Consider to set '
@@ -116,7 +118,8 @@ class YamlModel:
 
         # generate SBML as string
         reduced_model_dict = self._get_reduced_model_dict()
-        sbml_as_string = _parse_yaml_dict(reduced_model_dict)
+        sbml_as_string = _parse_yaml_dict(reduced_model_dict,
+                                          model_name)
 
         with open(sbml_dir, 'w') as f_out:
             f_out.write(sbml_as_string)
