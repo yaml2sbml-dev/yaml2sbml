@@ -1,6 +1,7 @@
 """Translate ODEs in the YAML format into SBML."""
 import argparse
 import warnings
+from pathlib import Path
 
 import libsbml as sbml
 import yaml
@@ -9,24 +10,40 @@ from yaml.scanner import ScannerError
 from .yaml_validation import _validate_yaml_from_dict
 
 
-def yaml2sbml(yaml_dir: str, sbml_dir: str):
+def yaml2sbml(yaml_dir: str,
+              sbml_dir: str,
+              observables_as_assignments: bool = False):
     """
     Parse a YAML file with the specification of ODEs and write it to SBML.
 
-    SBML is written within this function.
+    SBML is written within this function. If `observables_as_assignments=True`,
+    observables will be translated into parameter assignments of the form
+    `observable_<observable_id>`.
 
     Arguments:
-        yaml_file : path to the yaml file with the ODEs specification
-        sbml_file: path to the SBML file to be written out
+        yaml_dir : directory of the yaml file with the ODEs specification
+        sbml_dir: directory of the SBML file to be written out
+        observables_as_assignments: indicates whether there should be
+            parameter assignments of the form `observable_<observable_id>`.
     """
-    sbml_as_string = _parse_yaml(yaml_dir)
+    # check file extension in sbml_dir
+    if not (sbml_dir.endswith('.xml') or sbml_dir.endswith('.sbml')):
+        raise ValueError('sbml_dir should end with .xml or .sbml.')
+
+    model_name = Path(sbml_dir).stem
+
+    sbml_as_string = _parse_yaml(yaml_dir,
+                                 model_name,
+                                 observables_as_assignments)
 
     # write sbml file
     with open(sbml_dir, 'w') as f_out:
         f_out.write(sbml_as_string)
 
 
-def _parse_yaml(yaml_dir: str) -> str:
+def _parse_yaml(yaml_dir: str,
+                model_name: str,
+                observables_as_assignments: bool = False) -> str:
     """
     Parse a YAML file with the specification of ODEs to SBML.
 
@@ -34,6 +51,9 @@ def _parse_yaml(yaml_dir: str) -> str:
 
     Arguments:
         yaml_dir: path to the yaml file with the ODEs specification
+        model_name: model name as specified in the SBML
+        observables_as_assignments: indicates if observables should be
+            translated into parameter assignments
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format
@@ -43,18 +63,26 @@ def _parse_yaml(yaml_dir: str) -> str:
     """
     yaml_dict = _load_yaml_file(yaml_dir)
     _validate_yaml_from_dict(yaml_dict)
-    sbml_string = _parse_yaml_dict(yaml_dict)
+
+    sbml_string = _parse_yaml_dict(yaml_dict,
+                                   model_name,
+                                   observables_as_assignments)
 
     return sbml_string
 
 
-def _parse_yaml_dict(yaml_dict) -> str:
+def _parse_yaml_dict(yaml_dict: dict,
+                     model_name: str,
+                     observables_as_assignments: bool = False) -> str:
     """
     Generate a string, containing the SBML from a yaml_dict.
 
     Arguments:
         yaml_dict: dictionary, containing to the yaml file with the ODEs
                    specification.
+        model_name: model name as specified in the SBML
+        observables_as_assignments: indicates if observables should be
+            translated into parameter assignments
 
     Returns:
         sbml_string: a string containing the ODEs in SBML format.
@@ -66,9 +94,19 @@ def _parse_yaml_dict(yaml_dict) -> str:
         raise SystemExit('Could not create SBMLDocument object')
 
     model = document.createModel()
+
+    # remove file extension
+    if model_name.endswith('.xml') or model_name.endswith('.sbml'):
+        model_name = Path(model_name).stem
+
+    model.setId(model_name)
+    model.setName(model_name)
+
     model = _create_compartment(model)
 
-    _convert_yaml_blocks_to_sbml(model, yaml_dict)
+    _convert_yaml_blocks_to_sbml(model,
+                                 yaml_dict,
+                                 observables_as_assignments)
 
     # check consistency and give warnings for errors in SBML:
     if document.checkConsistency():
@@ -131,7 +169,9 @@ def _load_yaml_file(yaml_file: str) -> dict:
     return yaml_dict
 
 
-def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
+def _convert_yaml_blocks_to_sbml(model: sbml.Model,
+                                 yaml_dic: dict,
+                                 observables_as_assignments):
     """
     Convert each block in the yaml dictionary to SBML.
 
@@ -142,11 +182,17 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model, yaml_dic: dict):
     Returns:
         model: SBML model with added entities
     """
+
+    def _read_observables_with_assignments(model, block):
+        return _read_observables_block(model,
+                                       block,
+                                       observables_as_assignments)
+
     function_dict = {'time': _read_time_block,
                      'parameters': _read_parameters_block,
                      'assignments': _read_assignments_block,
                      'functions': _read_functions_block,
-                     'observables': _read_observables_block,
+                     'observables': _read_observables_with_assignments,
                      'odes': _read_odes_block,
                      'conditions': _read_conditions_block}
 
@@ -383,9 +429,11 @@ def _create_rate_rule(model: sbml.Model, species: str, formula: str):
     r.setMath(math_ast)
 
 
-def _read_observables_block(model: sbml.Model, observable_list: list):
+def _read_observables_block(model: sbml.Model,
+                            observable_list: list,
+                            observables_as_assignments: bool):
     """
-    Read an process the observables block in the YAML file.
+    Read and process the observables block in the YAML file.
 
     Since the observables are not represented in the SBML, it only gives
     a warning to inform the user.
@@ -394,10 +442,18 @@ def _read_observables_block(model: sbml.Model, observable_list: list):
         model: SBML model (libsbml)
         observable_list: observables block containing all
                          observable definitions.
+        observables_as_assignments: indicates whether there should be
+            parameter assignments of the form `observable_<observable_id>`.
     """
-    warnings.warn(
-        'Observables are not represented in the SBML and therefore only have '
-        'an effect on the output when called via yaml2PEtab')
+    if observables_as_assignments:
+        for observable_def in observable_list:
+            _create_assignment(model,
+                               f'observable_{observable_def["observableId"]}',
+                               observable_def['observableFormula'])
+    else:
+        warnings.warn(
+            'Observables are not represented in the SBML and therefore only '
+            'have an effect on the output when called via yaml2petab')
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
@@ -414,7 +470,7 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
     """
     warnings.warn(
         'Conditions are not represented in the SBML and therefore only have '
-        'an effect on the output when called via yaml2PEtab')
+        'an effect on the output when called via yaml2petab')
 
 
 def main():
@@ -424,6 +480,11 @@ def main():
     parser.add_argument('yaml_file', type=str, help='Path to input YAML file.')
     parser.add_argument('sbml_file', type=str,
                         help='Path to output SBML file.')
+    parser.add_argument('-o', '--observables_as_assignments',
+                        action='store_true',
+                        help='Optional argument, flag, that indicates, if '
+                             'observables should be represented in the SBML'
+                             'as assignments. Potential Values: 1/0 (yes/no).')
 
     args = parser.parse_args()
 
@@ -432,7 +493,9 @@ def main():
 
     print('Converting...')
 
-    yaml2sbml(args.yaml_file, args.sbml_file)
+    yaml2sbml(args.yaml_file,
+              args.sbml_file,
+              args.observables_as_assignments)
 
 
 if __name__ == '__main__':

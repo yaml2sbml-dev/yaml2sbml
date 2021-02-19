@@ -15,13 +15,18 @@ def test_yaml2sbml_cli(script_runner):
     script_runner.run('yaml2sbml', yaml_dir, sbml_dir)
 
     # test if SBML created by the python yaml2sbml command is the same.
-    sbml_from_python = _parse_yaml(yaml_dir)
+    sbml_from_python = _parse_yaml(yaml_dir, 'test_sbml')
 
     with open(sbml_dir, 'r') as f_in:
         sbml_from_cli = f_in.read()
 
-    if not (sbml_from_cli == sbml_from_python):
-        raise AssertionError('SBML from CLI and python interface differ.')
+    for line_cli, line_python in zip(sbml_from_cli.split('\n'),
+                                     sbml_from_python.split('\n')):
+
+        # the line containing name & id will not match...
+        if not line_cli == line_python:
+            raise AssertionError('SBML from CLI and '
+                                 'Python interface differ.')
 
     os.remove(sbml_dir)
 

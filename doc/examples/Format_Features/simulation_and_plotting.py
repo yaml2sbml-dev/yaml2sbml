@@ -30,7 +30,8 @@ def simulate_AMICI(sbml_name: str):
     amici_model = model_module.getModel()
     solver = amici_model.getSolver()
 
-    # Define time points ans run simulation using default model parameters/solver options
+    # Define time points ans run simulation using default
+    # model parameters/solver options
     amici_model.setTimepoints(np.linspace(0, 5, 101))
     rdata = amici.runAmiciSimulation(amici_model, solver)
 

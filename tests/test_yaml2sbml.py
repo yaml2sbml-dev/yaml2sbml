@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from yaml2sbml.yaml2sbml import _parse_yaml
+from yaml2sbml.yaml2sbml import yaml2sbml
 
 
 class TestYaml2SBML(unittest.TestCase):
@@ -18,46 +18,63 @@ class TestYaml2SBML(unittest.TestCase):
         """
         Test yaml import/SBML generation...
         """
-        ode_file = os.path.join(self.test_folder, 'ode_input1.yaml')
+        yaml_dir = os.path.join(self.test_folder, 'ode_input1.yaml')
         expected_result_file = os.path.join(self.test_folder,
                                             'true_sbml_output.xml')
 
-        sbml_contents = _parse_yaml(ode_file)
+        sbml_test_dir = os.path.join(self.test_folder, 'sbml_test.xml')
+
+        yaml2sbml(yaml_dir, sbml_test_dir)
 
         with open(expected_result_file, 'r') as f_in:
-            expected_sbml_contents = f_in.read()
+            expected_sbml = f_in.read()
 
-        sbml_test_dir = os.path.join(self.test_folder, 'sbml_test.xml')
-        with open(sbml_test_dir, 'w') as f_out:
-            f_out.write(sbml_contents)
+        with open(sbml_test_dir, 'r') as f_out:
+            observed_sbml = f_out.read()
 
-        self.assertEqual(expected_sbml_contents, sbml_contents)
+        # check if lines coincide
+        for line_true, line_tested in zip(expected_sbml.split('\n'),
+                                          observed_sbml.split('\n')):
+
+            # the line containing name & id will not match...
+            if not line_true.startswith('  <model id='):
+                self.assertEqual(line_true, line_tested)
 
         os.remove(sbml_test_dir)
 
     def test_yaml_import_observables(self):
         """
-        Test yaml import/export for a model containing observables
-        (that are not translated).
+        Test yaml import/export for a model containing observables.
         """
-        ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
+        yaml_dir = os.path.join(self.test_folder, 'ode_input2.yaml')
 
         expected_result_file = \
             os.path.join(self.test_folder, 'true_sbml_output.xml')
 
-        test_sbml_dir = os.path.join(self.test_folder, 'sbml_test.xml')
+        sbml_test_dir = os.path.join(self.test_folder, 'sbml_test.xml')
 
-        sbml_contents = _parse_yaml(ode_file)
+        # Call yaml2sbml with observables as assignments
+        yaml2sbml(yaml_dir,
+                  sbml_test_dir,
+                  observables_as_assignments=True)
+
+        # Call yaml2sbml with observables not translated
+        yaml2sbml(yaml_dir, sbml_test_dir)
 
         with open(expected_result_file, 'r') as f_in:
-            expected_sbml_contents = f_in.read()
+            expected_sbml = f_in.read()
 
-        with open(test_sbml_dir, 'w') as f_out:
-            f_out.write(sbml_contents)
+        with open(sbml_test_dir, 'r') as f_out:
+            observed_sbml = f_out.read()
 
-        self.assertEqual(expected_sbml_contents, sbml_contents)
+        for line_true, line_tested in zip(expected_sbml.split('\n'),
+                                          observed_sbml.split('\n')):
 
-        os.remove(test_sbml_dir)
+            # the line containing name & id will not match...
+            if not line_true.startswith('  <model id='):
+                self.assertEqual(line_true, line_tested)
+
+        os.remove(sbml_test_dir)
 
 
 if __name__ == '__main__':
