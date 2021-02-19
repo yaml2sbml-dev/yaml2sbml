@@ -1,7 +1,6 @@
 """Translate ODEs in the YAML format into SBML."""
 import argparse
 import warnings
-import os
 from pathlib import Path
 
 import libsbml as sbml

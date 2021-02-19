@@ -5,9 +5,9 @@ import copy
 from typing import Union
 from pathlib import Path
 
-from yaml2sbml.yaml2sbml import _parse_yaml_dict, _load_yaml_file
-from yaml2PEtab import _yaml2petab
-from yaml_validation import _validate_yaml_from_dict
+from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
+from .yaml2PEtab import _yaml2petab
+from .yaml_validation import _validate_yaml_from_dict
 
 
 class YamlModel:
