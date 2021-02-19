@@ -2,6 +2,7 @@
 import argparse
 import warnings
 import os
+from pathlib import Path
 
 import libsbml as sbml
 import yaml
@@ -30,7 +31,7 @@ def yaml2sbml(yaml_dir: str,
     if not (sbml_dir.endswith('.xml') or sbml_dir.endswith('.sbml')):
         raise ValueError('sbml_dir should end with .xml or .sbml.')
 
-    model_name = os.path.basename(sbml_dir)[:-4]
+    model_name = Path(sbml_dir).stem
 
     sbml_as_string = _parse_yaml(yaml_dir,
                                  model_name,
@@ -97,7 +98,7 @@ def _parse_yaml_dict(yaml_dict: dict,
 
     # remove file extension
     if model_name.endswith('.xml') or model_name.endswith('.sbml'):
-        model_name = model_name[:-4]
+        model_name = Path(model_name).stem
 
     model.setId(model_name)
     model.setName(model_name)
@@ -433,7 +434,7 @@ def _read_observables_block(model: sbml.Model,
                             observable_list: list,
                             observables_as_assignments: bool):
     """
-    Read an process the observables block in the YAML file.
+    Read and process the observables block in the YAML file.
 
     Since the observables are not represented in the SBML, it only gives
     a warning to inform the user.
@@ -453,7 +454,7 @@ def _read_observables_block(model: sbml.Model,
     else:
         warnings.warn(
             'Observables are not represented in the SBML and therefore only '
-            'have an effect on the output when called via yaml2PEtab')
+            'have an effect on the output when called via yaml2petab')
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
@@ -470,7 +471,7 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
     """
     warnings.warn(
         'Conditions are not represented in the SBML and therefore only have '
-        'an effect on the output when called via yaml2PEtab')
+        'an effect on the output when called via yaml2petab')
 
 
 def main():

@@ -7,6 +7,7 @@ import libsbml as sbml
 import pandas as pd
 import petab
 import yaml
+from pathlib import Path
 
 
 from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
@@ -85,7 +86,7 @@ def _yaml2petab(yaml_model_dict: dict,
 
     # create petab tsv files:
     if model_name.endswith('.xml') or model_name.endswith('.sbml'):
-        model_name = model_name[:-4]
+        model_name = Path(model_name).stem
 
     _create_petab_tables_from_yaml(yaml_model_dict,
                                    output_dir,

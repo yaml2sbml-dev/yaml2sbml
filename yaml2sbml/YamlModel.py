@@ -1,8 +1,9 @@
 """A Model Editor for creating YAML models."""
 import yaml
 import os.path
-from typing import Union
 import copy
+from typing import Union
+from pathlib import Path
 
 from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
 from .yaml2PEtab import _yaml2petab
@@ -108,7 +109,7 @@ class YamlModel:
                              'and hence end with .xml or .sbml')
 
         # model name = sbml name without file extension
-        model_name = os.path.splitext(sbml_dir)[0][:-4]
+        model_name = Path(sbml_dir).stem
 
         if (not overwrite) and os.path.exists(sbml_dir):
             raise FileExistsError(f'Can not write SBML model. File {sbml_dir}'

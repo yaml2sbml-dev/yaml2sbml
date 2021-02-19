@@ -15,7 +15,7 @@ def test_yaml2sbml_cli(script_runner):
     script_runner.run('yaml2sbml', yaml_dir, sbml_dir)
 
     # test if SBML created by the python yaml2sbml command is the same.
-    sbml_from_python = _parse_yaml(yaml_dir, 'python_sbml')
+    sbml_from_python = _parse_yaml(yaml_dir, 'test_sbml')
 
     with open(sbml_dir, 'r') as f_in:
         sbml_from_cli = f_in.read()
@@ -24,9 +24,7 @@ def test_yaml2sbml_cli(script_runner):
                                      sbml_from_python.split('\n')):
 
         # the line containing name & id will not match...
-        if not (line_cli == line_python or line_cli.startswith(
-                '  <model id=')):
-
+        if not line_cli == line_python:
             raise AssertionError('SBML from CLI and '
                                  'Python interface differ.')
 
