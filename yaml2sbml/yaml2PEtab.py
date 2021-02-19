@@ -104,6 +104,7 @@ def _yaml2petab(yaml_model_dict: dict,
                                    output_dir,
                                    sbml_dir,
                                    petab_yaml_name,
+                                   model_name,
                                    measurement_table_name)
     # validate PEtab tables:
     validate_petab_tables(sbml_dir, output_dir)
