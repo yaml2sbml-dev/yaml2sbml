@@ -1,46 +1,50 @@
+"""Validator of the input yaml."""
 import os
 import yaml
 import jsonschema
+from yaml.scanner import ScannerError
 import argparse
+
 
 SCHEMA = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                       "yaml_schema.yaml")
 
 
-def validate_yaml(yaml_file: str):
+def validate_yaml(yaml_dir: str):
     """
-    Validates the syntax of the yaml file.
+    Validate the syntax of the YAML file.
 
     Arguments:
-        yaml_file: path to yaml file to be validated
+        yaml_dir: path to YAML file to be validated
 
     Returns:
         jsonschema.validate
-
-    Raises:
-
     """
-    # read in yaml_file
-    with open(yaml_file, 'r') as f_in:
-        yaml_contents = f_in.read()
-        yaml_in = yaml.full_load(yaml_contents)
+    try:
 
-    _validate_yaml_from_dict(yaml_in)
+        with open(yaml_dir, 'r') as f_in:
+            yaml_contents = f_in.read()
+            yaml_dict = yaml.full_load(yaml_contents)
+
+    except ScannerError:
+        raise RuntimeError('YAML file can not be parsed due to a Scanner '
+                           'Error. This commonly happens if formulas begin '
+                           'with a minus. Please set them inside of brackets '
+                           '"(...)" or quotation marks.')
+
+    _validate_yaml_from_dict(yaml_dict)
     print('YAML file is valid ✅')
 
 
 def _validate_yaml_from_dict(yaml_dict: dict):
     """
-    Validates the syntax of the yaml file, using a dict as input.
+    Validate the syntax of the YAML file, using a dict as input.
 
     Arguments:
-        yaml_dict: yaml model as dict.
+        yaml_dict: YAML model as dict.
 
     Returns:
         jsonschema.validate
-
-    Raises:
-
     """
     # read in SCHEMA
     with open(SCHEMA, 'r') as f_in:
@@ -51,9 +55,7 @@ def _validate_yaml_from_dict(yaml_dict: dict):
 
 
 def main():
-    """
-    Function called by the CLI.
-    """
+    """Command-Line Interface."""
     parser = argparse.ArgumentParser(
         description='Validates a yaml model '
                     'so that it can be used by yaml2bsml.')

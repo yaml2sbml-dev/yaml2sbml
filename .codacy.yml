@@ -2,3 +2,4 @@
 exclude_paths:
   - 'README.md'
   - 'format_documentation.md'
+  - 'doc/examples/README.md'

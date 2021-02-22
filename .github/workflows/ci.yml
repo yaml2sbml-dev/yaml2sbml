@@ -1,0 +1,100 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  base:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.9]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Prepare python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
+
+    - name: Install tox
+      run: pip install tox
+
+    - name: Run tests
+      run: tox
+
+    - name: Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+
+  notebooks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Prepare python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-notebooks
+
+    - name: Install apt dependencies
+      run: |
+        .github/workflows/install_deps.sh amici
+
+    - name: Install tox
+      run: pip install tox
+
+    - name: Test notebooks
+      run: tox -e notebooks
+
+  doc:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Prepare python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-doc
+
+    - name: Install apt dependencies
+      run: |
+        .github/workflows/install_deps.sh doc
+
+    - name: Install tox
+      run: pip install tox
+
+    - name: Test documentation build
+      run: tox -e doc
+

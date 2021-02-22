@@ -1,4 +1,5 @@
 import os
+import shutil
 import unittest
 
 import yaml2sbml.yaml2PEtab as yaml2PEtab
@@ -12,26 +13,25 @@ class TestYaml2PEtab(unittest.TestCase):
 
     def setUp(self):
         this_dir, _ = os.path.split(__file__)
-        self.test_folder = os.path.join(this_dir, 'test_yaml2sbml')
+        self.input_folder = os.path.join(this_dir, 'test_yaml2sbml')
+        self.output_folder = os.path.join(this_dir, 'test_yaml2sbml_output')
+
+    def tearDown(self):
+        shutil.rmtree(self.output_folder)
 
     def test_petab_export(self):
         """
         Test PEtab export
         """
-        ode_file = os.path.join(self.test_folder, 'ode_input2.yaml')
+        input_yaml_dir = os.path.join(self.input_folder, 'ode_input2.yaml')
 
-        yaml2PEtab.yaml2petab(ode_file,
-                              self.test_folder,
+        yaml2PEtab.yaml2petab(input_yaml_dir,
+                              self.output_folder,
                               'sbml_test.xml')
 
         yaml2PEtab.validate_petab_tables(
-            os.path.join(self.test_folder, 'sbml_test.xml'), self.test_folder)
-
-        for f in ['observable_table.tsv',
-                  'parameter_table.tsv',
-                  'condition_table.tsv',
-                  'sbml_test.xml']:
-            os.remove(os.path.join(self.test_folder, f))
+            os.path.join(self.output_folder, 'sbml_test.xml'),
+            self.output_folder)
 
 
 if __name__ == '__main__':

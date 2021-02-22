@@ -1,3 +1,4 @@
+"""Utility functions for simulation and plotting in AMICI."""
 import amici
 import amici.plotting
 import matplotlib.pyplot as plt
@@ -29,7 +30,8 @@ def simulate_AMICI(sbml_name: str):
     amici_model = model_module.getModel()
     solver = amici_model.getSolver()
 
-    # Define time points ans run simulation using default model parameters/solver options
+    # Define time points and run simulation using default
+    # model parameters/solver options
     amici_model.setTimepoints(np.linspace(0, 5, 101))
     rdata = amici.runAmiciSimulation(amici_model, solver)
 
@@ -39,10 +41,7 @@ def simulate_AMICI(sbml_name: str):
 def plot_AMICI(amici_model,
                rdata,
                title: str):
-    """
-    Plots the AMICI simulation from the given rdata...
-    """
-
+    """Plot the AMICI simulation from the given rdata."""
     fig, ax = plt.subplots()
     amici.plotting.plotStateTrajectories(rdata, ax=ax)
 
