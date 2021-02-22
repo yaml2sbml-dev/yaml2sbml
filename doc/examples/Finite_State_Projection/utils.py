@@ -13,7 +13,7 @@ def plot_AMICI(sbml_dir: str,
                t: np.ndarray,
                r_max: int,
                p_max: int):
-    """Compiles, simulates and plots the AMICI model for the FSP example."""
+    """Compile, simulate and plot the AMICI model for the FSP example."""
     n_t = len(t)
     # compile and Simulate model
     simulation, model = compile_and_simulate(sbml_dir,

@@ -12,10 +12,10 @@ SCHEMA = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 def validate_yaml(yaml_dir: str):
     """
-    Validate the syntax of the yaml file.
+    Validate the syntax of the YAML file.
 
     Arguments:
-        yaml_dir: path to yaml file to be validated
+        yaml_dir: path to YAML file to be validated
 
     Returns:
         jsonschema.validate
@@ -28,9 +28,9 @@ def validate_yaml(yaml_dir: str):
 
     except ScannerError:
         raise RuntimeError('YAML file can not be parsed due to a Scanner '
-                           'Error. This commonly happens if formulas are '
-                           'starting with a minus. Please set them inside of '
-                           'brackets "(...)" or quotation marks.')
+                           'Error. This commonly happens if formulas begin '
+                           'with a minus. Please set them inside of brackets '
+                           '"(...)" or quotation marks.')
 
     _validate_yaml_from_dict(yaml_dict)
     print('YAML file is valid ✅')
@@ -38,10 +38,10 @@ def validate_yaml(yaml_dir: str):
 
 def _validate_yaml_from_dict(yaml_dict: dict):
     """
-    Validate the syntax of the yaml file, using a dict as input.
+    Validate the syntax of the YAML file, using a dict as input.
 
     Arguments:
-        yaml_dict: yaml model as dict.
+        yaml_dict: YAML model as dict.
 
     Returns:
         jsonschema.validate
@@ -55,7 +55,7 @@ def _validate_yaml_from_dict(yaml_dict: dict):
 
 
 def main():
-    """Command Line Interface."""
+    """Command-Line Interface."""
     parser = argparse.ArgumentParser(
         description='Validates a yaml model '
                     'so that it can be used by yaml2bsml.')

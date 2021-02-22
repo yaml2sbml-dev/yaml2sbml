@@ -56,7 +56,7 @@ def simulate_and_plot_sorensen(sbml_dir: str):
 
 def compile_model(sbml_dir: str):
     """
-    Compile the Sorensen model and specifies the observables.
+    Compile the Sorensen model and specify the observables.
 
     Parameters:
     -----------

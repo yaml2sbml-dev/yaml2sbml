@@ -2,20 +2,20 @@ API documentation
 ===================
 
 
-Convert yaml to sbml
+Convert YAML to SBML
 ---------------------
 
 .. automodule:: yaml2sbml.yaml2sbml
     :members: 
 
 
-Validate yaml file
+Validate YAML file
 ---------------------
 
 .. autofunction:: yaml2sbml.validate_yaml
 
 
-Convert yaml to PEtab
+Convert YAML to PEtab
 ----------------------------------
 
 .. autofunction:: yaml2sbml.yaml2petab

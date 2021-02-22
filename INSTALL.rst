@@ -4,7 +4,7 @@ Installation
 This package requires Python 3.6 or later. Miniconda_ provides a small
 installation.
 
-Install from Pypi
+Install from PyPI
 -----------------
 
 Install yaml2sbml from PyPI_ via::

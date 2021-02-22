@@ -1,12 +1,12 @@
 Examples
 ===============================================
 
-We provide the following jupyter notebooks with examples:
+We provide the following Jupyter notebooks with examples:
 
-* Three notebooks use the Lotka Volterra Equations as running example for the python tool, CLI and the Model Editor.
+* Three notebooks use the Lotka Volterra equations as a running example for the Python tool, CLI and the Model Editor.
 * A notebook demonstrating format features with minimal examples.
-* A notebook showing the Sorensen model as real world application.
-* A notebook implementing the Finite State Projection
+* A notebook showing the Sorensen model as a real world application.
+* A notebook implementing the Finite State Projection.
 
 These examples can also be found on Github `here <https://github.com/yaml2sbml-dev/yaml2sbml_examples>`_.
 

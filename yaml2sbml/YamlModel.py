@@ -26,11 +26,11 @@ class YamlModel:
     @staticmethod
     def load_from_yaml(yaml_dir: str):
         """
-        Create a model instance from a yaml file.
+        Create a model instance from a YAML file.
 
         Arguments:
             yaml_dir:
-                directory to the yaml file, that should be imported
+                directory to the YAML file, that should be imported
 
         Returns:
             cls:
@@ -50,13 +50,13 @@ class YamlModel:
                       yaml_dir: str,
                       overwrite: bool = False):
         """
-        Write model to yaml file given as directory yaml_dir.
+        Write the model to a YAML file given as `yaml_dir`.
 
         Arguments:
             yaml_dir:
-                path/file, where the yaml should be written
+                path/file, where the YAML should be written
             overwrite:
-                Indicates, whether an existing yaml should be overwritten
+                Indicates, whether an existing YAML should be overwritten
 
         Raises:
             ValueError
@@ -132,17 +132,17 @@ class YamlModel:
         """
         Write the YamlModel as a PEtab problem.
 
-        Equivalent to calling yaml2petab on the file produced by the yaml
+        Equivalent to calling `yaml2petab on the file produced by the YAML
         output.
 
-        If a petab_yaml_name is given, a .yaml file is created, that organizes
-        the petab problem. If additionally a measurement_table_file_name is
-        specified, this file name is written into the created .yaml file.
+        If a `petab_yaml_name is given, a YAML file is created, that organizes
+        the petab problem. If additionally a `measurement_table_file_name is
+        specified, this file name is written into the created YAML file.
 
         Arguments:
             output_dir: path the output file(s) are be written out
             model_name: name of SBML model
-            petab_yaml_name: name of yaml organizing the PEtab problem.
+            petab_yaml_name: name of the YAML organizing the PEtab problem.
             measurement_table_name: Name of measurement table
         """
         reduced_model_dict = self._get_reduced_model_dict()
@@ -155,7 +155,7 @@ class YamlModel:
 
     def validate_model(self):
         """
-        Validate the yaml model.
+        Validate the YAML model.
 
         Raises:
             ValidationError
@@ -207,9 +207,9 @@ class YamlModel:
                       upper_bound: float = None,
                       estimate: int = None):
         """
-        Add parameter.
+        Add a parameter.
 
-        Overwrite an existing parameter with the same id, if overwrite=True.
+        Overwrite an existing parameter with the same id, if `overwrite==True`.
 
         Arguments:
             parameter_id:
@@ -259,7 +259,7 @@ class YamlModel:
         """
         Add state/ODE.
 
-        Overwrite an existing state/ODE with the same id, if overwrite=True.
+        Overwrite an existing state/ODE with the same id, if `overwrite==True`.
 
         Arguments:
             state_id:
@@ -292,7 +292,8 @@ class YamlModel:
         """
         Add assignment.
 
-        Overwrite an existing assignment with the same id, if overwrite=True.
+        Overwrite an existing assignment with the same id, if
+        `overwrite==True`.
 
         Arguments:
             assignment_id:
@@ -324,7 +325,7 @@ class YamlModel:
         """
         Add function.
 
-        Overwrite an existing function with the same id, if overwrite=True.
+        Overwrite an existing function with the same id, if `overwrite==True`.
 
         Arguments:
             function_id:
@@ -362,10 +363,11 @@ class YamlModel:
         """
         Add observable.
 
-        Observable are not represented inside an SBML and only play a role
-        when generating a PEtab problem. (See PEtabs observable table.)
+        Observables are not represented inside an SBML and only play a role
+        when generating a PEtab problem see PEtabs observable table).
 
-        Overwrite an existing observable with the same id, if overwrite=True.
+        Overwrite an existing observable with the same id, if
+        `overwrite==True`.
 
         Arguments:
             observable_id:
@@ -408,9 +410,9 @@ class YamlModel:
         Add condition `condition_id`.
 
         Conditions are not represented inside an SBML and only play a role
-        when generating a PEtab problem. (See PEtabs condition table.)
+        when generating a PEtab problem (see PEtabs condition table).
 
-        Overwrite an existing condition with the same id, if overwrite=True.
+        Overwrite an existing condition with the same id, if `overwrite==True`.
 
         Arguments:
             condition_id:
@@ -506,7 +508,7 @@ class YamlModel:
         """
         Return dict for corresponding parameter.
 
-        Raise a ValueError, if parameter does not exist.
+        Raise a `ValueError, if the parameter does not exist.
         """
         if parameter_id not in self.get_parameter_ids():
             raise IndexError(f'Could not find parameter {parameter_id}.')
@@ -520,7 +522,7 @@ class YamlModel:
         """
         Return dict for corresponding ODE/state.
 
-        Raise a ValueError, if ODE/state does not exist.
+        Raise a `ValueError`, if the ODE/state does not exist.
         """
         if state_id not in self.get_ode_ids():
             raise IndexError(f'Could not find state/ODE {state_id}.')
@@ -534,7 +536,7 @@ class YamlModel:
         """
         Return dict for corresponding assignment.
 
-        Raise a ValueError, if assignment does not exist.
+        Raise a `ValueError`, if the assignment does not exist.
         """
         if assignment_id not in self.get_assignment_ids():
             raise IndexError(f'Could not find assignment {assignment_id}.')
@@ -548,7 +550,7 @@ class YamlModel:
         """
         Return dict for corresponding function.
 
-        Raise a ValueError, if function does not exist.
+        Raise a `ValueError`, if the function does not exist.
         """
         if function_id not in self.get_function_ids():
             raise IndexError(f'Could not find function {function_id}.')
@@ -562,7 +564,7 @@ class YamlModel:
         """
         Return dict for corresponding observable.
 
-        Raise a ValueError, if observable does not exist.
+        Raise a `ValueError`, if the observable does not exist.
         """
         if observable_id not in self.get_observable_ids():
             raise IndexError(f'Could not find observable {observable_id}.')
@@ -576,7 +578,7 @@ class YamlModel:
         """
         Return dict for corresponding condition.
 
-        Raise a ValueError, if condition does not exist.
+        Raise a `ValueError`, if the condition does not exist.
         """
         if condition_id not in self.get_condition_ids():
             raise IndexError(f'Could not find condition {condition_id}.')
@@ -734,7 +736,7 @@ class YamlModel:
 
 def _filter_none_values(d: dict):
     """
-    Filter out the key-value pairs with None as value.
+    Filter out the key-value pairs with `None` as value.
 
     Arguments:
     d

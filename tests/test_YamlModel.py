@@ -257,7 +257,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_condition_ids(), [])
 
     def test_valid_model(self):
-        """Test, whether the resulting models are valid."""
+        """Test whether the resulting models are valid."""
         model = YamlModel()
 
         model.set_time('t')

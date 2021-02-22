@@ -53,7 +53,7 @@ In the release form,
 Upload to PyPI
 --------------
 
-The upload to the python package index PyPI has been automatized via GitHub
+The upload to the Python package index PyPI has been automated via GitHub
 Actions, specified in ``.github/workflows/deploy.yml``,
 and is triggered whenever a new release tag is created.
 
@@ -62,7 +62,7 @@ First, create a so-called "wheel" via::
 
     python setup.py sdist bdist_wheel
 
-A wheel is essentially a zip archive which contains the source code
+A wheel is essentially a ZIP archive which contains the source code
 and the binaries (if any).
 
 Then upload the archive::

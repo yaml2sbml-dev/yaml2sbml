@@ -21,8 +21,8 @@ def yaml2sbml(yaml_dir: str,
     `observable_<observable_id>`.
 
     Arguments:
-        yaml_dir : directory of the yaml file with the ODEs specification
-        sbml_dir: directory of the SBML file to be written out
+        yaml_dir: directory to the YAML file with the ODEs specification
+        sbml_dir: directory to the SBML file to be written out
         observables_as_assignments: indicates whether there should be
             parameter assignments of the form `observable_<observable_id>`.
     """
@@ -50,7 +50,7 @@ def _parse_yaml(yaml_dir: str,
     The SBML is returned as string.
 
     Arguments:
-        yaml_dir: path to the yaml file with the ODEs specification
+        yaml_dir: path to the YAML file with the ODEs specification
         model_name: model name as specified in the SBML
         observables_as_assignments: indicates if observables should be
             translated into parameter assignments
@@ -75,11 +75,11 @@ def _parse_yaml_dict(yaml_dict: dict,
                      model_name: str,
                      observables_as_assignments: bool = False) -> str:
     """
-    Generate a string, containing the SBML from a yaml_dict.
+    Generate a string, containing the SBML from a `yaml_dict.
 
     Arguments:
-        yaml_dict: dictionary, containing to the yaml file with the ODEs
-                   specification.
+        yaml_dict: dictionary, containing to the YAML file with the ODEs
+                   specification.`
         model_name: model name as specified in the SBML
         observables_as_assignments: indicates if observables should be
             translated into parameter assignments
@@ -147,12 +147,12 @@ def _load_yaml_file(yaml_file: str) -> dict:
     Load YAML file from a dictionary.
 
     Arguments:
-        yaml_file: directory YAML model
+        yaml_file: directory to the YAML model
 
     Returns:
-        yaml_dic: dictionary with parsed yaml file contents
+        yaml_dic: dictionary with parsed YAML file contents
     Raises:
-        RuntimeError, if yaml can not be parsed, e.g. to incorrectly
+        RuntimeError, if YAML can not be parsed, e.g. due to incorrectly
             formatted entries
     """
     try:
@@ -163,21 +163,21 @@ def _load_yaml_file(yaml_file: str) -> dict:
 
     except ScannerError:
         raise RuntimeError('YAML file can not be parsed due to a Scanner '
-                           'Error. This commonly happens if formulas are '
-                           'starting with a minus. Please set them inside of '
-                           'brackets "(...)" or quotation marks.')
+                           'Error. This commonly happens if formulas begin '
+                           'with a minus. Please set them inside of brackets '
+                           '"(...)" or quotation marks.')
     return yaml_dict
 
 
 def _convert_yaml_blocks_to_sbml(model: sbml.Model,
-                                 yaml_dic: dict,
+                                 yaml_dict: dict,
                                  observables_as_assignments):
     """
-    Convert each block in the yaml dictionary to SBML.
+    Convert each block in the YAML dictionary to SBML.
 
     Arguments:
         model: SBML model
-        yaml_dic: dictionary with yaml contents
+        yaml_dict: dictionary with YAML contents
 
     Returns:
         model: SBML model with added entities
@@ -196,8 +196,8 @@ def _convert_yaml_blocks_to_sbml(model: sbml.Model,
                      'odes': _read_odes_block,
                      'conditions': _read_conditions_block}
 
-    for block in yaml_dic:
-        function_dict[block](model, yaml_dic[block])
+    for block in yaml_dict:
+        function_dict[block](model, yaml_dict[block])
 
     return model
 
@@ -208,7 +208,7 @@ def _read_time_block(model: sbml.Model, time_dic: dict):
 
     Arguments:
         model: SBML model to which the rate rule will be added.
-        time_dic: a dictionary with the time block in the ODE yaml file.
+        time_dic: a dictionary with the time block in the ODE YAML file.
     """
     if time_dic['variable'] == 'time':
         return
@@ -360,7 +360,7 @@ def _read_odes_block(model: sbml.Model, odes_list: list):
     """
     Read and process the odes block in the YAML file.
 
-    In particular, read the odes and add a species for the corresponding
+    In particular, read the ODEs and add a species for the corresponding
     state and the right hand side as rateRules to the given SBML file.
 
     The expected format of an ode definition is:
@@ -378,7 +378,7 @@ def _read_odes_block(model: sbml.Model, odes_list: list):
 
 def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
     """
-    Create a species and adds it to the SBML model.
+    Create a species and add it to the SBML model.
 
     Units are set as dimensionless by default.
 
@@ -458,7 +458,7 @@ def _read_observables_block(model: sbml.Model,
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
     """
-    Read an process the conditions block in the YAML file.
+    Read and process the conditions block in the YAML file.
 
     Since conditions are not represented in the SBML, it only gives
     a warning to inform the user.
@@ -474,7 +474,7 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
 
 
 def main():
-    """Command Line Interface."""
+    """Command-Line Interface."""
     parser = argparse.ArgumentParser(
         description='Takes in an ODE model in .yaml and converts it to SBML.')
     parser.add_argument('yaml_file', type=str, help='Path to input YAML file.')
@@ -482,14 +482,14 @@ def main():
                         help='Path to output SBML file.')
     parser.add_argument('-o', '--observables_as_assignments',
                         action='store_true',
-                        help='Optional argument, flag, that indicates, if '
+                        help='Optional argument, flag, which indicates, if '
                              'observables should be represented in the SBML'
                              'as assignments. Potential Values: 1/0 (yes/no).')
 
     args = parser.parse_args()
 
-    print(f'Path to yaml file: {args.yaml_file}')
-    print(f'Path to sbml file: {args.sbml_file}')
+    print(f'Path to YAML file: {args.yaml_file}')
+    print(f'Path to SBML file: {args.sbml_file}')
 
     print('Converting...')
 

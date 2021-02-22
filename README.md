@@ -25,7 +25,7 @@
 [**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. `yaml2sbml` offers:
 
 
-* A translator of ODE models specified in YAML into SBML/PEtab via a Python and a command line interface;
+* a translator of ODE models specified in YAML into SBML/PEtab via a Python and a command-line interface;
 * a format validator for the input YAML; and
 * a model editor, which provides a simplified interface to generate, import and export YAML models.
 
@@ -36,7 +36,7 @@
 ```shell
 pip install yaml2sbml
 ```
-For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/).
+For more info see the [docs](https://yaml2sbml.readthedocs.io/en/latest/).
 
 ## Getting Started
 
@@ -44,9 +44,9 @@ For more infos see the [docs](https://yaml2sbml.readthedocs.io/en/latest/).
 * The [format documentation](https://yaml2sbml.readthedocs.io/en/latest/format_specification.html) describes the input YAML. 
 
 * Jupyter notebooks containing examples can be found under [`doc/examples`](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples).  Most notably:
-    * [Lotka_Volterra.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb) showing the Python package.
-    * [Lotka_Volterra_CLI.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_CLI.ipynb) showing the command line interface.
-    * [Lotka_Volterra_Model_Editor.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_Model_Editor.ipynb) showing the Model Editor.
+    * [Lotka_Volterra.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra.ipynb) showing the Python package,
+    * [Lotka_Volterra_CLI.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_CLI.ipynb) showing the command-line interface, and
+    * [Lotka_Volterra_Model_Editor.ipynb](https://github.com/yaml2sbml-dev/yaml2sbml/tree/main/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_Model_Editor.ipynb) demonstrates the Model Editor.
 
 ## Basic Syntax
 
@@ -64,9 +64,9 @@ yaml2sbml.yaml2petab(yaml_dir,
                      output_dir,
                      sbml_name)
 ```
-### Command Line Interface
+### Command-Line Interface
 
-And in the command line via 
+and in the command-line via 
 ```shell
 # SBML conversion
 yaml2sbml <yaml_dir> <sbml_dir>
@@ -77,7 +77,7 @@ yaml2petab <yaml_dir> <output_dir> <sbml_name>
 
 ### Format Validation
 
-Format validation is possible in Python via `yaml2sbml.validate_yaml` and in the command line via `yaml2sbml_validate`.
+Format validation is possible in Python via `yaml2sbml.validate_yaml` and in the command-line via `yaml2sbml_validate`.
 
 ## Contact
 If you have a question regarding the tool: Please drop us an [issue](https://github.com/yaml2sbml-dev/yaml2sbml/issues/new) or a [mail](mailto:jakob.vanhoefer@uni-bonn.de), we are happy to help.

@@ -10,8 +10,8 @@ yaml2sbml
 .. image:: https://readthedocs.org/projects/yaml2sbml/badge/?version=latest
    :target: https://yaml2sbml.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-.. image:: https://app.codacy.com/project/badge/Grade/dc25c9a84ba54710bbb23a6e08ab5d22
-   :target: https://www.codacy.com/manual/martamatos/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade
+.. image:: https://app.codacy.com/project/badge/Grade/632acdc8d4ef4f50bf69892b8862fd24
+   :target: https://www.codacy.com/gh/yaml2sbml-dev/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade
    :alt: Code quality
 
 :Release: |version|

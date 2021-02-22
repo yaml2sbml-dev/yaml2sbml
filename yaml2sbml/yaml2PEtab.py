@@ -20,21 +20,21 @@ def yaml2petab(yaml_dir: str,
                petab_yaml_name: str = None,
                measurement_table_name: str = None):
     """
-    Translate a yaml model into a PEtab model.
+    Translate a YAML model into a PEtab model.
 
-    Takes a yaml file with the ODE specification, parses it, converts
+    Takes a YAML file with the ODE specification, parses it, converts
     it into SBML format, and writes the SBML file. Further it translates the
     given information into PEtab tables.
 
-    If a petab_yaml_name is given, a .yaml file is created, that organizes
-    the petab problem. If additionally a measurement_table_file_name is
-    specified, this file name is written into the created .yaml file.
+    If a `petab_yaml_name` is given, a YAML file is created, that organizes
+    the PEtab problem. If additionally a `measurement_table_file_name` is
+    specified, this file name is written into the created YAML file.
 
     Arguments:
-        yaml_dir : path to the yaml file with the ODEs specification
+        yaml_dir : path to the YAML file with the ODEs specification
         output_dir: path the output file(s) are be written out
         sbml_name: name of SBML model
-        petab_yaml_name: name of yaml organizing the PEtab problem.
+        petab_yaml_name: name of YAML organizing the PEtab problem.
         measurement_table_name: Name of measurement table
     """
     yaml_model_dict = _load_yaml_file(yaml_dir)
@@ -114,9 +114,9 @@ def _create_petab_tables_from_yaml(yaml_dict: dict,
                                    output_dir: str,
                                    model_name: str):
     """
-    Parse the yaml dict to a PEtab observable/parameter table.
+    Parse the YAML dict to a PEtab observable/parameter table.
 
-    The table will be named (if the corresponding information is in the YAML):
+    The files will be named (if the corresponding information is in the YAML):
     `parameters_<model_name>.tsv`,
     `observables_<model_name>.tsv` and
     `experimental_conditions_<model_name>.tsv`.
@@ -156,14 +156,14 @@ def _create_petab_problem_yaml(yaml_dict: dict,
                                model_name: str,
                                measurement_table_name: str = None):
     """
-    Create the yaml file, that can be used for structuring a PEtab problem.
+    Create a YAML file, that can be used for defining a PEtab problem.
 
     Arguments:
-        yaml_dict: dict, that contains the yaml file.
+        yaml_dict: dict, that contains the YAML file.
         output_dir: directory, where the PEtab tables should be written.
         sbml_dir: directory of the SBML model.
-        petab_yaml_name: name of file, where PEtab yaml is written.
-        model_name: Name of the model, in order to name the PEtab tables.
+        petab_yaml_name: name of file, where PEtab YAML is written.
+        model_name: name of the model, in order to name the PEtab tables.
         measurement_table_name: directory of the  measurement table.
     """
     petab_yaml_dict = {'format_version': 1,
@@ -193,9 +193,9 @@ def _create_petab_problem_yaml(yaml_dict: dict,
 
 def _create_parameter_table(yaml_dict: dict):
     """
-    Create a parameter table from the parameter block in yaml_dict.
+    Create a parameter table from the parameter block in `yaml_dict.
 
-    Arguments:
+    Arguments:`
         yaml_dict
 
     Returns:
@@ -208,7 +208,7 @@ def _create_parameter_table(yaml_dict: dict):
 
 def _create_observable_table(yaml_dict: dict):
     """
-    Create an observable table from the observable block in yaml_dict.
+    Create an observable table from the observable block in `yaml_dict`.
 
     Arguments:
         yaml_dict
@@ -224,7 +224,7 @@ def _create_observable_table(yaml_dict: dict):
 
 def _create_condition_table(yaml_dict: dict):
     """
-    Create a condition table from the condition block in yaml_dict.
+    Create a condition table from the condition block in `yaml_dict.
 
     Arguments:
         yaml_dict
@@ -247,9 +247,10 @@ def _create_condition_table(yaml_dict: dict):
 def validate_petab_tables(sbml_dir: str,
                           output_dir: str):
     """
-    Validate the PEtab tables via petab.lint.
+    Validate the PEtab tables via `petab.lint`.
 
-    Throws an error, if the petab tables do not follow PEtab format standard.
+    Throws an error if the PEtab tables do not follow the PEtab format
+    standard.
 
     Arguments:
         sbml_dir: directory of the sbml
@@ -343,7 +344,7 @@ def _petab_table_add_row(petab_table: pd.DataFrame, row_dict: dict):
 
 
 def main():
-    """Command Line Interface."""
+    """Command-Line Interface."""
     parser = argparse.ArgumentParser(description='Takes in an ODE model in '
                                      '.yaml and converts it to a PEtab file.')
 
