@@ -1,4 +1,4 @@
-![yaml2sbml logo](https://github.com/yaml2sbml-dev/yaml2sbml/blob/master/doc/logo/logo_yaml2sbml_long.png?raw=true)
+<img src="https://raw.githubusercontent.com/yaml2sbml-dev/yaml2sbml/main/doc/logo/logo_yaml2sbml_long.svg" alt="yaml2sbml logo"/>
 
 [![CI](https://github.com/yaml2sbml-dev/yaml2sbml/workflows/CI/badge.svg)](https://github.com/yaml2sbml-dev/yaml2sbml/actions)
 [![codecov](https://codecov.io/gh/yaml2sbml-dev/yaml2sbml/branch/master/graph/badge.svg)](https://codecov.io/gh/yaml2sbml-dev/yaml2sbml)
