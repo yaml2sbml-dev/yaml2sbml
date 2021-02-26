@@ -66,7 +66,7 @@ jobs:
 
     - name: Test notebooks
       run: tox -e notebooks
-      timeout-minutes: 30
+      timeout-minutes: 60
 
   doc:
     runs-on: ubuntu-latest
