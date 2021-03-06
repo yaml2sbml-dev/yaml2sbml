@@ -1,13 +1,19 @@
 name: CI
 
-on: [pull_request]
+# trigger
+on:
+  pull_request:
+  push:
+    branches:
+    - master
 
 jobs:
   base:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.9]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Check out repository
