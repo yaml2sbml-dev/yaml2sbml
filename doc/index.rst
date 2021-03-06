@@ -20,7 +20,7 @@ yaml2sbml
 .. image:: logo/logo_yaml2sbml_long.png
    :alt: yaml2sbml logo
    :align: center
-   :scale: 30 %
+   :scale: 20 %
 
 **yaml2sbml** allows the user to convert a system of ODEs specified in a YAML_
 file to SBML_.
@@ -44,6 +44,8 @@ converted to PEtab_.
 
    release_notes
    license
+   log
+   logo
    contact
 
 .. toctree::
