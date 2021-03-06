@@ -1,4 +1,4 @@
-__pycache__/
+**/__pycache__/
 *.egg-info/
 
 # PyCharm
@@ -12,44 +12,44 @@ yaml2sbml/tests/test_yaml2sbml/sbml_test.xml
 
 ### Files generated when running the notebooks (AMICI + PEtab files)
 
-## Lotka Volterra Python
-./doc/examples/Lotka_Volterra/Lotka_Volterra_python/amici_models
-./doc/examples/Lotka_Volterra/Lotka_Volterra_python/amici_models/*
-
-./doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_AMICI
-./doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_AMICI/*
-
-./doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_basic.xml
-
-./doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/*
-!./doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/measurement_table.tsv
-
-## Lotka Volterra CLI
-./doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_PEtab/*
-./doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_PEtab.yml
-./doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_PEtab/*.xml
-
-## Lotka Volterra Model Editor
-./doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/*.yaml
-./doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/*.xml
-./doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_PEtab
-
-## Sorensen example
-./doc/examples/Sorensen/*.xml
-./doc/examples/Sorensen/amici_models
+**/amici_models/
+**/AMICI_models/
 
 ## FSP examples
-./doc/examples/Finite_State_Projection/amici_models
-./doc/examples/Finite_State_Projection/*.xml
+
+/doc/examples/Finite_State_Projection/gene_expression.xml
 
 ## Format Features
 
-./doc/examples/Format_Features/__pycache__
-./doc/examples/Format_Features/AMICI_models
+/doc/examples/Format_Features/functions_in_rhs.xml
+/doc/examples/Format_Features/step_function.xml
+/doc/examples/Format_Features/time_dependent_rhs.xml
 
-./doc/examples/Format_Features/*.xml
+## Lotka Volterra
+
+/doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_PEtab.yml
+/doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_PEtab/
+/doc/examples/Lotka_Volterra/Lotka_Volterra_CLI/Lotka_Volterra_basic.xml
+
+/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_PEtab.yaml
+/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_PEtab/
+/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_basic.xml
+/doc/examples/Lotka_Volterra/Lotka_Volterra_Model_Editor/Lotka_Volterra_basic.yaml
+
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_AMICI/
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/Lotka_Volterra_with_observables.xml
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/experimental_conditions_Lotka_Volterra_with_observables.tsv
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/observables_Lotka_Volterra_with_observables.tsv
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/parameters_Lotka_Volterra_with_observables.tsv
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_PEtab/problem.yml
+/doc/examples/Lotka_Volterra/Lotka_Volterra_python/Lotka_Volterra_basic.xml
+
+## Sorensen
+
+/doc/examples/Sorensen/Fig71_Sorensen1985.xml
 
 ### JupyterNotebooks ###
+
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
