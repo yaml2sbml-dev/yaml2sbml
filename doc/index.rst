@@ -13,6 +13,9 @@ yaml2sbml
 .. image:: https://app.codacy.com/project/badge/Grade/632acdc8d4ef4f50bf69892b8862fd24
    :target: https://www.codacy.com/gh/yaml2sbml-dev/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade
    :alt: Code quality
+.. image:: https://badge.fury.io/py/yaml2sbml.svg
+   :target: https://badge.fury.io/py/yaml2sbml
+   :alt: PyPI
 
 :Release: |version|
 :Source code: https://github.com/yaml2sbml-dev/yaml2sbml
@@ -20,7 +23,6 @@ yaml2sbml
 .. image:: logo/logo_yaml2sbml_long.png
    :alt: yaml2sbml logo
    :align: center
-   :scale: 30 %
 
 **yaml2sbml** allows the user to convert a system of ODEs specified in a YAML_
 file to SBML_.
@@ -44,6 +46,8 @@ converted to PEtab_.
 
    release_notes
    license
+   log
+   logo
    contact
 
 .. toctree::
