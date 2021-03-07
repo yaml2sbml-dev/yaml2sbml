@@ -224,8 +224,15 @@ def _create_time(model: sbml.Model, time_var: str):
         model: the SBML model to which the species will be added.
         time_var: str, the time variable
     """
+
+    if time_var == 'time':
+        return
+
     time_parameter = model.createParameter()
-    time_parameter.setId(time_var)
+
+    if not time_parameter.setId(time_var):
+        raise RuntimeError(f'Unable to generate time parameter with id '
+                           f'{time_var}. Invalid SBML identifier.')
     time_parameter.setName(time_var)
     time_parameter.setConstant(False)
 
@@ -266,7 +273,9 @@ def _create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
         value: the parameter value, if value is None, no parameter is set.
     """
     k = model.createParameter()
-    k.setId(parameter_id)
+    if not k.setId(parameter_id):
+        raise RuntimeError(f'Unable to generate parameter with id '
+                           f'{parameter_id}. Invalid SBML identifier.')
     k.setName(parameter_id)
     k.setConstant(True)
 
@@ -306,14 +315,26 @@ def _create_assignment(model: sbml.Model, assignment_id: str, formula: str):
         formula: str: contains the equation for the assignment rule
     """
     assignment_parameter = model.createParameter()
-    assignment_parameter.setId(assignment_id)
+
+    if assignment_parameter.setId(assignment_id):
+        raise RuntimeError(f'Unable to generate assignment with id '
+                           f'{assignment_id}. Invalid SBML identifier.')
+
     assignment_parameter.setName(assignment_id)
     assignment_parameter.setConstant(False)
     assignment_parameter.setUnits('dimensionless')
 
     assignment_rule = model.createAssignmentRule()
     assignment_rule.setVariable(assignment_id)
-    assignment_rule.setMath(sbml.parseL3Formula(formula))
+
+    sbml_formula = sbml.parseL3Formula(formula)
+
+    if sbml_formula is not None:
+        assignment_rule.setMath(sbml.parseL3Formula(formula))
+    else:
+        raise RuntimeError(f'Unable to generate assignment for formula '
+                           f'{formula}, libsbml can not parse the given '
+                           f'expression.')
 
 
 def _read_functions_block(model: sbml.Model, functions_list: list):
@@ -351,9 +372,20 @@ def _create_function(model: sbml.Model,
         formula: the formula of the function
     """
     f = model.createFunctionDefinition()
-    f.setId(function_id)
+
+    if not f.setId(function_id):
+        raise RuntimeError(f'Unable to generate function with id '
+                           f'{function_id}. Invalid SBML identifier.')
+
     math = sbml.parseL3Formula('lambda(' + arguments + ', ' + formula + ')')
-    f.setMath(math)
+
+    if math is not None:
+        f.setMath(math)
+    else:
+        raise RuntimeError(f'Unable to generate assignment for funtion '
+                           f'{function_id}, libsbml can not parse the given '
+                           f'function expression, given by '
+                           f'lambda({arguments} , {formula}).')
 
 
 def _read_odes_block(model: sbml.Model, odes_list: list):
@@ -391,7 +423,9 @@ def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
         s: the SBML species
     """
     s = model.createSpecies()
-    s.setId(species_id)
+    if not s.setId(species_id):
+        raise RuntimeError(f'Unable to generate species with id '
+                           f'{species_id}. Invalid SBML identifier.')
 
     try:
         s.setInitialAmount(float(initial_amount))
@@ -411,7 +445,7 @@ def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
     return s
 
 
-def _create_rate_rule(model: sbml.Model, species: str, formula: str):
+def _create_rate_rule(model: sbml.Model, species_id: str, formula: str):
     """
     Create an SBML rateRule for a species and add it to the SBML model.
 
@@ -419,13 +453,17 @@ def _create_rate_rule(model: sbml.Model, species: str, formula: str):
 
     Arguments:
         model: SBML model to which the rate rule will be added.
-        species: the species name of the ODE
+        species_id: the id of the state of the ODE
         formula: the right-hand-side of the ODE
     """
     r = model.createRateRule()
-    r.setId('d/dt_' + species)
-    r.setVariable(species)
+    r.setId('d_dt_' + species_id)
+    r.setVariable(species_id)
     math_ast = sbml.parseL3Formula(formula)
+    if math_ast is None:
+        raise RuntimeError(f'Unable to generate the rate rule for the state '
+                           f'{species_id}, libsbml can not parse the right '
+                           f'hand side, given by {formula}).')
     r.setMath(math_ast)
 
 
