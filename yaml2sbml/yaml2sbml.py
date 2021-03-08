@@ -230,9 +230,11 @@ def _create_time(model: sbml.Model, time_var: str):
 
     time_parameter = model.createParameter()
 
-    if not time_parameter.setId(time_var):
+    if time_parameter.setId(time_var) != sbml.LIBSBML_OPERATION_SUCCESS:
+
         raise RuntimeError(f'Unable to generate time parameter with id '
                            f'{time_var}. Invalid SBML identifier.')
+
     time_parameter.setName(time_var)
     time_parameter.setConstant(False)
 
@@ -273,9 +275,11 @@ def _create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
         value: the parameter value, if value is None, no parameter is set.
     """
     k = model.createParameter()
-    if not k.setId(parameter_id):
+
+    if k.setId(parameter_id) != sbml.LIBSBML_OPERATION_SUCCESS:
         raise RuntimeError(f'Unable to generate parameter with id '
                            f'{parameter_id}. Invalid SBML identifier.')
+
     k.setName(parameter_id)
     k.setConstant(True)
 
@@ -373,7 +377,7 @@ def _create_function(model: sbml.Model,
     """
     f = model.createFunctionDefinition()
 
-    if not f.setId(function_id):
+    if f.setId(function_id) != sbml.LIBSBML_OPERATION_SUCCESS:
         raise RuntimeError(f'Unable to generate function with id '
                            f'{function_id}. Invalid SBML identifier.')
 
@@ -423,7 +427,7 @@ def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
         s: the SBML species
     """
     s = model.createSpecies()
-    if not s.setId(species_id):
+    if s.setId(species_id) != sbml.LIBSBML_OPERATION_SUCCESS:
         raise RuntimeError(f'Unable to generate species with id '
                            f'{species_id}. Invalid SBML identifier.')
 
