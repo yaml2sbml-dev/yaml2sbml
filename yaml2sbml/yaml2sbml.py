@@ -466,7 +466,7 @@ def _create_rate_rule(model: sbml.Model, species_id: str, formula: str):
     math_ast = sbml.parseL3Formula(formula)
     if math_ast is None:
         raise RuntimeError(f'Unable to generate the rate rule for the state '
-                           f'{species_id}, libsbml can not parse the right '
+                           f'{species_id}, libsbml can not parse the right-'
                            f'hand side, given by {formula}).')
     r.setMath(math_ast)
 
