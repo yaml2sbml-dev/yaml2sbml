@@ -6,7 +6,7 @@ for par in "$@"; do
     amici)
       # for amici
       sudo apt-get install \
-        swig3.0 libatlas-base-dev libhdf5-serial-dev libhdf5-cpp-100
+        swig3.0 libatlas-base-dev
     ;;
 
     doc)
