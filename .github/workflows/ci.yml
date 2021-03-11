@@ -35,7 +35,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ matrix.path }}
-        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
+        key: ci-base-${{ runner.os }}-${{ matrix.python-version }}
 
     - name: Install tox
       run: pip install tox
@@ -68,14 +68,10 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-notebooks
+        key: ci-notebooks-${{ runner.os }}-${{ matrix.python-version }}
 
-    - name: Install apt dependencies
-      run: |
-        .github/workflows/install_deps.sh amici
-
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh amici
 
     - name: Test notebooks
       run: tox -e notebooks
@@ -99,14 +95,10 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-doc
+        key: ci-doc-${{ runner.os }}-${{ matrix.python-version }}
 
-    - name: Install apt dependencies
-      run: |
-        .github/workflows/install_deps.sh doc
-
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh doc
 
     - name: Test documentation build
       run: tox -e doc
