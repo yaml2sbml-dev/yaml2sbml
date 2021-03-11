@@ -49,6 +49,30 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
 
+  nb1:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Prepare python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install apt deps
+      run: .github/workflows/install_deps.sh amici
+   
+    - name: Run tests
+      run: |
+        pip install nbmake
+        pip install .[examples]
+        pytest --nbmake doc/examples
+
   notebooks:
     runs-on: ubuntu-latest
     strategy:
