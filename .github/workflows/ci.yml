@@ -37,8 +37,8 @@ jobs:
         path: ${{ matrix.path }}
         key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
 
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh
 
     - name: Run tests
       run: tox
@@ -70,12 +70,8 @@ jobs:
         path: ~/.cache/pip
         key: ${{ runner.os }}-${{ matrix.python-version }}-ci-notebooks
 
-    - name: Install apt dependencies
-      run: |
-        .github/workflows/install_deps.sh amici
-
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh amici
 
     - name: Test notebooks
       run: tox -e notebooks
@@ -101,12 +97,8 @@ jobs:
         path: ~/.cache/pip
         key: ${{ runner.os }}-${{ matrix.python-version }}-ci-doc
 
-    - name: Install apt dependencies
-      run: |
-        .github/workflows/install_deps.sh doc
-
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh doc
 
     - name: Test documentation build
       run: tox -e doc
