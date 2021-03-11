@@ -37,8 +37,8 @@ jobs:
         path: ${{ matrix.path }}
         key: ci-base-${{ runner.os }}-${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: .github/workflows/install_deps.sh
+    - name: Install tox
+      run: pip install tox
 
     - name: Run tests
       run: tox
