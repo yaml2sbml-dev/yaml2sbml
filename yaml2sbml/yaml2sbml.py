@@ -224,7 +224,6 @@ def _create_time(model: sbml.Model, time_var: str):
         model: the SBML model to which the species will be added.
         time_var: str, the time variable
     """
-
     if time_var == 'time':
         return
 
