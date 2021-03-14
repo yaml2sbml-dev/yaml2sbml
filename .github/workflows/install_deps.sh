@@ -1,12 +1,18 @@
 #!/bin/sh
 
+# Install tox
+pip install tox
+
+# Update apt package lists
+sudo apt-get update
+
 # iterate over optional dependencies
 for par in "$@"; do
   case $par in
     amici)
       # for amici
       sudo apt-get install \
-        swig3.0 libatlas-base-dev libhdf5-serial-dev
+        swig libatlas-base-dev libhdf5-serial-dev
     ;;
 
     doc)
