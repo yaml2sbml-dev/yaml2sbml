@@ -1,9 +1,11 @@
 time:
   - t
+
 odes:
-- initialValue: 0
+- stateId: x
   rightHandSide: k_1 * x + t
-  stateId: x
+  initialValue: 0
+
 parameters:
-- nominalValue: 1
-  parameterId: k_1
+- parameterId: k_1
+  nominalValue: 1

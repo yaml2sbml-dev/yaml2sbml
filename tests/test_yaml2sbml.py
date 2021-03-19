@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from yaml2sbml.yaml2sbml import yaml2sbml
+from yaml2sbml.yaml2sbml import yaml2sbml, _parse_yaml
 
 
 class TestYaml2SBML(unittest.TestCase):
@@ -75,6 +75,26 @@ class TestYaml2SBML(unittest.TestCase):
                 self.assertEqual(line_true, line_tested)
 
         os.remove(sbml_test_dir)
+
+    def test_catch_invalid_sbml_identifier(self):
+        """
+        Test checks for invalid SBML identifiers.
+        """
+        yaml_dir = os.path.join(self.test_folder,
+                                'ode_input_invalid_SBML_identifier.yaml')
+        with self.assertRaises(RuntimeError):
+            _parse_yaml(yaml_dir,
+                        'Test_Model')
+
+    def test_catch_invalid_math(self):
+        """
+        Test checks for strings, that parseL3Formula can not parse.
+        """
+        yaml_dir = os.path.join(self.test_folder,
+                                'ode_input_invalid_formula.yaml')
+        with self.assertRaises(RuntimeError):
+            _parse_yaml(yaml_dir,
+                        'Test_Model')
 
 
 if __name__ == '__main__':
