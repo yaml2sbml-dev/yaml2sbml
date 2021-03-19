@@ -23,7 +23,7 @@
 
 `yaml2sbml` is a small package in Python to convert an ODE model specified in a YAML file into 
 [**SBML**](http://www.sbml.org/) for ODE simulation and into 
-[**PEtab**](https://github.com/martamatos/yaml2sbml) for parameter fitting. `yaml2sbml` offers:
+[**PEtab**](https://github.com/PEtab-dev/PEtab/) for parameter fitting. `yaml2sbml` offers:
 
 
 * a translator of ODE models specified in YAML into SBML/PEtab via a Python and a command-line interface;
