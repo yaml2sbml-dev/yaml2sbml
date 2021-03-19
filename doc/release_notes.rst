@@ -9,7 +9,7 @@ Release Notes
 ------------------
 
 * Add checks in SBML conversion, e.g. to catch invalid identifiers and equations (# 118).
-* Add tests for MacOs and Windows (#115).
+* Add tests for MacOS and Windows (#115).
 * Fix pydocstyle and swig (#120).
 * Add a logo license. (#116)
 * Smaller fixes in notebooks (#113, #117).
