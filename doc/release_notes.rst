@@ -9,7 +9,7 @@ Release Notes
 ------------------
 
 * Add checks in SBML conversion (e.g. to catch invalid identifiers and equations).
-* Add tests for MacOs and Windows.
+* Add tests for MacOS and Windows.
 * Add a logo license.
 * Smaller fixes in notebooks.
 
