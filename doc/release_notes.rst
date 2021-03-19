@@ -8,21 +8,22 @@ Release Notes
 0.2.2 (2021-03-19)
 ------------------
 
-* Add checks in SBML conversion (e.g. to catch invalid identifiers and equations).
-* Add tests for MacOs and Windows.
-* Add a logo license.
-* Smaller fixes in notebooks.
+* Add checks in SBML conversion, e.g. to catch invalid identifiers and equations (# 118).
+* Add tests for MacOs and Windows (#115).
+* Fix pydocstyle and swig (#120).
+* Add a logo license. (#116)
+* Smaller fixes in notebooks (#113, #117).
 
 0.2.1 (2021-02-22)
 ------------------
 
-* New option to write observables as assignments in `yaml2sbml`.
-* Set SBML file name as model id in the SBML.
-* Clarify docs and warnings, e.g. if formula starts with a minus.
-* Add issue template.
-* Restructure README.
-* Testing via tox.
-* Replace `requirements.txt` and `setup.py` by `setup.cfg`.
+* New option to write observables as assignments in `yaml2sbml` (#105).
+* Set SBML file name as model id in the SBML (#105).
+* Clarify docs and warnings, e.g. if formula starts with a minus (#109).
+* Add issue template (#96).
+* Restructure README (#55, #103, #104).
+* Testing via tox (#88, #94, #95).
+* Replace `requirements.txt` and `setup.py` by `setup.cfg` (#87).
 
 0.2.0 (2021-02-03)
 ------------------
