@@ -5,6 +5,13 @@ Release Notes
 0.2 series
 ..........
 
+0.2.2 (2021-03-19)
+------------------
+
+* Add checks in SBML conversion (e.g. to catch invalid identifiers and equations).
+* Add tests for MacOs and Windows.
+* Add a logo license.
+* Smaller fixes in notebooks.
 
 0.2.1 (2021-02-22)
 ------------------
