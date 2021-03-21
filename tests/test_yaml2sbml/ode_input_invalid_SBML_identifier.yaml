@@ -1,117 +1,14 @@
 time:
     variable: t
 
-parametersR:
-
-    - parameterId: c1
-      nominalValue: 1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
-
-    - parameterId: Shalve
-      nominalValue: 0.1
-
-      parameterScale: log10
-      lowerBound: 0.1
-      upperBound: 10
-      estimaete: 1
-
-    - parameterId: Vh
-      nominalValue: 0.1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 50
-      estimate: 0
-
-    - parameterId: h
-      nominalValue: 0.1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
-
-    - parameterId: Vmm
-      nominalValue: 0.1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
-
-    - parameterId: Km
-      nominalValue: 0.1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
-
-    - parameterId: v1
-      nominalValue: 0.1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
-
-    - parameterId: k4
-      nominalValue: 0.1
-
-      parameterScale: lin
-      lowerBound: 0
-      upperBound: 10
-      estimate: 0
-
-
-functions:
-    - functionId: hill
-      arguments: V, s, Shalve, h
-      formula: V * (s/Shalve)^h / (1 + (s/Shalve)^h )
-
-    - functionId: MM
-      arguments: V, s, Km
-      formula: V*s / (Km + s)
-
-
 odes:
-    - stateId: S1
-      rightHandSide: v1 - MM(S1, Vmm, Km)*c1^2
-      initialValue: 0.1
+- stateId: 1_x
+  rightHandSide: k_1 * x + t
+  initialValue: 0
 
-    - stateId: S2
-      rightHaandSide: MM(S1, Vmm, Km) - hill(S2, Shalve, Vh, h)
-      initialValue: 1
-
-    - stateId: S3
-      rightHandSide: hill(S2, Shalve, Vh, h) - k4*S3 + log10(c1)
-      initialValue: 1
-
-
-observables:
-    - observableId: Obs_1
-      observableFormula: S1 + S2
-
-      noiseFormula: noiseParameter1
-      noiseDistribution: normal
-
-    - observableId: Obs_2
-      observableFormula: s * S3
-
-      noiseFormula: noiseParameter1
-      noiseDistribution: normal
-
-
-conditions2:
-
-    - conditionId: condition1
-      conditionName: condition1
-      S1: 42
-      Km: 3.14
+parameters:
+- parameterId: k_1
+  nominalValue: 1
 
 
 
