@@ -88,7 +88,7 @@ class TestYaml2SBML(unittest.TestCase):
 
     def test_catch_invalid_math(self):
         """
-        Test checks for strings, that parseL3Formula can not parse.
+        Check for strings that parseL3Formula can not parse.
         """
         yaml_dir = os.path.join(self.test_folder,
                                 'ode_input_invalid_formula.yaml')
