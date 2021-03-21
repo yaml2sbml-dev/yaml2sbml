@@ -181,16 +181,20 @@ class YamlModel:
 
     # functionalities regarding the time
     def is_set_time(self):
+        """Check whether there is a time variable."""
         return 'variable' in self._yaml_model['time'].keys()
 
     def set_time(self,
                  time_variable: str):
+        """Set time variable."""
         self._yaml_model['time'] = {'variable': time_variable}
 
     def delete_time(self):
+        """Delete time variable."""
         self._yaml_model['time'] = {}
 
     def get_time(self):
+        """Get time variable."""
         if self.is_set_time():
             return self._yaml_model['time']['variable']
         else:

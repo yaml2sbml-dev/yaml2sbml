@@ -1,13 +1,26 @@
 name: CI
 
-on: [pull_request]
+# trigger
+on:
+  pull_request:
+  push:
+    branches:
+    - master
 
 jobs:
   base:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+        - os: ubuntu-latest
+          path: ~/.cache/pip
+        - os: macos-latest
+          path: ~/Library/Caches/pip
+        - os: windows-latest
+          path: ~\AppData\Local\pip\Cache
         python-version: [3.6, 3.9]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Check out repository
@@ -19,10 +32,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Cache
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-base
+        path: ${{ matrix.path }}
+        key: ci-base-${{ runner.os }}-${{ matrix.python-version }}
 
     - name: Install tox
       run: pip install tox
@@ -55,17 +68,14 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-notebooks
+        key: ci-notebooks-${{ runner.os }}-${{ matrix.python-version }}
 
-    - name: Install apt dependencies
-      run: |
-        .github/workflows/install_deps.sh amici
-
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh amici
 
     - name: Test notebooks
       run: tox -e notebooks
+      timeout-minutes: 60
 
   doc:
     runs-on: ubuntu-latest
@@ -86,14 +96,10 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-ci-doc
+        key: ci-doc-${{ runner.os }}-${{ matrix.python-version }}
 
-    - name: Install apt dependencies
-      run: |
-        .github/workflows/install_deps.sh doc
-
-    - name: Install tox
-      run: pip install tox
+    - name: Install dependencies
+      run: .github/workflows/install_deps.sh doc
 
     - name: Test documentation build
       run: tox -e doc
