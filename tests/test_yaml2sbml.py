@@ -78,7 +78,7 @@ class TestYaml2SBML(unittest.TestCase):
 
     def test_catch_invalid_sbml_identifier(self):
         """
-        Test checks for invalid SBML identifiers.
+        Check for invalid SBML identifiers.
         """
         yaml_dir = os.path.join(self.test_folder,
                                 'ode_input_invalid_SBML_identifier.yaml')
