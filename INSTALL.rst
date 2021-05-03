@@ -29,6 +29,16 @@ or clone the repository and install from local via::
 where ``-e`` is short for ``--editable`` and links the installed package to
 the current location, such that changes there take immediate effect.
 
+Additional dependencies for running the examples
+------------------------------------------------
+
+The notebooks come with additional dependencies. Information on the
+installation of the ODE-simulator AMICI is given in its
+`installation guide <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/libsbml-math.html>`_.
+Further dependencies can be installed via::
+
+    pip install yaml2sbml[examples]
+
 .. _Miniconda: http://conda.pydata.org/miniconda.html
 .. _PyPI: https://pypi.org/project/yaml2sbml
 .. _GitHub: https://github.com/yaml2sbml-dev/yaml2sbml
