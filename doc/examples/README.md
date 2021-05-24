@@ -24,3 +24,7 @@ The [`yaml2sbml`](https://github.com/yaml2sbml-dev/yaml2sbml) package translates
         *   Time-dependent right hand sides
         *   Step functions in the right hand side
         *   Function definitions
+                
+## Running the examples
+
+The notebooks come with additional dependencies, mainly for running the ODE-simulation and parameter fitting. Information on the installation of AMICI is given in its [installation guide](http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/libsbml-math.html). Further dependencies ( e.g. [pyPESTO](https://github.com/ICB-DCM/pyPESTO)) can be installed via `pip install yaml2sbml[examples]`.
