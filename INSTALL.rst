@@ -34,7 +34,7 @@ Additional dependencies for running the examples
 
 The notebooks come with additional dependencies. Information on the
 installation of the ODE-simulator AMICI is given in its
-`installation guide <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/libsbml-math.html>`_.
+`installation guide <https://github.com/AMICI-dev/AMICI/blob/master/INSTALL.md>`_.
 Further dependencies can be installed via::
 
     pip install yaml2sbml[examples]
