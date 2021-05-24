@@ -46,15 +46,15 @@ ODE models have applications in many scientific fields, including biology [@Hodg
 
 SBML is a widely adopted community standard for specifying biological reaction networks [@HuckaFin2003]. [sbml.org](http://sbml.org/SBML_Software_Guide/SBML_Software_Summary#cat_12) lists more than 100 software tools that accept SBML as their input format for dynamic model simulation, among them COPASI [@HoopsSah2006], d2d [@RaueSte2015], AMICI [@FroehlichWei2020] and dMod [@KaschekMad2019].
 
-Model parameters can be estimated from data by formulating a likelihood function. Therefore, the system states must be mapped to measured quantities by observable functions, and a measurement noise model must be specified. The PEtab format was recently introduced to complement SBML by tab-separated value files specifying observables, measurements, experimental conditions, and estimated parameters [@SchmiesterSch2021]. Currently 9 software toolboxes support PEtab as an input format, among them COPASI, d2d, dMod and AMICI/[pyPESTO](https://github.com/ICB-DCM/pyPESTO).
+Model parameters can be estimated from data by formulating a likelihood function. Therefore, the system states must be mapped to measured quantities by observable functions, and a measurement noise model must be specified. The PEtab format was recently introduced to complement SBML by tab-separated value files specifying observables, measurements, experimental conditions, and estimated parameters [@SchmiesterSch2021]. Currently 9 software toolboxes support PEtab as an input format, among them COPASI, d2d, dMod and AMICI/[pyPESTO](https://github.com/ICB-DCM/pyPESTO). The  [PEtab documentation](https://petab.readthedocs.io/en/latest/#petab-support-in-systems-biology-tools) gives a complete and up-to-date list of tools.
 
-Due to the aforementioned tools, model simulation or parameter estimation has become a matter of a few lines of code or clicks. Hence ODE model definition is a relevant bottleneck, since constructing an SBML model from scratch is often tedious. Therefore, various approaches to facilitate model construction from text-based input formats or in code have been presented, as `libsbml` [@BornsteinKea2008],  `SimpleSBML` [@CannistraMed2015], `MOCCASIN` [@GomezHuc2016], `Antimony` [@SmithBer2009] and `ScrumPy`  [@Poolman2006]. `MOCCASIN` translates MATLAB code into SBML. Other tools have a text-based input format that is centered around chemical reactions and not around ODEs directly (e.g. `ScrumPy`), or only offer a text-based (`Antimony`) or only a Python-based way of defining SBML models ( `libsbml`, `SimpleSBML`), but not both at the same time interchangeably. Neither of these tools offer PEtab support.
+Thanks to the aforementioned tools, model simulation or parameter estimation has become a matter of a few lines of code or clicks. However, ODE model definition is often a bottleneck, since constructing an SBML model from scratch is often tedious. Therefore, various approaches to facilitate model construction from text-based input formats or in code have been presented, as `libsbml` [@BornsteinKea2008],  `SimpleSBML` [@CannistraMed2015], `MOCCASIN` [@GomezHuc2016], `Antimony` [@SmithBer2009] and `ScrumPy`  [@Poolman2006]. `MOCCASIN` translates MATLAB code into SBML. Other tools have a text-based input format that is centered around chemical reactions and not around ODEs directly (e.g. `ScrumPy`), or only offer a text-based (`Antimony`) or only a Python-based way of defining SBML models ( `libsbml`, `SimpleSBML`), but not both at the same time interchangeably. Neither of these tools offer PEtab support.
 
-Here, we present a human-readable and -writeable format tailored to ODE models, that is based on YAML and can be validated and translated to SBML and PEtab via the Python tool `yaml2sbml` and a CLI. Furthermore, `yaml2sbml` comes with a format validator and a Python-based model editor that allows one to generate, import, extend and export a YAML model within code.
+Here, we present a human-readable and -writeable format tailored to ODE models that is based on YAML and can be validated and translated to SBML and PEtab via the Python tool `yaml2sbml` and a CLI. Furthermore, `yaml2sbml` comes with a format validator and a Python-based model editor that allows to generate, import, extend and export a YAML model within code.
 
 # Tool and Format
 
-Figure 1 gives an overview over of the typical workflow for model generation and conversion using `yaml2sbml`.
+Figure 1 gives an overview of the typical workflow for model generation and conversion using `yaml2sbml`.
 
 ![Typical workflow for model generation and conversion using `yaml2sbml`. The ODE is written as YAML file using any text editor, the API, or the object-oriented model editor. Both can be used interchangeably. The conversion from YAML to SBML or PEtab can be performed in Python or by the CLI.](Figure2.png)
 
@@ -62,7 +62,7 @@ Figure 1 gives an overview over of the typical workflow for model generation and
 
 ## YAML Format
 
-Building the input format on YAML allows one to easily parse and validate the model, while keeping the simplicity of a text-based format (see Figure 1). The format is organized in the blocks for different model components.
+Building the input format on YAML allows to parse and validate the model easily, while keeping the simplicity of a text-based format (see Figure 1). The format is organized in the blocks for different model components.
 
 * `odes` define states, right-hand sides and initial values (as numeric values or parameters).
 * `parameters` define parameters and their values. Further optional keys, e.g. optimization bounds, are written to the PEtab parameter table.
