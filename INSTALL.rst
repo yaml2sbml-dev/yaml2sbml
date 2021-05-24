@@ -33,7 +33,7 @@ Additional dependencies for running the examples
 ------------------------------------------------
 
 The notebooks come with additional dependencies. Information on the
-installation of the ODE-simulator AMICI is given in its
+installation of the ODE simulator `AMICI <https://github.com/AMICI-dev/AMICI>`_ is given in its
 `installation guide <https://github.com/AMICI-dev/AMICI/blob/master/INSTALL.md>`_.
 Further dependencies can be installed via::
 
