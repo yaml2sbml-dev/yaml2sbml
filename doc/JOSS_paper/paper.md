@@ -50,7 +50,7 @@ Model parameters can be estimated from data by formulating a likelihood function
 
 Thanks to the aforementioned tools, model simulation or parameter estimation has become a matter of a few lines of code or clicks. However, ODE model definition is often a bottleneck, since constructing an SBML model from scratch is often tedious. Therefore, various approaches to facilitate model construction from text-based input formats or in code have been presented, as `libsbml` [@BornsteinKea2008],  `SimpleSBML` [@CannistraMed2015], `MOCCASIN` [@GomezHuc2016], `Antimony` [@SmithBer2009] and `ScrumPy`  [@Poolman2006]. `MOCCASIN` translates MATLAB code into SBML. Other tools have a text-based input format that is centered around chemical reactions and not around ODEs directly (e.g. `ScrumPy`), or only offer a text-based (`Antimony`) or only a Python-based way of defining SBML models ( `libsbml`, `SimpleSBML`), but not both at the same time interchangeably. Neither of these tools offer PEtab support.
 
-Here, we present a human-readable and -writeable format tailored to ODE models, that is based on YAML and can be validated and translated to SBML and PEtab via the Python tool `yaml2sbml` and a CLI. Furthermore, `yaml2sbml` comes with a format validator and a Python-based model editor that allows to generate, import, extend and export a YAML model within code.
+Here, we present a human-readable and -writeable format tailored to ODE models that is based on YAML and can be validated and translated to SBML and PEtab via the Python tool `yaml2sbml` and a CLI. Furthermore, `yaml2sbml` comes with a format validator and a Python-based model editor that allows to generate, import, extend and export a YAML model within code.
 
 # Tool and Format
 
