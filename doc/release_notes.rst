@@ -5,10 +5,16 @@ Release Notes
 0.2 series
 ..........
 
+0.2.3 (2021-05-25)
+------------------
+
+* Add additional names to the license (#128).
+* Add information about the installation of dependencies for the example notebooks (#128).
+
 0.2.2 (2021-03-19)
 ------------------
 
-* Add checks in SBML conversion, e.g. to catch invalid identifiers and equations (# 118).
+* Add checks in SBML conversion, e.g. to catch invalid identifiers and equations (# 118, #123).
 * Add tests for MacOS and Windows (#115).
 * Fix pydocstyle and swig (#120).
 * Add a logo license. (#116)
