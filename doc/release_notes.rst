@@ -5,6 +5,12 @@ Release Notes
 0.2 series
 ..........
 
+0.2.3 (2021-05-25)
+------------------
+
+* Add additional names to the license (#128).
+* Add information about the installation of dependencies for the example notebooks (#128).
+
 0.2.2 (2021-03-19)
 ------------------
 
