@@ -90,7 +90,7 @@ Format validation is possible in Python via `yaml2sbml.validate_yaml` and in the
 
 When using `yaml2sbml` in your project, please cite
 
-* Vanhoefer J., Matos, M. R. A., Pathirana, D., Schälte, Y. and Hasenauer, J. (2021). yaml2sbml: Human-readable and -writable specification of ODE models and their conversion to SBML. Journal of Open Source Software, 6(61), 3215, [https://doi.org/10.21105/joss.03215]
+* Vanhoefer J., Matos, M. R. A., Pathirana, D., Schälte, Y. and Hasenauer, J. (2021). yaml2sbml: Human-readable and -writable specification of ODE models and their conversion to SBML. Journal of Open Source Software, 6(61), 3215, https://doi.org/10.21105/joss.03215
 
 
 ```
