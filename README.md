@@ -5,6 +5,8 @@
 [![Documentation Status](https://readthedocs.org/projects/yaml2sbml/badge/?version=latest)](https://yaml2sbml.readthedocs.io/en/latest/?badge=latest)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/632acdc8d4ef4f50bf69892b8862fd24)](https://www.codacy.com/gh/yaml2sbml-dev/yaml2sbml/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaml2sbml-dev/yaml2sbml&amp;utm_campaign=Badge_Grade)
 [![PyPI](https://badge.fury.io/py/yaml2sbml.svg)](https://badge.fury.io/py/yaml2sbml)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.03215/status.svg)](https://doi.org/10.21105/joss.03215)
+
 
 ## Table of contents
 
@@ -15,6 +17,8 @@
 * [Getting Started](#getting-started)
 
 * [Basic Syntax](#basic-syntax)
+
+* [How to cite](#how-to-cite)
 
 * [Contact](#contact)
 
@@ -80,5 +84,28 @@ yaml2petab <yaml_dir> <output_dir> <sbml_name>
 
 Format validation is possible in Python via `yaml2sbml.validate_yaml` and in the command-line via `yaml2sbml_validate`.
 
+## How to cite
+
+`yaml2sbml` is published in the [Journal of Open Source Software](https://joss.theoj.org/papers/10.21105/joss.03215). 
+
+When using `yaml2sbml` in your project, please cite
+
+* Vanhoefer J., Matos, M. R. A., Pathirana, D., Schälte, Y. and Hasenauer, J. (2021). yaml2sbml: Human-readable and -writable specification of ODE models and their conversion to SBML. Journal of Open Source Software, 6(61), 3215, https://doi.org/10.21105/joss.03215
+
+
+```
+@article{Vanhoefer2021,
+  doi = {10.21105/joss.03215},
+  url = {https://doi.org/10.21105/joss.03215},
+  year = {2021},
+  publisher = {The Open Journal},
+  volume = {6},
+  number = {61},
+  pages = {3215},
+  author = {Jakob Vanhoefer and Marta R. A. Matos and Dilan Pathirana and Yannik Schälte and Jan Hasenauer},
+  title = {yaml2sbml: Human-readable and -writable specification of ODE models and their conversion to SBML},
+  journal = {Journal of Open Source Software}
+}
+```
 ## Contact
 If you have a question regarding the tool: Please drop us an [issue](https://github.com/yaml2sbml-dev/yaml2sbml/issues/new) or a [mail](mailto:jakob.vanhoefer@uni-bonn.de), we are happy to help.
