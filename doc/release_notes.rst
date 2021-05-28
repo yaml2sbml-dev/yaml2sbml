@@ -8,8 +8,8 @@ Release Notes
 0.2.4 (2021-05-28)
 ------------------
 
-* JOSS badge in the README (#...)
-* Citation section in the README (#...)
+* JOSS badge in the README (#133)
+* Citation section in the README (#133)
 
 0.2.3 (2021-05-25)
 ------------------
