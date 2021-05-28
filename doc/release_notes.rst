@@ -5,6 +5,12 @@ Release Notes
 0.2 series
 ..........
 
+0.2.4 (2021-05-28)
+------------------
+
+* JOSS badge in the README (#...)
+* Citation section in the README (#...)
+
 0.2.3 (2021-05-25)
 ------------------
 
