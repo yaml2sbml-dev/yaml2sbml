@@ -109,6 +109,8 @@ def _parse_yaml_dict(yaml_dict: dict,
                                  observables_as_assignments)
 
     # check consistency and give warnings for errors in SBML:
+    document.setConsistencyChecks(sbml.LIBSBML_CAT_UNITS_CONSISTENCY, False)
+
     if document.checkConsistency():
 
         for error_num in range(document.getErrorLog().getNumErrors()):
