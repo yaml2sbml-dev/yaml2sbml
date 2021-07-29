@@ -82,20 +82,20 @@
       <compartment id="Compartment" size="1" constant="true"/>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="S1" compartment="Compartment" initialAmount="0.1" substanceUnits="dimensionless" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="S2" compartment="Compartment" initialAmount="1" substanceUnits="dimensionless" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="S3" compartment="Compartment" initialAmount="1" substanceUnits="dimensionless" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="S1" compartment="Compartment" initialAmount="0.1" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="S2" compartment="Compartment" initialAmount="1" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="S3" compartment="Compartment" initialAmount="1" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="t" name="t" constant="false"/>
-      <parameter id="c1" name="c1" value="1" units="dimensionless" constant="true"/>
-      <parameter id="Shalve" name="Shalve" value="0.1" units="dimensionless" constant="true"/>
-      <parameter id="Vh" name="Vh" value="0.1" units="dimensionless" constant="true"/>
-      <parameter id="h" name="h" value="0.1" units="dimensionless" constant="true"/>
-      <parameter id="Vmm" name="Vmm" value="0.1" units="dimensionless" constant="true"/>
-      <parameter id="Km" name="Km" value="0.1" units="dimensionless" constant="true"/>
-      <parameter id="v1" name="v1" value="0.1" units="dimensionless" constant="true"/>
-      <parameter id="k4" name="k4" value="0.1" units="dimensionless" constant="true"/>
+      <parameter id="c1" name="c1" value="1" constant="true"/>
+      <parameter id="Shalve" name="Shalve" value="0.1" constant="true"/>
+      <parameter id="Vh" name="Vh" value="0.1" constant="true"/>
+      <parameter id="h" name="h" value="0.1" constant="true"/>
+      <parameter id="Vmm" name="Vmm" value="0.1" constant="true"/>
+      <parameter id="Km" name="Km" value="0.1" constant="true"/>
+      <parameter id="v1" name="v1" value="0.1" constant="true"/>
+      <parameter id="k4" name="k4" value="0.1" constant="true"/>
     </listOfParameters>
     <listOfRules>
       <assignmentRule variable="t">
