@@ -7,6 +7,11 @@ Release Notes
 
 0.2.4 (2021-05-28)
 ------------------
+* remove unit assignment `dimensionless` from SBML creation. (#136)
+* remove checks for consistency of units. (#135)
+
+0.2.4 (2021-05-28)
+------------------
 
 * JOSS badge in the README (#133)
 * Citation section in the README (#133)
