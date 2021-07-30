@@ -109,6 +109,8 @@ def _parse_yaml_dict(yaml_dict: dict,
                                  observables_as_assignments)
 
     # check consistency and give warnings for errors in SBML:
+    document.setConsistencyChecks(sbml.LIBSBML_CAT_UNITS_CONSISTENCY, False)
+
     if document.checkConsistency():
 
         for error_num in range(document.getErrorLog().getNumErrors()):
@@ -266,8 +268,6 @@ def _create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
     """
     Create a parameter and add it to the given SBML model.
 
-    Units are set as dimensionless by default.
-
     Arguments:
         model: the SBML model to which the parameter will be added.
         parameter_id: the parameter ID
@@ -284,8 +284,6 @@ def _create_parameter(model: sbml.Model, parameter_id: str, value: str = None):
 
     if value is not None:
         k.setValue(float(value))
-
-    k.setUnits('dimensionless')
 
 
 def _read_assignments_block(model: sbml.Model, assignment_list: list):
@@ -325,7 +323,6 @@ def _create_assignment(model: sbml.Model, assignment_id: str, formula: str):
 
     assignment_parameter.setName(assignment_id)
     assignment_parameter.setConstant(False)
-    assignment_parameter.setUnits('dimensionless')
 
     assignment_rule = model.createAssignmentRule()
     assignment_rule.setVariable(assignment_id)
@@ -415,8 +412,6 @@ def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
     """
     Create a species and add it to the SBML model.
 
-    Units are set as dimensionless by default.
-
     Arguments:
         model: the SBML model to which the species will be added.
         species_id: the species ID
@@ -442,8 +437,6 @@ def _create_species(model: sbml.Model, species_id: str, initial_amount: str):
     s.setBoundaryCondition(False)
     s.setHasOnlySubstanceUnits(False)
     s.setCompartment('Compartment')
-
-    s.setSubstanceUnits('dimensionless')
 
     return s
 
