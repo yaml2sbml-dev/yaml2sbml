@@ -5,7 +5,10 @@ on:
   pull_request:
   push:
     branches:
-    - master
+    - main
+  schedule:
+    # run Tuesday at noon UTC
+    - cron: '0 13 * * 2'
 
 jobs:
   base:
