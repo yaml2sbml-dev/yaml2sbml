@@ -8,6 +8,7 @@ import pandas as pd
 import petab
 import yaml
 from pathlib import Path
+from petab.models.sbml_model import SbmlModel
 
 
 from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
@@ -284,7 +285,7 @@ def validate_petab_tables(sbml_dir: str,
         condition_df = pd.read_csv(condition_table_dir,
                                    sep='\t',
                                    index_col='conditionId')
-        petab.lint.check_condition_df(condition_df, model)
+        petab.lint.check_condition_df(condition_df, SbmlModel(model))
 
     # check parameter table
     parameter_df = pd.read_csv(parameter_file_dir,
