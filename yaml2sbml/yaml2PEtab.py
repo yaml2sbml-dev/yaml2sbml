@@ -293,7 +293,7 @@ def validate_petab_tables(sbml_dir: str,
                                index_col='parameterId')
 
     petab.lint.check_parameter_df(parameter_df,
-                                  sbml_model=model,
+                                  sbml_model=SbmlModel(model),
                                   observable_df=observable_df)
 
 
