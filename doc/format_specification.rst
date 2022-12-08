@@ -166,8 +166,8 @@ Parsing of mathematical equations
 
  Throughout `yaml2sbml` formulas are parsed by `libsbml's` `parseL3Formula` function. Further information on the syntax are given by:
 
-*  the `working with math <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/libsbml-math.html>`_ - section of the `libsbml` documentation.
-*  the `documentation <http://sbml.org/Special/Software/libSBML/docs/formatted/python-api/namespacelibsbml.html#ae79acc3be958963c55f1d03944add36b>`_ of `libsbml.parseL3Formula`.
+*  the `working with math <https://synonym.caltech.edu/software/libsbml/5.18.0/docs/formatted/python-api/libsbml-math.html>`_ - section of the `libsbml` documentation.
+*  the `documentation <https://sbml.org/software/libsbml/5.18.0/docs/formatted/python-api/namespacelibsbml.html#ae79acc3be958963c55f1d03944add36b>`_ of `libsbml.parseL3Formula`.
 
 
 This gives access to e.g.:
