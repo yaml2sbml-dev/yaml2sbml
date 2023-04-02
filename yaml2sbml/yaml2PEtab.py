@@ -8,6 +8,7 @@ import pandas as pd
 import petab
 import yaml
 from pathlib import Path
+from petab.models.sbml_model import SbmlModel
 
 
 from .yaml2sbml import _parse_yaml_dict, _load_yaml_file
@@ -97,7 +98,8 @@ def _yaml2petab(yaml_model_dict: dict,
 
         warnings.warn('Since no petab_yaml_file_name is specified, the '
                       'specified measurement_table_name will have no effect.',
-                      RuntimeWarning)
+                      RuntimeWarning,
+                      stacklevel=2)
 
     elif petab_yaml_name is not None:
         _create_petab_problem_yaml(yaml_model_dict,
@@ -284,7 +286,7 @@ def validate_petab_tables(sbml_dir: str,
         condition_df = pd.read_csv(condition_table_dir,
                                    sep='\t',
                                    index_col='conditionId')
-        petab.lint.check_condition_df(condition_df, model)
+        petab.lint.check_condition_df(condition_df, SbmlModel(model))
 
     # check parameter table
     parameter_df = pd.read_csv(parameter_file_dir,
@@ -292,7 +294,7 @@ def validate_petab_tables(sbml_dir: str,
                                index_col='parameterId')
 
     petab.lint.check_parameter_df(parameter_df,
-                                  sbml_model=model,
+                                  model=SbmlModel(model),
                                   observable_df=observable_df)
 
 
@@ -319,7 +321,8 @@ def _create_petab_table(block_list: list,
     for col_name in petab_table.head():
         if not (col_name in mandatory_id_list or col_name in optional_id_list):
             warnings.warn(f'PEtab warning: {col_name} is not part of the '
-                          f'PEtab standard and hence might have noe effect.')
+                          f'PEtab standard and hence might have noe effect.',
+                          stacklevel=2)
     return petab_table
 
 
@@ -359,11 +362,11 @@ def main():
 
     args = parser.parse_args()
 
-    print(f'Path to yaml file: {args.yaml_file}')
-    print(f'Output directory: {args.output_dir}')
-    print(f'Path to sbml/petab files: {args.model_name}')
+    print(f'Path to yaml file: {args.yaml_file}')  # noqa:T201
+    print(f'Output directory: {args.output_dir}')  # noqa:T201
+    print(f'Path to sbml/petab files: {args.model_name}')  # noqa:T201
 
-    print('Converting...')
+    print('Converting...')  # noqa:T201
 
     yaml2petab(args.yaml_file,
                args.output_dir,

@@ -1,3 +1,4 @@
+"""Tests of the yaml2sbml model editor."""
 import os
 import shutil
 
@@ -12,6 +13,7 @@ class TestYamlModel(unittest.TestCase):
     """TestCase class for testing YamlModel."""
 
     def setUp(self):
+        """Set Up of tests."""
         # input directory
         this_dir, _ = os.path.split(__file__)
         self.test_input_folder = os.path.join(this_dir, 'test_yaml2sbml')
@@ -20,13 +22,12 @@ class TestYamlModel(unittest.TestCase):
         self.test_dir = tempfile.mkdtemp()
 
     def tearDown(self):
+        """Tear Down of tests."""
         # remove temporary directory
         shutil.rmtree(self.test_dir)
 
     def test_load_and_write(self):
-        """
-        Test loading and writing.
-        """
+        """Test loading and writing."""
         # read in yaml
         yaml_dir = os.path.join(self.test_input_folder, 'ode_input2.yaml')
         model = YamlModel.load_from_yaml(yaml_dir)
@@ -40,9 +41,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertDictEqual(model._yaml_model, reloaded_model._yaml_model)
 
     def test_time(self):
-        """
-        Test all functionality regarding the time keyword.
-        """
+        """Test all functionality regarding the time keyword."""
         model = YamlModel()
         time_var = 't'
 
@@ -57,9 +56,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertFalse(model.is_set_time())
 
     def test_parameter(self):
-        """
-        Test all functionality regarding the 'parameters' keyword.
-        """
+        """Test all functionality regarding the 'parameters' keyword."""
         model = YamlModel()
         parameter_id = 'p1'
         model.add_parameter(parameter_id,
@@ -87,9 +84,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_parameter_ids(), [])
 
     def test_ode(self):
-        """
-        Test all functionality regarding the 'odes' keyword.
-        """
+        """Test all functionality regarding the 'odes' keyword."""
         model = YamlModel()
 
         state_id = 's1'
@@ -120,9 +115,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_ode_ids(), [])
 
     def test_assignment(self):
-        """
-        Test all functionality regarding the 'assignments' keyword.
-        """
+        """Test all functionality regarding the 'assignments' keyword."""
         model = YamlModel()
 
         assignment_id = 's1'
@@ -149,9 +142,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_assignment_ids(), [])
 
     def test_function(self):
-        """
-        Test all functionality regarding the 'functions' keyword.
-        """
+        """Test all functionality regarding the 'functions' keyword."""
         model = YamlModel()
 
         function_id = 'f'
@@ -179,9 +170,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_function_ids(), [])
 
     def test_observable(self):
-        """
-        Test all functionality regarding the 'observables' keyword.
-        """
+        """Test all functionality regarding the 'observables' keyword."""
         model = YamlModel()
 
         observable_id = 'obs'
@@ -220,9 +209,7 @@ class TestYamlModel(unittest.TestCase):
         self.assertListEqual(model.get_observable_ids(), [])
 
     def test_condition(self):
-        """
-        Test all functionality regarding the 'conditions' keyword.
-        """
+        """Test all functionality regarding the 'conditions' keyword."""
         model = YamlModel()
 
         condition_id = 'cond'

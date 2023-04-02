@@ -1,3 +1,4 @@
+"""Tests of Command-line Interface."""
 import os
 import shutil
 
@@ -53,8 +54,7 @@ def test_yaml2petab_cli(script_runner):
 
 
 def test_yaml2sbml_validate_cli(script_runner):
-    """Test the command line command ``yaml2sbml_validate`"""
-
+    """Test the command line command `yaml2sbml_validate`."""
     path = os.path.dirname(os.path.abspath(__file__))
     yaml_dir = os.path.join(path, 'test_yaml2sbml/ode_input1.yaml')
 

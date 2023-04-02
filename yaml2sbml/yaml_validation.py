@@ -33,7 +33,7 @@ def validate_yaml(yaml_dir: str):
                            '"(...)" or quotation marks.')
 
     _validate_yaml_from_dict(yaml_dict)
-    print('YAML file is valid ✅')
+    print('YAML file is valid ✅')  # noqa:T201
 
 
 def _validate_yaml_from_dict(yaml_dict: dict):
@@ -66,8 +66,8 @@ def main():
 
     args = parser.parse_args()
 
-    print(f'Path to yaml file: {args.yaml_file}')
-    print('Validating...')
+    print(f'Path to yaml file: {args.yaml_file}')  # noqa:T201
+    print('Validating...')  # noqa:T201
 
     validate_yaml(args.yaml_file)
 

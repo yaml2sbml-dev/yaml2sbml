@@ -117,7 +117,8 @@ def _parse_yaml_dict(yaml_dict: dict,
             if not document.getErrorLog().getError(error_num).isWarning():
                 warnings.warn(
                     document.getErrorLog().getError(error_num).getMessage(),
-                    RuntimeWarning)
+                    RuntimeWarning,
+                    stacklevel=1)
 
     sbml_string = sbml.writeSBMLToString(document)
 
@@ -487,7 +488,9 @@ def _read_observables_block(model: sbml.Model,
     else:
         warnings.warn(
             'Observables are not represented in the SBML and therefore only '
-            'have an effect on the output when called via yaml2petab')
+            'have an effect on the output when called via yaml2petab,',
+            RuntimeWarning,
+            stacklevel=2)
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
@@ -504,7 +507,9 @@ def _read_conditions_block(model: sbml.Model, conditions_list: list):
     """
     warnings.warn(
         'Conditions are not represented in the SBML and therefore only have '
-        'an effect on the output when called via yaml2petab')
+        'an effect on the output when called via yaml2petab',
+        RuntimeWarning,
+        stacklevel=2)
 
 
 def main():
@@ -522,10 +527,10 @@ def main():
 
     args = parser.parse_args()
 
-    print(f'Path to YAML file: {args.yaml_file}')
-    print(f'Path to SBML file: {args.sbml_file}')
+    print(f'Path to YAML file: {args.yaml_file}')  # noqa:T201
+    print(f'Path to SBML file: {args.sbml_file}')  # noqa:T201
 
-    print('Converting...')
+    print('Converting...')  # noqa:T201
 
     yaml2sbml(args.yaml_file,
               args.sbml_file,
