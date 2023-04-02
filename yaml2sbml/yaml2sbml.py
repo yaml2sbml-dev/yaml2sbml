@@ -522,10 +522,10 @@ def main():
 
     args = parser.parse_args()
 
-    print(f'Path to YAML file: {args.yaml_file}')
-    print(f'Path to SBML file: {args.sbml_file}')
+    print(f'Path to YAML file: {args.yaml_file}')  # noqa:T201
+    print(f'Path to SBML file: {args.sbml_file}')  # noqa:T201
 
-    print('Converting...')
+    print('Converting...')  # noqa:T201
 
     yaml2sbml(args.yaml_file,
               args.sbml_file,

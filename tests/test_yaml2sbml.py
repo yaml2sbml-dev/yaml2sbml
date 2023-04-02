@@ -1,3 +1,4 @@
+"""Tests of the yamls2bml function."""
 import os
 import unittest
 
@@ -5,19 +6,15 @@ from yaml2sbml.yaml2sbml import yaml2sbml, _parse_yaml
 
 
 class TestYaml2SBML(unittest.TestCase):
-    """
-    TestCase class for testing ODE import from a generic yaml file
-    and conversion to SBML.
-    """
+    """Tests  ODE import yaml file and conversion to SBML."""
 
     def setUp(self):
+        """Set Up of tests."""
         this_dir, _ = os.path.split(__file__)
         self.test_folder = os.path.join(this_dir, 'test_yaml2sbml')
 
     def test_yaml_import(self):
-        """
-        Test yaml import/SBML generation...
-        """
+        """Test yaml import & SBML generation."""
         yaml_dir = os.path.join(self.test_folder, 'ode_input1.yaml')
         expected_result_file = os.path.join(self.test_folder,
                                             'true_sbml_output.xml')
@@ -43,9 +40,7 @@ class TestYaml2SBML(unittest.TestCase):
         os.remove(sbml_test_dir)
 
     def test_yaml_import_observables(self):
-        """
-        Test yaml import/export for a model containing observables.
-        """
+        """Test yaml import/export for a model containing observables."""
         yaml_dir = os.path.join(self.test_folder, 'ode_input2.yaml')
 
         expected_result_file = \
@@ -77,9 +72,7 @@ class TestYaml2SBML(unittest.TestCase):
         os.remove(sbml_test_dir)
 
     def test_catch_invalid_sbml_identifier(self):
-        """
-        Check for invalid SBML identifiers.
-        """
+        """Check for invalid SBML identifiers."""
         yaml_dir = os.path.join(self.test_folder,
                                 'ode_input_invalid_SBML_identifier.yaml')
         with self.assertRaises(RuntimeError):
@@ -87,9 +80,7 @@ class TestYaml2SBML(unittest.TestCase):
                         'Test_Model')
 
     def test_catch_invalid_math(self):
-        """
-        Check for strings that parseL3Formula can not parse.
-        """
+        """Check for strings that parseL3Formula can not parse."""
         yaml_dir = os.path.join(self.test_folder,
                                 'ode_input_invalid_formula.yaml')
         with self.assertRaises(RuntimeError):

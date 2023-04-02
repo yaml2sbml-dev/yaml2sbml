@@ -360,11 +360,11 @@ def main():
 
     args = parser.parse_args()
 
-    print(f'Path to yaml file: {args.yaml_file}')
-    print(f'Output directory: {args.output_dir}')
-    print(f'Path to sbml/petab files: {args.model_name}')
+    print(f'Path to yaml file: {args.yaml_file}')  # noqa:T201
+    print(f'Output directory: {args.output_dir}')  # noqa:T201
+    print(f'Path to sbml/petab files: {args.model_name}')  # noqa:T201
 
-    print('Converting...')
+    print('Converting...')  # noqa:T201
 
     yaml2petab(args.yaml_file,
                args.output_dir,
