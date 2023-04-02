@@ -22,7 +22,7 @@ jobs:
           path: ~/Library/Caches/pip
         - os: windows-latest
           path: ~\AppData\Local\pip\Cache
-        python-version: [3.10, 3.11]
+        python-version: ['3.10', '3.11']
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: ['3.10']
 
     steps:
     - name: Check out repository
@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: ['3.10']
 
 
     steps:
