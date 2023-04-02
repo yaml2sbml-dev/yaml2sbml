@@ -5,7 +5,10 @@ on:
   pull_request:
   push:
     branches:
-    - master
+    - main
+  schedule:
+    # run Tuesday at noon UTC
+    - cron: '0 13 * * 2'
 
 jobs:
   base:
@@ -82,6 +85,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.10]
+
 
     steps:
     - name: Check out repository
