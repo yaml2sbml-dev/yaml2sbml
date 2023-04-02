@@ -98,7 +98,8 @@ def _yaml2petab(yaml_model_dict: dict,
 
         warnings.warn('Since no petab_yaml_file_name is specified, the '
                       'specified measurement_table_name will have no effect.',
-                      RuntimeWarning)
+                      RuntimeWarning,
+                      stacklevel=2)
 
     elif petab_yaml_name is not None:
         _create_petab_problem_yaml(yaml_model_dict,
@@ -320,7 +321,8 @@ def _create_petab_table(block_list: list,
     for col_name in petab_table.head():
         if not (col_name in mandatory_id_list or col_name in optional_id_list):
             warnings.warn(f'PEtab warning: {col_name} is not part of the '
-                          f'PEtab standard and hence might have noe effect.')
+                          f'PEtab standard and hence might have noe effect.',
+                          stacklevel=2)
     return petab_table
 
 

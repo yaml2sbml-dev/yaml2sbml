@@ -117,7 +117,8 @@ def _parse_yaml_dict(yaml_dict: dict,
             if not document.getErrorLog().getError(error_num).isWarning():
                 warnings.warn(
                     document.getErrorLog().getError(error_num).getMessage(),
-                    RuntimeWarning)
+                    RuntimeWarning,
+                    stacklevel=2)
 
     sbml_string = sbml.writeSBMLToString(document)
 
@@ -457,9 +458,10 @@ def _create_rate_rule(model: sbml.Model, species_id: str, formula: str):
     r.setVariable(species_id)
     math_ast = sbml.parseL3Formula(formula)
     if math_ast is None:
-        raise RuntimeError(f'Unable to generate the rate rule for the state '
-                           f'{species_id}, libsbml can not parse the right-'
-                           f'hand side, given by {formula}).')
+        raise warnings.warn(f'Unable to generate the rate rule for the state '
+                            f'{species_id}, libsbml can not parse the right-'
+                            f'hand side, given by {formula}).',
+                            stacklevel=2)
     r.setMath(math_ast)
 
 
@@ -487,7 +489,8 @@ def _read_observables_block(model: sbml.Model,
     else:
         warnings.warn(
             'Observables are not represented in the SBML and therefore only '
-            'have an effect on the output when called via yaml2petab')
+            'have an effect on the output when called via yaml2petab,',
+            stacklevel=2)
 
 
 def _read_conditions_block(model: sbml.Model, conditions_list: list):
