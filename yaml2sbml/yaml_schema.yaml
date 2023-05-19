@@ -195,6 +195,3 @@ properties:
         - conditionId
 
 additionalProperties: false
-
-required:
-  - odes
