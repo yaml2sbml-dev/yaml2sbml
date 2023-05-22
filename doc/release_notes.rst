@@ -5,6 +5,11 @@ Release Notes
 0.2 series
 ..........
 
+0.2.5 (2021-07-30)
+------------------
+* remove unit assignment `dimensionless` from SBML creation. (#136)
+* remove checks for consistency of units. (#135)
+
 0.2.4 (2021-05-28)
 ------------------
 

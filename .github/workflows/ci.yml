@@ -5,7 +5,10 @@ on:
   pull_request:
   push:
     branches:
-    - master
+    - main
+  schedule:
+    # run Tuesday at noon UTC
+    - cron: '0 13 * * 2'
 
 jobs:
   base:
@@ -19,7 +22,7 @@ jobs:
           path: ~/Library/Caches/pip
         - os: windows-latest
           path: ~\AppData\Local\pip\Cache
-        python-version: [3.6, 3.9]
+        python-version: ['3.7', '3.10']
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -53,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9]
+        python-version: ['3.10']
 
     steps:
     - name: Check out repository
@@ -81,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9]
+        python-version: ['3.10']
 
     steps:
     - name: Check out repository
