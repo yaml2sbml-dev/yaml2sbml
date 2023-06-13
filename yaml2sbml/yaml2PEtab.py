@@ -259,15 +259,16 @@ def validate_petab_tables(sbml_dir: str,
     Raises:
         Errors are raised by lint, if PEtab files are invalid...
     """
-    model = sbml.readSBML(sbml_dir).getModel()
-    model_name = model.getId()
+    model = petab.models.sbml_model.SbmlModel.from_file(sbml_dir)
 
     parameter_file_dir = \
-        os.path.join(output_dir, f'parameters_{model_name}.tsv')
+        os.path.join(output_dir, f'parameters_{model.model_id}.tsv')
     observable_file_dir = \
-        os.path.join(output_dir, f'observables_{model_name}.tsv')
+        os.path.join(output_dir, f'observables_{model.model_id}.tsv')
     condition_table_dir = \
-        os.path.join(output_dir, f'experimental_conditions_{model_name}.tsv')
+        os.path.join(
+            output_dir,
+            f'experimental_conditions_{model.model_id}.tsv')
 
     # check observable table, if the table exists
     if os.path.exists(observable_file_dir):
@@ -292,7 +293,7 @@ def validate_petab_tables(sbml_dir: str,
                                index_col='parameterId')
 
     petab.lint.check_parameter_df(parameter_df,
-                                  sbml_model=model,
+                                  model=model,
                                   observable_df=observable_df)
 
 
